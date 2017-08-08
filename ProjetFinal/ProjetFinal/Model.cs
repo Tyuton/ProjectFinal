@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ProjetFinal
 {
     /// <summary>
-    /// 
+    /// creation des classes qui détaillent les champs des tables 
     /// </summary>
     class Query
     {

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ProjetFinal
 {
     /// <summary>
-    /// 
+    /// Creation des tables de la base de données + connection string
     /// </summary>
     class QueryContext : DbContext
     {
