@@ -21,7 +21,7 @@ namespace ProjetFinal
     class Page
     {
         public int PageId { get; set; }
-        public int QueryId { get; set; }
+        public virtual Query QueryId { get; set; }
         public string URL { get; set; }
 
     }
@@ -29,7 +29,7 @@ namespace ProjetFinal
     class Selector
     {
         public int SelectorId { get; set; }
-        public int PageId { get; set; }
+        public virtual Page PageId { get; set; }
         public string Value { get; set; }
 
     }
@@ -37,14 +37,14 @@ namespace ProjetFinal
     class ResultsHeader
     {
         public int ResultsHeaderId { get; set; }
-        public int SelectorId { get; set; }
+        public virtual Selector SelectorId { get; set; }
         public DateTime QueryExecutionDate { get; set; }
     }
 
     class ResultsDetail
     {
         public int ResultsDetailId { get; set; }
-        public int ResultsHeaderId { get; set; }
+        public virtual ResultsHeader ResultsHeaderId { get; set; }
         public string Value { get; set; }
     }
 }

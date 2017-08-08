@@ -10,10 +10,15 @@ namespace ProjetFinal
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("First commit");
-            Console.WriteLine("Second Commit");
-            Console.ReadLine();
+            QueryContext context = new QueryContext();
+
+            Console.WriteLine("\t\tBienvenue sur l'application d'Amin et Jonathan" +
+                              "\n\t\tVeuillez entrer une nouvelle requête");
             
+            Console.Read();
+            
+              
+
         }
     }
 }

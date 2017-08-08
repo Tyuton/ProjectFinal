@@ -8,7 +8,8 @@ namespace ProjetFinal
 {
     class Repository
     {
-        private QueryContext = new QueryContext();
+        //TODO : Enlever le Test poour ne pas géner le Commit d'Amin
+        private QueryContext Test = new QueryContext();
 
         /// <summary>
         /// TODO Add a new query...
