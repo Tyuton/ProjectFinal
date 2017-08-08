@@ -10,7 +10,9 @@ namespace ProjetFinal
     {
         static void Main(string[] args)
         {
+            Console.WriteLine("First commit");
             Console.ReadLine();
+            
         }
     }
 }
