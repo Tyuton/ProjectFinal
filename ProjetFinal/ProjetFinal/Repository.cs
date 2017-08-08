@@ -8,7 +8,7 @@ namespace ProjetFinal
 {
     class Repository
     {
-        private QueryContext = new QueryContext();
+        private QueryContext dbQueryContext = new QueryContext();
 
         /// <summary>
         /// TODO Add a new query...
@@ -16,7 +16,11 @@ namespace ProjetFinal
         /// <returns></returns>
         bool AddNewQuery()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var q = new Query();
+            q.Name = "test";
+            dbQueryContext.Queries.Add(q);
+            return true;
         }
         /// <summary>
         /// return id of queries with same "name"
