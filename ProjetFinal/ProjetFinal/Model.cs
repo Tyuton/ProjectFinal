@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,16 +13,16 @@ namespace ProjetFinal
     /// </summary>
     class Query
     {
-        public int QueryId { get; set; }
+        public Guid QueryId { get; set; }
         public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime DataExpiryDate { get; set; }
-        public DateTime DataTimeStamp { get; set; }
+        public string Description { get; set; } 
+        public DateTime? DataExpiryDate { get; set; }
+        public DateTime? DataTimeStamp { get; set; }
     }
 
     class Page
     {
-        public int PageId { get; set; }
+        public Guid PageId { get; set; }
         public virtual Query QueryId { get; set; }
         public string URL { get; set; }
 
@@ -28,7 +30,7 @@ namespace ProjetFinal
 
     class Selector
     {
-        public int SelectorId { get; set; }
+        public Guid SelectorId { get; set; }
         public virtual Page PageId { get; set; }
         public string Value { get; set; }
 
@@ -36,14 +38,14 @@ namespace ProjetFinal
 
     class ResultsHeader
     {
-        public int ResultsHeaderId { get; set; }
+        public Guid ResultsHeaderId { get; set; }
         public virtual Selector SelectorId { get; set; }
         public DateTime QueryExecutionDate { get; set; }
     }
 
     class ResultsDetail
     {
-        public int ResultsDetailId { get; set; }
+        public Guid ResultsDetailId { get; set; }
         public virtual ResultsHeader ResultsHeaderId { get; set; }
         public string Value { get; set; }
     }
