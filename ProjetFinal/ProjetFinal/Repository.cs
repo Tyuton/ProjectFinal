@@ -8,8 +8,7 @@ namespace ProjetFinal
 {
     class Repository
     {
-        //TODO : Enlever le Test poour ne pas géner le Commit d'Amin
-        private QueryContext Test = new QueryContext();
+        private QueryContext dbQueryContext = new QueryContext();
 
         /// <summary>
         /// TODO Add a new query...
@@ -17,7 +16,11 @@ namespace ProjetFinal
         /// <returns></returns>
         bool AddNewQuery()
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            var q = new Query();
+            q.Name = "test";
+            dbQueryContext.Queries.Add(q);
+            return true;
         }
         /// <summary>
         /// return id of queries with same "name"
