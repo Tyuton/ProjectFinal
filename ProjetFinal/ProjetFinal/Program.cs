@@ -12,12 +12,12 @@ namespace ProjetFinal
         {
             Repository repo = new Repository();
 
-            Console.WriteLine("\t\tBienvenue sur l'application d'Amin et Jonathan" +
-                              "\n\t\tVeuillez entrer une nouvelle requête");
+            //Console.WriteLine("\t\tBienvenue sur l'application d'Amin et Jonathan" +
+            //                  "\n\t\tVeuillez entrer une nouvelle requête");
 
             repo.AddNewQuery();
             
-            Console.Read();
+            //Console.Read();
             
               
 
