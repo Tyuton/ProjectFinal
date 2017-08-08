@@ -13,7 +13,7 @@ namespace ProjetFinal
     /// </summary>
     class Query
     {
-        public Guid QueryId { get; set; }
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; } 
         public DateTime? DataExpiryDate { get; set; }
@@ -21,32 +21,32 @@ namespace ProjetFinal
     }
 
     class Page
-    {
-        public Guid PageId { get; set; }
-        public virtual Query QueryId { get; set; }
+    {        
+        public Guid Id { get; set; }
+        public virtual Query Query { get; set; }
         public string URL { get; set; }
 
     }
 
     class Selector
     {
-        public Guid SelectorId { get; set; }
-        public virtual Page PageId { get; set; }
+        public Guid Id { get; set; }
+        public virtual Page Page { get; set; }
         public string Value { get; set; }
 
     }
 
     class ResultsHeader
     {
-        public Guid ResultsHeaderId { get; set; }
-        public virtual Selector SelectorId { get; set; }
+        public Guid Id { get; set; }
+        public virtual Selector Selector { get; set; }
         public DateTime QueryExecutionDate { get; set; }
     }
 
     class ResultsDetail
     {
-        public Guid ResultsDetailId { get; set; }
-        public virtual ResultsHeader ResultsHeaderId { get; set; }
+        public Guid Id { get; set; }
+        public virtual ResultsHeader ResultsHeader { get; set; }
         public string Value { get; set; }
     }
 }
