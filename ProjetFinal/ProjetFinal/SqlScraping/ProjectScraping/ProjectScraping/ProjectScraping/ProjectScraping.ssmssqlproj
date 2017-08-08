@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<SqlWorkbenchSqlProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="ProjectScraping">
+  <Items>
+    <LogicalFolder Name="Connexions" Type="2" Sorted="true">
+      <Items>
+        <ConnectionNode Name="POSTE104\SQLEXPRESS:POSTE104\adminl">
+          <Created>2017-08-07T14:44:01.4742137+02:00</Created>
+          <Type>SQL</Type>
+          <Server>POSTE104\SQLEXPRESS</Server>
+          <UserName />
+          <Authentication>Authentification Windows</Authentication>
+          <InitialDB>ProjectScraping_Queries</InitialDB>
+          <LoginTimeout>15</LoginTimeout>
+          <ExecutionTimeout>0</ExecutionTimeout>
+          <ConnectionProtocol>NotSpecified</ConnectionProtocol>
+          <ApplicationName>Microsoft SQL Server Management Studio - Requête</ApplicationName>
+        </ConnectionNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Requêtes" Type="0" Sorted="true">
+      <Items>
+        <FileNode Name="creation2.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:POSTE104\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>POSTE104\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>creation2.sql</FullPath>
+        </FileNode>
+        <FileNode Name="DBCreation.SQL">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:POSTE104\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>POSTE104\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>DBCreation.SQL</FullPath>
+        </FileNode>
+        <FileNode Name="fill.sql">
+          <AssociatedConnectionMoniker>8c91a03d-f9b4-46c0-a305-b5dcc79ff907:POSTE104\SQLEXPRESS:True</AssociatedConnectionMoniker>
+          <AssociatedConnSrvName>POSTE104\SQLEXPRESS</AssociatedConnSrvName>
+          <AssociatedConnUserName />
+          <FullPath>fill.sql</FullPath>
+        </FileNode>
+      </Items>
+    </LogicalFolder>
+    <LogicalFolder Name="Divers" Type="3" Sorted="true">
+      <Items />
+    </LogicalFolder>
+  </Items>
+</SqlWorkbenchSqlProject>
