@@ -14,7 +14,7 @@ namespace ProjetFinal
         /// TODO Add a new query...
         /// </summary>
         /// <returns></returns>
-        bool AddNewQuery()
+        public bool AddNewQuery()
         {
             //throw new NotImplementedException();
             var q = new Query();
