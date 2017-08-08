@@ -10,10 +10,12 @@ namespace ProjetFinal
     {
         static void Main(string[] args)
         {
-            QueryContext context = new QueryContext();
+            Repository repo = new Repository();
 
             Console.WriteLine("\t\tBienvenue sur l'application d'Amin et Jonathan" +
                               "\n\t\tVeuillez entrer une nouvelle requête");
+
+            repo.AddNewQuery();
             
             Console.Read();
             
