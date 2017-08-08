@@ -11,6 +11,7 @@ namespace ProjetFinal
         static void Main(string[] args)
         {
             Console.WriteLine("First commit");
+            Console.WriteLine("Second Commit");
             Console.ReadLine();
             
         }
