@@ -20,6 +20,7 @@ namespace ProjetFinal
             var q = new Query();
             q.Name = "test";
             dbQueryContext.Queries.Add(q);
+            dbQueryContext.SaveChanges();
             return true;
         }
         /// <summary>
