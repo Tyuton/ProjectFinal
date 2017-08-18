@@ -28,19 +28,18 @@
                 </Grid.RowDefinitions>
 
                 <ListBox Name="Queries" Grid.Column="0" Grid.RowSpan="4" Background="DarkCyan"
-                         ItemsSource="{Binding Path=listQueries}">
+                         ItemsSource="{Binding Path=listQueries}" SelectionChanged="Queries_SelectionChanged">
                     <!--<ListBoxItem>Requête 1</ListBoxItem>
                     <ListBoxItem>Requête 2</ListBoxItem>-->
                 </ListBox>
 
-                <ComboBox Name="URLs" Grid.Column="1" Grid.Row="0">
-                    <!--<ComboBoxItem>Http://www.ffr.fr</ComboBoxItem>
-                    <ComboBoxItem>Http://www.Makri.com</ComboBoxItem>-->
+                <ComboBox Name="URLs" Grid.Column="1" Grid.Row="0"                          
+                          ItemsSource="{Binding ElementName=Queries, Path=SelectedItem.urls}" SelectionChanged="URLs_SelectionChanged_1">                    
                 </ComboBox>
 
-                <ListBox Name="Selectors" Grid.Column="1" Grid.Row="1">
-                    <ListBoxItem>Selec 1</ListBoxItem>
-                    <ListBoxItem>Selec 2</ListBoxItem>
+                <ListBox Name="Selectors" Grid.Column="1" Grid.Row="1"
+                         ItemsSource="{Binding ElementName=URLs, Path=SelectedItem.selectors}">
+
                 </ListBox>
 
                 <Label BorderBrush="Black" BorderThickness="1" Name="nbreResults" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">

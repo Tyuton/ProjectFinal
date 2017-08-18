@@ -1,4 +1,5 @@
-﻿using ProjetFinal.UI.WPF.ViewModel;
+﻿using ProjetFinal.UI.WPF.Model;
+using ProjetFinal.UI.WPF.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +35,21 @@ namespace ProjetFinal.UI.WPF
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             DataContext = new ViewModelQueries();
+        }
+
+        private void Queries_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            
+        }
+
+        private void URLs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void URLs_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

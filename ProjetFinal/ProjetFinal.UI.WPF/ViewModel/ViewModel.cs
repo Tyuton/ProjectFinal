@@ -12,11 +12,14 @@ namespace ProjetFinal.UI.WPF.ViewModel
         private Repository repo = new Repository();
 
         public List<Query> listQueries { get; set; }
+        public List<URL> listURL { get ; set; }
 
         public ViewModelQueries()
         {
-            listQueries = repo.getAllQuery();
+            listQueries = repo.getAllQuery();            
         }
+
+        
     }
     
     
