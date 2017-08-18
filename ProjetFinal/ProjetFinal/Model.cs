@@ -32,6 +32,7 @@ namespace ProjetFinal
     {
         public Guid Id { get; set; }
         public virtual Page Page { get; set; }
+        public string Name { get; set; }
         public string Value { get; set; }
 
     }
