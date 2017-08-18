@@ -48,4 +48,11 @@ namespace ProjetFinal.UI.WPF.Model
             throw new NotImplementedException();
         }
     }
+    class Query
+    {
+        public override string ToString()
+        {
+            return "TestQuery";
+        }
+    }
 }

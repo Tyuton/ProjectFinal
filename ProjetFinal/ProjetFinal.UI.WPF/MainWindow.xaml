@@ -4,9 +4,58 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjetFinal.UI.WPF"
+        xmlns:ViewModel="clr-namespace:ProjetFinal.UI.WPF.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
+
+    <DockPanel LastChildFill="True">
+        <DockPanel LastChildFill="True" DockPanel.Dock="Top">
+            <Image  Source="Images/Logo.jpg" DockPanel.Dock="Left" Width="50" Height="50" Margin="5"/>
+            <Label  Content="NomDeNotreProjet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
+        </DockPanel>
         
-    </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <ListBox Name="Queries" Grid.Column="0" Grid.RowSpan="4" Background="DarkCyan"
+                         ItemsSource="{Binding Source=listQueries}">
+                    <!--<ListBoxItem>Requête 1</ListBoxItem>
+                    <ListBoxItem>Requête 2</ListBoxItem>-->
+                </ListBox>
+
+                <ComboBox Name="URLs" Grid.Column="1" Grid.Row="0">
+                    <ComboBoxItem>Http://www.ffr.fr</ComboBoxItem>
+                    <ComboBoxItem>Http://www.Makri.com</ComboBoxItem>
+                </ComboBox>
+
+                <ListBox Name="Selectors" Grid.Column="1" Grid.Row="1">
+                    <ListBoxItem>Selec 1</ListBoxItem>
+                    <ListBoxItem>Selec 2</ListBoxItem>
+                </ListBox>
+
+                <Label BorderBrush="Black" BorderThickness="1" Name="nbreResults" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">
+                Il y a X données référencées
+                </Label>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
+                    <Button Name="Add" Content="Ajouter" Margin="5" />
+                    <Button Name="Modify" Content="Modifier" Margin="5" />
+                    <Button Name="Close" Content="Quitter" Click="Quitter_Click" Margin="5"/>
+                </StackPanel>
+
+
+
+            </Grid>
+        
+
+    </DockPanel>
 </Window>

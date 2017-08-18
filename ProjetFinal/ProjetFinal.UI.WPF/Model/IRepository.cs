@@ -36,8 +36,5 @@ namespace ProjetFinal.UI.WPF.Model
          void SetResults(Query query, string scrapingResults);
 
 }
-    class Query
-    {
 
-    }
 }

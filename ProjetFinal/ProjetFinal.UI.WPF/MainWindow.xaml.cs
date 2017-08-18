@@ -24,5 +24,10 @@ namespace ProjetFinal.UI.WPF
         {
             InitializeComponent();
         }
+
+        private void Quitter_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
