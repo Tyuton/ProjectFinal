@@ -18,10 +18,10 @@ namespace ProjetFinal.UI.WPF.Views
     /// <summary>
     /// Interaction logic for AddNewQuery.xaml
     /// </summary>
-    public partial class AddNewQuery : Window
+    public partial class ModifyQuery : Window
     {
         public MainWindow mainWindow = null;
-        public AddNewQuery(MainWindow w)
+        public ModifyQuery(MainWindow w)
         {
             InitializeComponent();
             mainWindow = w;
@@ -34,7 +34,8 @@ namespace ProjetFinal.UI.WPF.Views
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // DataContext =             
+            // DataContext = 
+            QueryName.Text = ((Query)mainWindow.Queries.SelectedItem).Nom;
         }
     }
 }

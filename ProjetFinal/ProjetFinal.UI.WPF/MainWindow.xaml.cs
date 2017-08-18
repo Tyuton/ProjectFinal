@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjetFinal.UI.WPF.Views;
 
 namespace ProjetFinal.UI.WPF
 {
@@ -50,6 +51,18 @@ namespace ProjetFinal.UI.WPF
         private void URLs_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewQuery newqueryWindow = new AddNewQuery(this);
+            newqueryWindow.Show();
+        }
+
+        private void Modify_Click(object sender, RoutedEventArgs e)
+        {
+            ModifyQuery modifyQ = new ModifyQuery(this);
+            modifyQ.Show();
         }
     }
 }

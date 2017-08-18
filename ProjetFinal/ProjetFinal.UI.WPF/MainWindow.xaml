@@ -7,7 +7,7 @@
         xmlns:ViewModel="clr-namespace:ProjetFinal.UI.WPF.ViewModel"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="500" Width="725">
 
     <DockPanel LastChildFill="True">
         <DockPanel LastChildFill="True" DockPanel.Dock="Top">
@@ -47,8 +47,8 @@
                 </Label>
 
                 <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
-                    <Button Name="Add" Content="Ajouter" Margin="5" />
-                    <Button Name="Modify" Content="Modifier" Margin="5" />
+                    <Button Name="Add" Content="Ajouter" Margin="5" Click="Add_Click" />
+                    <Button Name="Modify" Content="Modifier" Margin="5" Click="Modify_Click" />
                     <Button Name="Close" Content="Quitter" Click="Quitter_Click" Margin="5"/>
                 </StackPanel>
 
