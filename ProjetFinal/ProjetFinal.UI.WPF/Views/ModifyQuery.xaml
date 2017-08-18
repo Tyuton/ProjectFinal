@@ -1,4 +1,4 @@
-﻿<Window x:Class="ProjetFinal.UI.WPF.Views.AddNewQuery"
+﻿<Window x:Class="ProjetFinal.UI.WPF.Views.ModifyQuery"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjetFinal.UI.WPF.Views"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Add New Query" Height="500" Width="375">
+        Title="Modify Query" Height="500" Width="375">
     
     <DockPanel LastChildFill="True">
         
