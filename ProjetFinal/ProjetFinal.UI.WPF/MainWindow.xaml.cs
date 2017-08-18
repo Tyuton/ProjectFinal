@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetFinal.UI.WPF.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,6 +29,11 @@ namespace ProjetFinal.UI.WPF
         private void Quitter_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            DataContext = new ViewModelQueries();
         }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:ProjetFinal.UI.WPF"
         xmlns:ViewModel="clr-namespace:ProjetFinal.UI.WPF.ViewModel"
         mc:Ignorable="d"
+        Loaded="Window_Loaded"
         Title="MainWindow" Height="350" Width="525">
 
     <DockPanel LastChildFill="True">
@@ -27,14 +28,14 @@
                 </Grid.RowDefinitions>
 
                 <ListBox Name="Queries" Grid.Column="0" Grid.RowSpan="4" Background="DarkCyan"
-                         ItemsSource="{Binding Source=listQueries}">
+                         ItemsSource="{Binding Path=listQueries}">
                     <!--<ListBoxItem>Requête 1</ListBoxItem>
                     <ListBoxItem>Requête 2</ListBoxItem>-->
                 </ListBox>
 
                 <ComboBox Name="URLs" Grid.Column="1" Grid.Row="0">
-                    <ComboBoxItem>Http://www.ffr.fr</ComboBoxItem>
-                    <ComboBoxItem>Http://www.Makri.com</ComboBoxItem>
+                    <!--<ComboBoxItem>Http://www.ffr.fr</ComboBoxItem>
+                    <ComboBoxItem>Http://www.Makri.com</ComboBoxItem>-->
                 </ComboBox>
 
                 <ListBox Name="Selectors" Grid.Column="1" Grid.Row="1">

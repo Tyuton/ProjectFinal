@@ -25,7 +25,13 @@ namespace ProjetFinal.UI.WPF.Model
 
         public List<Query> getAllQuery()
         {
-            throw new NotImplementedException();
+            return new List<Query>
+            {
+                new Query { Nom = "Requête 1", url = { "http://www.ffr.fr", "http://competitions.ffr.fr/index.php/ffr/rugby_francais/competitions" } },
+                new Query { Nom = "Requête 2", url = { "https://www.google.fr/", "https://fr.wikipedia.org/" } },
+                //new Query { }
+
+            };
         }
 
         public List<Query> getQueryByName(string name)
@@ -50,9 +56,15 @@ namespace ProjetFinal.UI.WPF.Model
     }
     class Query
     {
+        public List<string> url { get; set; }
+
+        public string Nom { get; set; }
+
         public override string ToString()
         {
-            return "TestQuery";
+            return Nom;
         }
+        
+
     }
 }
