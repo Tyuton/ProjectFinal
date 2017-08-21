@@ -6,6 +6,49 @@ using System.Threading.Tasks;
 
 namespace ProjetFinal.UI.WPF.Model
 {
+
+    /// ///////////////////////////////////////////////
+    // Model
+    class Query
+    {
+        public List<URL> urls { get; set; }
+
+        public string Nom { get; set; }
+        public Query()
+        {
+            urls = new List<URL>();
+        }
+
+        public override string ToString()
+        {
+            return Nom;
+        }
+    }
+    public class URL
+    {
+        public List<Selector> selectors { get; set; }
+        public string url { get; set; }
+        public URL()
+        {
+            selectors = new List<Selector>();
+        }
+        public override string ToString()
+        {
+            return url; 
+        }
+
+    }
+    public class Selector
+    {
+        public string script { get; set; }
+        public override string ToString()
+        {
+            return script; 
+        }
+    }
+
+    /// ///////////////////////////////////////////////
+    // Repository
     class Repository : IRepository
     {
         private List<Query> queries = null;
@@ -113,35 +156,4 @@ namespace ProjetFinal.UI.WPF.Model
     }
 
 
-    /// ///////////////////////////////////////////////
-    // Model
-    class Query
-    {
-        public List<URL> urls { get; set; }
-
-        public string Nom { get; set; }
-
-        public override string ToString()
-        {
-            return Nom;
-        }
-    }
-    public class URL
-    {
-        public List<Selector> selectors { get; set; }
-        public string url { get; set; }
-        public override string ToString()
-        {
-            return url; 
-        }
-
-    }
-    public class Selector
-    {
-        public string script { get; set; }
-        public override string ToString()
-        {
-            return script; 
-        }
-    }
 }

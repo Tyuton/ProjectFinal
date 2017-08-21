@@ -26,6 +26,8 @@ namespace ProjetFinal.UI.WPF
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new ViewModelQueries();
+
         }
 
         private void Quitter_Click(object sender, RoutedEventArgs e)
@@ -35,23 +37,30 @@ namespace ProjetFinal.UI.WPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            DataContext = new ViewModelQueries();
+            if (Queries.Items.Count > 0)
+            {
+                Queries.SelectedIndex = 0;
+                //Queries_SelectionChanged(sender, null);
+            }
         }
 
         private void Queries_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            
+            //update listURL in ViewModel
+            //var selectedItem = ((ListBox)sender).SelectedItem;
+            //((ViewModelQueries)DataContext).listURL = ((Query)selectedItem).urls;
+            if (URLs.Items.Count > 0)
+            {
+                URLs.SelectedIndex = 0;
+                //URLs_SelectionChanged(sender, null);
+            }
         }
 
         private void URLs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //if (Selectors.Items.Count > 0) Selectors.SelectedIndex = 0;
         }
 
-        private void URLs_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {

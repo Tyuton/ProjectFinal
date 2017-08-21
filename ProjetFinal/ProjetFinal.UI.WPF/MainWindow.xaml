@@ -14,50 +14,55 @@
             <Image  Source="Images/Logo.jpg" DockPanel.Dock="Left" Width="50" Height="50" Margin="5"/>
             <Label  Content="NomDeNotreProjet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
         </DockPanel>
-        
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="4*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
             <TextBlock Name="QueryListboxTitle" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center">
                 Liste des requêtes
             </TextBlock>
-                <ListBox Name="Queries" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" 
-                         ItemsSource="{Binding Path=listQueries}" SelectionChanged="Queries_SelectionChanged">
-                    <!--<ListBoxItem>Requête 1</ListBoxItem>
+            <ListBox Name="Queries" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" 
+                         ItemsSource="{Binding Path=listQueries}" 
+                        SelectionChanged="Queries_SelectionChanged">
+                <!--<ListBoxItem>Requête 1</ListBoxItem>
                     <ListBoxItem>Requête 2</ListBoxItem>-->
-                </ListBox>
+            </ListBox>
 
-                <ComboBox Name="URLs" Grid.Column="1" Grid.Row="0"                          
-                          ItemsSource="{Binding ElementName=Queries, Path=SelectedItem.urls}" SelectionChanged="URLs_SelectionChanged_1">                   
-                </ComboBox>
+            <!--Binding ElementName=Queries, Path=SelectedItem.urls-->
+            <ComboBox DataContext="{Binding ElementName=Queries, Path=SelectedItem}" Name="URLs" Grid.Column="1" Grid.Row="0"   
+                        ItemsSource="{Binding Path=urls}"
+                        SelectionChanged="URLs_SelectionChanged">
 
-                <ListBox x:Name="Selectors" Grid.Column="1" Grid.Row="1"
-                         ItemsSource="{Binding ElementName=URLs, Path=SelectedItem.selectors}">
+            </ComboBox>
 
-                </ListBox>
+            <ListBox x:Name="Selectors" 
+                     DataContext="{Binding ElementName=URLs, Path=SelectedItem}" Grid.Column="1" Grid.Row="1"
+                     ItemsSource="{Binding selectors}">
 
-                <Label BorderBrush="Black" BorderThickness="1" Name="nbreResults" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">
+            </ListBox>
+
+            <Label BorderBrush="Black" BorderThickness="1" Name="nbreResults" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center">
                 Il y a X données référencées
-                </Label>
+            </Label>
 
-                <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
-                    <Button Name="Add" Content="Ajouter" Margin="5" Click="Add_Click" />
-                    <Button Name="Modify" Content="Modifier" Margin="5" Click="Modify_Click" />
-                    <Button Name="Close" Content="Quitter" Click="Quitter_Click" Margin="5"/>
-                </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Center">
+                <Button Name="Add" Content="Ajouter" Margin="5" Click="Add_Click" />
+                <Button Name="Modify" Content="Modifier" Margin="5" Click="Modify_Click" />
+                <Button Name="Close" Content="Quitter" Click="Quitter_Click" Margin="5"/>
+            </StackPanel>
 
 
 
-            </Grid>
-        
+        </Grid>
+
 
     </DockPanel>
 </Window>

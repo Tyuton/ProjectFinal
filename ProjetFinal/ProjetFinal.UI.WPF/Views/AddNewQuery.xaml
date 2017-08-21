@@ -7,10 +7,12 @@
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Title="Add New Query" Height="500" Width="500">
-    
+    <!--#region Toottip Ressource -->
+    <!--#endregion-->
+
     <DockPanel LastChildFill="True">
-        
-    
+
+
 
         <DockPanel LastChildFill="True" DockPanel.Dock="Top" Background="{StaticResource DockPanelStyle}">
             <Image  Source="../Images/Logo.jpg" DockPanel.Dock="Left" Width="50" Height="50" Margin="5"/>
@@ -25,19 +27,19 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            
-        <!--#region Query name-->
-        <Grid Grid.Row="0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+
+            <!--#region Query name-->
+            <Grid Grid.Row="0" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Label   Grid.Column="0" Grid.Row="0" Content="Query Name :" Target="QueryName"/>
                 <TextBox Grid.Column="1" Grid.Row="0" Name="QueryName" Text=""/>
                 <Label   Grid.Column="2" Grid.Row="0" Content="Expiry Date :" Target="Expiry"/>
@@ -46,68 +48,70 @@
                 <TextBox Grid.Column="1" Grid.Row="1" Name="QueryDescription"/>
                 <Label   Grid.Column="2" Grid.Row="1" Content="Timestamp :" Target="Timestamp"/>
                 <TextBox Grid.Column="3" Grid.Row="1" Name="Timestamp"/>
-        </Grid>
-        <!--#endregion-->
+            </Grid>
+            <!--#endregion-->
 
-        <!--#region New url-->
+            <!--#region New url-->
             <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="Auto"/>
-            </Grid.ColumnDefinitions>
-            <Label   Grid.Column="0" Grid.Row="0" Content="New URL :" Target="URL"></Label>
-            <TextBox Grid.Column="1" Grid.Row="0" Name="URL"/>
-            <Button  Grid.Column="2" Margin="5">Add</Button>
-        </Grid>
-        <!--#endregion-->
-
-        <!--#region list urls+selectors -->
-            <Grid Grid.Row="2" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="2*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-
-            <ListBox Grid.Column="0" Grid.RowSpan="2" Name="urls">
-                <ListBoxItem Content="www.url1.fr"/>
-                <ListBoxItem Content="www.url2.fr"/>
-                <ListBoxItem Content="www.url3.fr"/>
-            </ListBox>
-
-        <!--#region new selectors -->
-            <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label   Grid.Column="0" Grid.Row="0" Content="New URL :" Target="URL"></Label>
+                <TextBox Grid.Column="1" Grid.Row="0" Name="URL" Text="www.exemple.fr"/>
+                <Button  Grid.Column="2" Margin="5" Click="Add_Button_Click" >Add</Button>
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region list urls+selectors -->
+            <Grid Grid.Row="2" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <Label   Grid.Column="0" Grid.Row="0" Content="Selector :" Target="selector"/>
-                <TextBox Grid.Column="1" Grid.Row="0" Name="selector" Height="50"/>
-                <ListBox Grid.ColumnSpan="2" Grid.Row="1" Name="listselector">
-                    <ListBoxItem Content="selector 1"/>
-                    <ListBoxItem Content="selector 2"/>
-                    <ListBoxItem Content="selector 3"/>
+
+                <ListBox Grid.Column="0" Grid.RowSpan="2" Name="lbURLs"
+                         DataContext="{Binding newQuery}"
+                         ItemsSource="{Binding Path=urls}" SelectionChanged="lbURLs_SelectionChanged">
                 </ListBox>
-            </Grid>            
-        <!--#endregion-->            
-        </Grid>
-        <!--#endregion-->
-        
-        <!--#region button OK / Cancel -->
+                    
+                <!--#region new selectors -->
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label   Grid.Column="0" Grid.Row="0" Content="Selector :" Target="tbScript"/>
+                    <TextBox Grid.Column="1" Grid.Row="0" Name="tbScript" Height="75" 
+                             AcceptsReturn="True" AcceptsTab="True" Margin="5" TextWrapping="Wrap" 
+                             VerticalScrollBarVisibility="Auto"/>
+                    <Button  Grid.Column="2" Name="btAddScript" Margin="5" Click="Button_Click_1">Add</Button>
+                    <ListBox Grid.ColumnSpan="3" Grid.Row="1" Name="listSelectors"                             
+                             DataContext="{Binding ElementName=lbURLs, Path=SelectedItem}"
+                             ItemsSource="{Binding Path=selectors}">
+                    </ListBox>
+                </Grid>
+                <!--#endregion-->
+            </Grid>
+            <!--#endregion-->
+
+            <!--#region button OK / Cancel -->
             <StackPanel Grid.Row="3"  Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button>Ok</Button>
-            <Button Click="Button_Click">Cancel</Button>
-        </StackPanel>
-        <!--#endregion-->
-        
+                <Button>Ok</Button>
+                <Button Click="Button_Click">Cancel</Button>
+            </StackPanel>
+            <!--#endregion-->
+
         </Grid>
 
     </DockPanel>
