@@ -4,47 +4,73 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
 
-    <LinearGradientBrush x:Key="DockPanelStyle" EndPoint="1,1" StartPoint="0,0">
-        <GradientStop Color="#53c653" Offset="0" />
-        <GradientStop Color="#66cc66" Offset="0.318" />
-        <GradientStop Color="#79d279" Offset="0.834" />
-        <GradientStop Color="#c6ecc6" Offset="1" />
+    <LinearGradientBrush x:Key="DockPanelStyle" EndPoint="0.5, 0" StartPoint="0.5,1">
+        <GradientStop Color="#253452" Offset="0" />
+        <GradientStop Color="#2D3D5C" Offset="0.318"/>
+        <GradientStop Color="#354363" Offset="0.734" />
+        <GradientStop Color="#435273" Offset="1" />
     </LinearGradientBrush>
 
-    <LinearGradientBrush x:Key="MouseOverBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <!--<GradientStop Color="#FFFFFFFF" Offset="0" />
-        <GradientStop Color="#FFFEF3B5" Offset="0.318" />
-        <GradientStop Color="#FFFFEB70" Offset="0.488" />
-        <GradientStop Color="#FFFFD02E" Offset="0.502" />
-        <GradientStop Color="#FFFFD932" Offset="0.834" />
-        <GradientStop Color="#FFFFF48B" Offset="1" />-->        
-    </LinearGradientBrush>
-    <SolidColorBrush x:Key="MouseOverBrush ">
-        
-    </SolidColorBrush>
+    <Style TargetType="TextBlock" x:Key="TextBlockStyle">
+        <Setter Property="FontFamily" Value="Calibri" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#4d4d4d" />
+    </Style>
+
     
     
-    <LinearGradientBrush x:Key="MouseOverBorderBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFEEE8CF" Offset="0" />
-        <GradientStop Color="#FFC4AF8C" Offset="0.536" />
-        <GradientStop Color="#FFDCD1BF" Offset="1" />
-    </LinearGradientBrush>
-    <!--<SolidColorBrush x:Key="MouseOverBorderBrush ">
-        <SolidColorBrush.Color>
-    </SolidColorBrush>-->
 
-
-    <LinearGradientBrush x:Key="MouseOverHighlightBrush" EndPoint="0.5,1" StartPoint="0.5,0">
-        <GradientStop Color="#FFFFFFFB" Offset="0" />
-        <GradientStop Color="#FFFEF3B5" Offset="1" />
-    </LinearGradientBrush>
-    <SolidColorBrush x:Key="MouseOverHighlightBrush ">
-
-    </SolidColorBrush>
-
+    <!--Add ItemContainerStyle="{StaticResource ListBoxStyle}"-->
+    <Style x:Key="ListBoxStyle" TargetType="{x:Type ListBoxItem}">
+        <Style.Resources>
+            <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#8cd98c" />
+        </Style.Resources>
+    </Style>
 
 
     <!--Styles Buttons-->
+
+    <Style TargetType="{x:Type Button}" >
+        <Setter Property="Background" Value="Green"/>
+        <Setter Property="Margin" Value="5" />        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="4" Height="25" Width="100">
+                        
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Red"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+
+    <!--<SolidColorBrush x:Key="MouseOverBrush ">
+        <SolidColorBrush.Color >Red</SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="MouseOverBrushOff ">
+        <SolidColorBrush.Color >Green</SolidColorBrush.Color>
+    </SolidColorBrush>
+
+    <SolidColorBrush x:Key="MouseOverBorderBrush ">
+        <SolidColorBrush.Color>Red</SolidColorBrush.Color>
+    </SolidColorBrush>
+
+
+    <SolidColorBrush x:Key="MouseOverHighlightBrush ">
+        <SolidColorBrush.Color>Green</SolidColorBrush.Color>
+    </SolidColorBrush>
+
+
     <Style x:Key="ButtonVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -69,20 +95,20 @@
 
         <ControlTemplate.Resources>
             <Storyboard x:Key="HoverOn">
-                <DoubleAnimation Duration="00:00:00.1000000" Storyboard.TargetName="BackgroundOver" Storyboard.TargetProperty="Background" To="Green" />
+                <DoubleAnimation Duration="00:00:00.1000000" Storyboard.TargetName="BackgroundOver" Storyboard.TargetProperty="Background" By="{Binding Source={StaticResource MouseOverBrush}}" />
                 <DoubleAnimation Duration="00:00:00.1000000" Storyboard.TargetName="BackgroundOver_Highlight" Storyboard.TargetProperty="Opacity" To="0.65" />
             </Storyboard>
             <Storyboard x:Key="HoverOff">
-                <DoubleAnimation Duration="00:00:00.4000000" Storyboard.TargetName="BackgroundOver" Storyboard.TargetProperty="Background" By="Red" />
-                <DoubleAnimation Duration="00:00:00.4000000" Storyboard.TargetName="BackgroundOver_Highlight" Storyboard.TargetProperty="Opacity" To="0" />
+                <DoubleAnimation Duration="00:00:00.4000000" Storyboard.TargetName="BackgroundOver" Storyboard.TargetProperty="Background" By="{Binding Source={StaticResource MouseOverBrushOff}}" />
+                <DoubleAnimation Duration="00:00:00.4000000" Storyboard.TargetName="BackgroundOver_Highlight" Storyboard.TargetProperty="Opacity" To="1" />
             </Storyboard>
         </ControlTemplate.Resources>
-        
+
         <StackPanel x:Name="StackPanelButton">
-            <Border x:Name="BackgroundOver" BorderThickness="1" CornerRadius="1.75" Opacity="0" Background="{DynamicResource MouseOverBrush}" BorderBrush="{DynamicResource MouseOverBorderBrush}"/>
-            <Border x:Name="BackgroundOver_Highlight" Margin="1" BorderThickness="1,0,1,1" CornerRadius="1" Opacity="0" BorderBrush="{DynamicResource MouseOverHighlightBrush}"/>
+            <Border x:Name="BackgroundOver" BorderThickness="1" CornerRadius="1.75" Opacity="1" Background="{DynamicResource MouseOverBrush}" BorderBrush="{DynamicResource MouseOverBorderBrush}"/>
+            <Border x:Name="BackgroundOver_Highlight" Margin="1" BorderThickness="1,0,1,1" CornerRadius="1" Opacity="1" BorderBrush="{DynamicResource MouseOverHighlightBrush}"/>
         </StackPanel>
-        
+
         <ControlTemplate.Triggers>
             <Trigger Property="IsMouseOver" Value="true">
                 <Trigger.ExitActions>
@@ -93,5 +119,5 @@
                 </Trigger.EnterActions>
             </Trigger>
         </ControlTemplate.Triggers>
-    </ControlTemplate>
+    </ControlTemplate>-->
 </ResourceDictionary>
