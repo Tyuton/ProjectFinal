@@ -61,8 +61,8 @@ namespace ProjetFinal.UI.WPF
 
         private void Modify_Click(object sender, RoutedEventArgs e)
         {
-            ModifyQuery modifyQ = new ModifyQuery(this);
-            modifyQ.Show();
+            //ModifyQuery modifyQ = new ModifyQuery(this);
+            //modifyQ.Show();
         }
     }
 }

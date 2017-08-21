@@ -6,13 +6,13 @@
         xmlns:local="clr-namespace:ProjetFinal.UI.WPF.Views"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Add New Query" Height="500" Width="375">
+        Title="Add New Query" Height="500" Width="500">
     
     <DockPanel LastChildFill="True">
         
     
 
-        <DockPanel LastChildFill="True" DockPanel.Dock="Top">
+        <DockPanel LastChildFill="True" DockPanel.Dock="Top" Background="{StaticResource DockPanelStyle}">
             <Image  Source="../Images/Logo.jpg" DockPanel.Dock="Left" Width="50" Height="50" Margin="5"/>
             <Label  Content="NomDeNotreProjet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
         </DockPanel>

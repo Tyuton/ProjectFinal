@@ -10,7 +10,7 @@
         Title="MainWindow" Height="500" Width="725">
 
     <DockPanel LastChildFill="True">
-        <DockPanel LastChildFill="True" DockPanel.Dock="Top">
+        <DockPanel LastChildFill="True" DockPanel.Dock="Top" Background="{StaticResource DockPanelStyle }">
             <Image  Source="Images/Logo.jpg" DockPanel.Dock="Left" Width="50" Height="50" Margin="5"/>
             <Label  Content="NomDeNotreProjet" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="5"/>
         </DockPanel>
@@ -27,7 +27,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <ListBox Name="Queries" Grid.Column="0" Grid.RowSpan="4" Background="DarkCyan"
+                <ListBox Name="Queries" Grid.Column="0" Grid.RowSpan="4" 
                          ItemsSource="{Binding Path=listQueries}" SelectionChanged="Queries_SelectionChanged">
                     <!--<ListBoxItem>Requête 1</ListBoxItem>
                     <ListBoxItem>Requête 2</ListBoxItem>-->
