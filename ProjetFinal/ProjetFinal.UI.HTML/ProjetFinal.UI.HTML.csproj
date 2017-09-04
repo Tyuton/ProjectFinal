@@ -134,8 +134,14 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Accueil.html" />
+    <Content Include="FAQ.html" />
+    <Content Include="Gerer.html" />
+    <Content Include="Login.html" />
+    <Content Include="Requetes.html" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="styles\site.css" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
