@@ -2,9 +2,75 @@
 <html>
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <title>Gestion des requêtes</title>
 </head>
-<body>
 
+<body>
+    <div class="jumbotron text-center">
+        <h1>Gestion de vos requêtes</h1>
+    </div>
+    <hr />
+
+    <div class="wrapper">
+
+        <div class="container">
+            <fieldset id="field1">
+                <legend>Liste des requêtes</legend>
+                <div id="QueryList" class="list-group">
+                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 1">Requete 1</a>
+                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 2">Requete 2</a>
+                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 3">Requete 3</a>
+                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 4">Requete 4</a>
+                    <button class="tn btn-primary" id="addRequete">+</button>
+                </div>
+            </fieldset>
+        </div>
+
+
+        <div class="container" >
+            <fieldset>
+                <legend>Liste des URLs associées</legend>
+                <div id="UrlList" class="list-group">
+                    <a href="#" class="list-group-item">URL 1</a>
+                    <a href="#" class="list-group-item">URL 2</a>
+                    <a href="#" class="list-group-item">URL 3</a>
+                    <a href="#" class="list-group-item">URL 4</a>
+                    <button class="tn btn-primary" id="addURL">+</button>
+                </div>
+            </fieldset>
+            <div id="currentURL">URL Sélectionnée</div>
+     </div>
+
+        <div class="container" id="SelectorsList">
+            <fieldset>
+                <legend>Liste des selecteur associés</legend>
+                <div id="SelectorsList" class="list-group">
+                    <a href="#" class="list-group-item">Selectors 1</a>
+                    <a href="#" class="list-group-item">Selectors 2</a>
+                    <a href="#" class="list-group-item">Selectors 3</a>
+                    <a href="#" class="list-group-item">Selectors 4</a>
+                    <button class="tn btn-primary" id="addSelector">+</button>
+                </div>
+            </fieldset>
+            <div id="currentSelector"+>Selecteur sélectionné</div>
+        </div>
+
+        <div id="DatePeremption">
+            Peremption de data
+        </div>
+
+    </div>
+    <div id="boutons" class="container">
+        <button class="tn btn-primary" id="Execute">Exécuter</button>
+        <button class="tn btn-primary" id="Save">Enregistrer les modifications</button>
+        <button class="tn btn-primary" id="Delete">Supprimer</button>
+        <button class="tn btn-primary" id="Cancel">Annuler</button>
+    </div>
+
+    <script src="scripts/jquery-1.9.1.min.js"></script>
+    <script src="scripts/bootstrap.min.js"></script>
+    <script src="scripts/Gerer.js"></script>
 </body>
 </html>

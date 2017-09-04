@@ -1,0 +1,23 @@
+﻿
+.wrapper {
+    display:flex;
+    justify-content:space-between;
+    flex:auto;
+}
+
+.button {
+    margin:50px;
+    
+}
+
+/*#boutons {
+    display:flex;
+    justify-content: center;    
+}
+.but {
+    margin:5px;
+}
+#QueryList li {
+
+}*/
+
