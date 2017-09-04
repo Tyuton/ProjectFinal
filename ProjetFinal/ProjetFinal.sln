@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetFinal", "ProjetFinal\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetFinal.UI.WPF", "ProjetFinal.UI.WPF\ProjetFinal.UI.WPF.csproj", "{9AAB48BE-28F8-4A50-A8B0-C58A82FE6F90}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjetFinal.UI.HTML", "ProjetFinal.UI.HTML\ProjetFinal.UI.HTML.csproj", "{3DD64005-A3CA-4397-921F-2CA9EBCF26D4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{9AAB48BE-28F8-4A50-A8B0-C58A82FE6F90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AAB48BE-28F8-4A50-A8B0-C58A82FE6F90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AAB48BE-28F8-4A50-A8B0-C58A82FE6F90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DD64005-A3CA-4397-921F-2CA9EBCF26D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DD64005-A3CA-4397-921F-2CA9EBCF26D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DD64005-A3CA-4397-921F-2CA9EBCF26D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DD64005-A3CA-4397-921F-2CA9EBCF26D4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
