@@ -3,10 +3,13 @@
     display:flex;
     justify-content:space-between;
     flex:auto;
-}.button {
+}
+
+.button {
     margin:50px;
     
-}
+}
+
 /*#boutons {
     display:flex;
     justify-content: center;    
