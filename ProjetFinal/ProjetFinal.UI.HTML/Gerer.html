@@ -4,6 +4,7 @@
     <title></title>
     <meta charset="utf-8" />
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="styles/Gerer.css" rel="stylesheet" />
     <title>Gestion des requêtes</title>
 </head>
 
@@ -15,54 +16,57 @@
 
     <div class="wrapper">
 
-        <div class="container">
+        <div class="container col-lg-3">
             <fieldset id="field1">
                 <legend>Liste des requêtes</legend>
                 <div id="QueryList" class="list-group">
-                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 1">Requete 1</a>
-                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 2">Requete 2</a>
-                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 3">Requete 3</a>
-                    <a href="#" class="list-group-item" data-toggle="tooltip" title="Requete 4">Requete 4</a>
+                    <a href="#" class="list-group-item query" name="query">Requete 1</a>
+                    <a href="#" class="list-group-item query" name="query">Requete 2</a>
+                    <a href="#" class="list-group-item query" name="query">Requete 3</a>
+                    <a href="#" class="list-group-item query" name="query">Requete 4</a>
                     <button class="tn btn-primary" id="addRequete">+</button>
                 </div>
+                <textarea class="textQuery" id="currentQuery" hidden="hidden"></textarea>
             </fieldset>
         </div>
 
 
-        <div class="container" >
+        <div class="container col-lg-3" >
             <fieldset>
                 <legend>Liste des URLs associées</legend>
                 <div id="UrlList" class="list-group">
-                    <a href="#" class="list-group-item">URL 1</a>
-                    <a href="#" class="list-group-item">URL 2</a>
-                    <a href="#" class="list-group-item">URL 3</a>
-                    <a href="#" class="list-group-item">URL 4</a>
+                    <a href="#" class="list-group-item url" name="url">URL 1</a>
+                    <a href="#" class="list-group-item url" name="url">URL 2</a>
+                    <a href="#" class="list-group-item url" name="url">URL 3</a>
+                    <a href="#" class="list-group-item url" name="url">URL 4</a>
                     <button class="tn btn-primary" id="addURL">+</button>
                 </div>
             </fieldset>
-            <div id="currentURL">URL Sélectionnée</div>
+            <textarea class="textURL" id="currentURL" hidden="hidden"></textarea>
      </div>
 
-        <div class="container" id="SelectorsList">
+        <div class="container col-lg-3" id="SelectorsList">
             <fieldset>
-                <legend>Liste des selecteur associés</legend>
+                <legend>Liste des selecteurs associés</legend>
                 <div id="SelectorsList" class="list-group">
-                    <a href="#" class="list-group-item">Selectors 1</a>
-                    <a href="#" class="list-group-item">Selectors 2</a>
-                    <a href="#" class="list-group-item">Selectors 3</a>
-                    <a href="#" class="list-group-item">Selectors 4</a>
+                    <a href="#" class="list-group-item selector" name="selector">Selectors 1</a>
+                    <a href="#" class="list-group-item selector" name="selector">Selectors 2</a>
+                    <a href="#" class="list-group-item selector" name="selector">Selectors 3</a>
+                    <a href="#" class="list-group-item selector" name="selector">Selectors 4</a>
                     <button class="tn btn-primary" id="addSelector">+</button>
                 </div>
             </fieldset>
-            <div id="currentSelector"+>Selecteur sélectionné</div>
+            <textarea class="textSelector" id="currentSelector" hidden="hidden"></textarea>
         </div>
 
-        <div id="DatePeremption">
+        <div id="DatePeremption" class="container  col-lg-3">
             Peremption de data
         </div>
 
     </div>
-    <div id="boutons" class="container">
+
+
+    <div id="boutons" class="container col-lg-12">
         <button class="tn btn-primary" id="Execute">Exécuter</button>
         <button class="tn btn-primary" id="Save">Enregistrer les modifications</button>
         <button class="tn btn-primary" id="Delete">Supprimer</button>

@@ -5,9 +5,14 @@
     flex:auto;
 }
 
-.button {
-    margin:50px;
-    
+#boutons {
+    min-height:100%;
+    display:flex;
+    justify-content:center;    
+}
+
+#Execute, #Save, #Cancel, #Delete {
+    margin:10px;
 }
 
 /*#boutons {
