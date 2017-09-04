@@ -161,7 +161,9 @@
     <Content Include="Requetes.html" />
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
+    <Content Include="scripts\Requetes.js" />
     <Content Include="styles\Gerer.css" />
+    <Content Include="styles\Requetes.css" />
     <Content Include="styles\site.css" />
     <Content Include="Web.config" />
   </ItemGroup>
