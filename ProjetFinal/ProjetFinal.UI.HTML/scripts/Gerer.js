@@ -2,13 +2,23 @@
 
 function myClickQuery() {
     var $this = $(this);
-    //$this += '<span class="glyphicon glyphicon-trash">';
+    $this.attr("class").split(' ');
+    if ($this.name = 'query') {
+        if ($this.hasClass('#active') == true) {
 
-    $('.active').removeClass('active');
-    $('#glyphicon').remove();
-
+            $('.active').removeClass('active');
+            $('#glyphicon').remove();
+        }
+        else {
+            $('#list-group-item query active').remove('#active');
+            $('#glyphicon').remove();
+        }
+    }
+    else {
+        alert(1);
+    }
     $this.toggleClass('active');
-
+    //$this.attr('name', 'selected');
     $this.append('<div id="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>')
 
     $('#span2').on('click', function () {
@@ -63,7 +73,7 @@ $('#addQuery').on('click', function () {
     $(t).keyup(function (e) {
         var code = e.which;
         if (code == 13) e.preventDefault();
-        if (code == 13) {              
+        if (code == 13) {
             var value = $('textarea').val();
             value = value.substring(0, value.length - 1);
             var a = document.createElement('a');
@@ -75,7 +85,7 @@ $('#addQuery').on('click', function () {
             $(t).replaceWith(a);
         }
     });
-            showModifySelectedItem(t);
+    showModifySelectedItem(t);
 });
 
 
