@@ -20,22 +20,26 @@
             <fieldset id="field1">
                 <legend>Liste des requêtes</legend>
                 <div id="QueryList" class="list-group">
-                    <a href="#"  id="1" class="list-group-item query" name="query">Requete 1</a>
-                  <!-- <label id="2" for="1" hidden="hidden"><span class="glyphicon glyphicon-trash"></span><span class="glyphicon glyphicon-cog"></span></label>-->
+                    <a href="#" class="list-group-item query" name="query">Requete 1</a>
                     <a href="#" class="list-group-item query" name="query">Requete 2</a>
                     <a href="#" class="list-group-item query" name="query">Requete 3</a>
                     <a href="#" class="list-group-item query" name="query">Requete 4</a>
                 </div>
-                <button class="btn btn-primary" id="addQuery">+</button>                    
-                <div class="divTextArea">
-                    <label for="currentQuery">Ajouter ou modifier une requête</label>
-                    <textarea class="textQuery" id="currentQuery"></textarea>
+                <button class="btn btn-primary" id="addQuery">+</button>
+                <div id="selectedQuery">
+                    <label for="currentQuery">Requête sélectionnée</label>
+                    <div class="textQuery" id="currentQuery"></div>
                 </div>
+                <!--<div id="queryTextArea">
+                    <label for="addQueryField">Ajouter</label>
+                    <textarea id="addQueryField"></textarea>
+                    <button id="okAddQuery">Ok</button>
+                </div>-->
             </fieldset>
         </div>
 
 
-        <div class="container col-lg-3" >
+        <div class="container col-lg-3">
             <fieldset>
                 <legend>Liste des URLs associées</legend>
                 <div id="UrlList" class="list-group">
@@ -44,13 +48,18 @@
                     <a href="#" class="list-group-item url" name="url">URL 3</a>
                     <a href="#" class="list-group-item url" name="url">URL 4</a>
                 </div>
-                    <button class="btn btn-primary" id="addURL">+</button>
+                <button class="btn btn-primary" id="addURL">+</button>
+                <div id="selectedURL">
+                    <label for="selectedURL">URL sélectionnée</label>
+                    <div class="textURL" id="currentURL"></div>
+                </div>
+                <div id="urlTextArea">
+                    <label for="addURLField">Ajouter</label>
+                    <textarea id="addURLField"></textarea>
+                    <button id="okURLQuery">Ok</button>
+                </div>
             </fieldset>
-            <div class="divTextArea">
-                <label for="currentURL">Ajouter ou modifier une URL</label>
-                <textarea class="textURL" id="currentURL"></textarea>
-            </div>
-     </div>
+        </div>
 
         <div class="container col-lg-3" id="SelectorsList">
             <fieldset>
@@ -61,7 +70,7 @@
                     <a href="#" class="list-group-item selector" name="selector">Selectors 3</a>
                     <a href="#" class="list-group-item selector" name="selector">Selectors 4</a>
                 </div>
-                    <button class="btn btn-primary" id="addSelector">+</button>
+                <button class="btn btn-primary" id="addSelector">+</button>
             </fieldset>
             <div class="divTextArea">
                 <label for="currentSelector">Ajouter ou modifier un selecteur</label>
@@ -71,10 +80,10 @@
 
         <div id="DatePeremption" class="container col-lg-3">
             <fieldset>
-                <legend>Péremption des données</legend>      
+                <legend>Péremption des données</legend>
                 <div>
 
-                </div>     
+                </div>
             </fieldset>
         </div>
 

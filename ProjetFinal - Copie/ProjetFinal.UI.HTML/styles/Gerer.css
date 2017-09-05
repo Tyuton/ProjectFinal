@@ -1,0 +1,50 @@
+﻿
+.wrapper {
+    display:flex;
+    justify-content:space-between;
+    flex:auto;
+}
+
+#boutons {
+    min-height:100%;
+    display:flex;
+    justify-content:center;    
+}
+
+#Execute, #Save, #Cancel, #Delete {
+    margin:10px;
+}
+
+.divTextArea {
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+legend {
+    align-items:center;
+}
+
+#test {
+    display:flex;
+    /*flex-direction:column;*/
+    justify-content:flex-end;
+    /*align-items:center;*/
+   
+}
+.glyphicon {
+    margin-left:5px;
+
+}
+
+/*#boutons {
+    display:flex;
+    justify-content: center;    
+}
+.but {
+    margin:5px;
+}
+#QueryList li {
+
+}*/
+
