@@ -1,3 +1,14 @@
-﻿html, body {
-  height: 100%;
-}
+﻿        /* FOOTER STYLE Don't forget to add body { padding-bottom: 70px; } or otherwise the page content may be covered. */
+        body {
+            padding-bottom: 70px;
+        }
+
+        .navbar-fixed-bottom {
+            background-color:darkgray;
+            margin:auto;            
+        }
+
+        .navbar-fixed-bottom > p {
+            color:white;
+            
+        }
