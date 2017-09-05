@@ -20,12 +20,13 @@
             <fieldset id="field1">
                 <legend>Liste des requêtes</legend>
                 <div id="QueryList" class="list-group">
-                    <a href="#" class="list-group-item query" name="query">Requete 1</a>
+                    <a href="#"  id="1" class="list-group-item query" name="query">Requete 1</a>
+                    <label id="2" for="1" hidden="hidden"><span class="glyphicon glyphicon-trash"></span><span class="glyphicon glyphicon-cog"></span></label>
                     <a href="#" class="list-group-item query" name="query">Requete 2</a>
                     <a href="#" class="list-group-item query" name="query">Requete 3</a>
                     <a href="#" class="list-group-item query" name="query">Requete 4</a>
                 </div>
-                <button class="tn btn-primary" id="addQuery">+</button>                    
+                <button class="btn btn-primary" id="addQuery">+</button>                    
                 <div class="divTextArea">
                     <label for="currentQuery">Ajouter ou modifier une requête</label>
                     <textarea class="textQuery" id="currentQuery"></textarea>
@@ -43,7 +44,7 @@
                     <a href="#" class="list-group-item url" name="url">URL 3</a>
                     <a href="#" class="list-group-item url" name="url">URL 4</a>
                 </div>
-                    <button class="tn btn-primary" id="addURL">+</button>
+                    <button class="btn btn-primary" id="addURL">+</button>
             </fieldset>
             <div class="divTextArea">
                 <label for="currentURL">Ajouter ou modifier une URL</label>
@@ -60,7 +61,7 @@
                     <a href="#" class="list-group-item selector" name="selector">Selectors 3</a>
                     <a href="#" class="list-group-item selector" name="selector">Selectors 4</a>
                 </div>
-                    <button class="tn btn-primary" id="addSelector">+</button>
+                    <button class="btn btn-primary" id="addSelector">+</button>
             </fieldset>
             <div class="divTextArea">
                 <label for="currentSelector">Ajouter ou modifier un selecteur</label>
@@ -81,10 +82,10 @@
 
 
     <div id="boutons" class="container col-lg-12">
-        <button class="tn btn-primary" id="Execute">Exécuter</button>
-        <button class="tn btn-primary" id="Save">Enregistrer les modifications</button>
-        <button class="tn btn-primary" id="Delete">Supprimer</button>
-        <button class="tn btn-primary" id="Cancel">Annuler</button>
+        <button class="btn btn-primary" id="Execute">Exécuter</button>
+        <button class="btn btn-primary" id="Save">Enregistrer les modifications</button>
+        <button class="btn btn-primary" id="Delete">Supprimer</button>
+        <button class="btn btn-primary" id="Cancel">Annuler</button>
     </div>
 
     <script src="scripts/jquery-1.9.1.min.js"></script>

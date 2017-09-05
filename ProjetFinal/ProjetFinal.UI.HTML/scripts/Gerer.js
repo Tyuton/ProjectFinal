@@ -2,8 +2,12 @@
     var $this = $(this);
     //$this += '<span class="glyphicon glyphicon-trash">';
 
-    $('.active').removeClass('active glyphicon glyphicon-trash');
-    $this.toggleClass('active glyphicon glyphicon-trash');
+    $('.active').removeClass('active');
+    $('span').remove();
+    $this.toggleClass('active');
+    $this.append('<div id="test"><span class="glyphicon glyphicon-trash"></span><span class="glyphicon glyphicon-cog"></span></div>')
+
+    $('#2').show();
 
     showModifySelectedItem($this[0]);
 });
@@ -35,8 +39,10 @@ $('#addQuery').on('click', function () {
         $this.append('<a href="#" class="list-group-item query" name="query">' + value + '</a>');
     }
 
-    $('#currentQuery').html('');
-    
-    
+    $('#currentQuery').html('');       
+});
+
+$('#test').on('click', function () {
+    alert('ça marche!');
 });
 

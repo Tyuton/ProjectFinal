@@ -25,9 +25,16 @@ legend {
     align-items:center;
 }
 
+#test {
+    display:flex;
+    /*flex-direction:column;*/
+    justify-content:flex-end;
+    /*align-items:center;*/
+   
+}
 .glyphicon {
-    right:auto;
-    color:red;
+    margin-left:5px;
+
 }
 
 /*#boutons {
