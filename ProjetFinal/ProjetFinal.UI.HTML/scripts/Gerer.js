@@ -1,4 +1,4 @@
-﻿$('.list-group-item').on('click', myClickQuery);
+﻿$('.query').on('click', myClickQuery);
 
 function myClickQuery() {
     var $this = $(this);
@@ -27,7 +27,7 @@ function myClickQuery() {
                 var liste = $('#QueryList');
                 var value = $('textarea').val();
                 value = value.substring(0, value.length - 1);
-                var a = document.createElement('a'); 
+                var a = document.createElement('a');
                 a.classList.add('list-group-item');
                 a.classList.add('query');
                 a.name = 'query';
@@ -36,12 +36,15 @@ function myClickQuery() {
                 $($this).replaceWith(a);
             }
         });
-    });   
+    });
     showModifySelectedItem($this[0]);
 
     $('#span1').on('click', function () {
-        $('#QueryList').remove(this);
-        //$(this).replaceWith();
+
+        //$(this).remove($(this)[0]);
+        $('#QueryList .active').remove();
+        $('#currentQuery').text = "";
+
     });
 }
 
