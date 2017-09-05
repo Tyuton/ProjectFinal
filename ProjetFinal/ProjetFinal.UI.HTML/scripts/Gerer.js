@@ -1,16 +1,25 @@
-﻿$('.list-group-item').on('click', function () {
+﻿
+function myClick () {
     var $this = $(this);
     //$this += '<span class="glyphicon glyphicon-trash">';
 
     $('.active').removeClass('active');
-    $('span').remove();
+    $('#test').remove();
     $this.toggleClass('active');
-    $this.append('<div id="test"><span class="glyphicon glyphicon-trash"></span><span class="glyphicon glyphicon-cog"></span></div>')
+    $this.append('<div id="test"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>')
+    $('#span1').on('click',function (sender) {
+       + alert('ça marche! span 1');
+    });
+    $('#span2').on('click', function (sender) {
+        alert('ça marche! span 2');
+    });
 
     $('#2').show();
 
     showModifySelectedItem($this[0]);
-});
+}
+
+$('.list-group-item').on('click', myClick);
 
 function showModifySelectedItem(selectedItem) {
     var item = selectedItem.text;
@@ -31,18 +40,21 @@ function showModifySelectedItem(selectedItem) {
 
 $('#addQuery').on('click', function () {
     $('.textQuery').show();
-    var $this = $('#QueryList');
+    var liste = $('#QueryList');
     var value = $('#currentQuery').val();
     
     if (!(value == null || value == '')) {
         //$this.append('<a href="#" class="list-group-item query" name="query">' + value + '</a>');
-        $this.append('<a href="#" class="list-group-item query" name="query">' + value + '</a>');
+        liste.append('<a href="#" class="list-group-item query" name="query">' + value + '</a>');
+        var last = $('#QueryList >.query')[$('#QueryList >.query').length - 1];
+        last.onclick = myClick;
     }
 
     $('#currentQuery').html('');       
 });
 
-$('#test').on('click', function () {
-    alert('ça marche!');
-});
+
+//$('#test').on('click', function (sender) {
+//    alert('ça marche!');
+//});
 
