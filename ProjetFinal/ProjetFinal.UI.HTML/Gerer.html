@@ -24,9 +24,12 @@
                     <a href="#" class="list-group-item query" name="query">Requete 2</a>
                     <a href="#" class="list-group-item query" name="query">Requete 3</a>
                     <a href="#" class="list-group-item query" name="query">Requete 4</a>
-                    <button class="tn btn-primary" id="addRequete">+</button>
                 </div>
-                <textarea class="textQuery" id="currentQuery" hidden="hidden"></textarea>
+                <button class="tn btn-primary" id="addQuery">+</button>                    
+                <div class="divTextArea">
+                    <label for="currentQuery">Ajouter ou modifier une requête</label>
+                    <textarea class="textQuery" id="currentQuery"></textarea>
+                </div>
             </fieldset>
         </div>
 
@@ -39,10 +42,13 @@
                     <a href="#" class="list-group-item url" name="url">URL 2</a>
                     <a href="#" class="list-group-item url" name="url">URL 3</a>
                     <a href="#" class="list-group-item url" name="url">URL 4</a>
-                    <button class="tn btn-primary" id="addURL">+</button>
                 </div>
+                    <button class="tn btn-primary" id="addURL">+</button>
             </fieldset>
-            <textarea class="textURL" id="currentURL" hidden="hidden"></textarea>
+            <div class="divTextArea">
+                <label for="currentURL">Ajouter ou modifier une URL</label>
+                <textarea class="textURL" id="currentURL"></textarea>
+            </div>
      </div>
 
         <div class="container col-lg-3" id="SelectorsList">
@@ -53,14 +59,22 @@
                     <a href="#" class="list-group-item selector" name="selector">Selectors 2</a>
                     <a href="#" class="list-group-item selector" name="selector">Selectors 3</a>
                     <a href="#" class="list-group-item selector" name="selector">Selectors 4</a>
-                    <button class="tn btn-primary" id="addSelector">+</button>
                 </div>
+                    <button class="tn btn-primary" id="addSelector">+</button>
             </fieldset>
-            <textarea class="textSelector" id="currentSelector" hidden="hidden"></textarea>
+            <div class="divTextArea">
+                <label for="currentSelector">Ajouter ou modifier un selecteur</label>
+                <textarea class="textSelector" id="currentSelector"></textarea>
+            </div>
         </div>
 
-        <div id="DatePeremption" class="container  col-lg-3">
-            Peremption de data
+        <div id="DatePeremption" class="container col-lg-3">
+            <fieldset>
+                <legend>Péremption des données</legend>      
+                <div>
+
+                </div>     
+            </fieldset>
         </div>
 
     </div>
