@@ -5,10 +5,8 @@
 
         .navbar-fixed-bottom {
             background-color:darkgray;
-            margin:auto;            
         }
 
-        .navbar-fixed-bottom > p {
-            color:white;
-            
+        .navbar-fixed-bottom > p {            
+            margin:10px;                        
         }
