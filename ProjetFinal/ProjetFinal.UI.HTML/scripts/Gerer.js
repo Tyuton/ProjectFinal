@@ -1,15 +1,42 @@
-﻿$('.list-group-item').on('click', myClickQuery);
-
+﻿$('.query').on('click', myClickQuery);
+i = 0;
 function myClickQuery() {
     var $this = $(this);
-    //$this += '<span class="glyphicon glyphicon-trash">';
+    $this.attr("class").split(' ');
 
-    $('.active').removeClass('active');
-    $('#glyphicon').remove();
+    if ($this.name == 'query') {
+        if ($this.hasClass('active') == true) {
 
-    $this.toggleClass('active');
+            $('.active').removeClass('.active');
+            $('#glyphicon').remove();
+        }
+        else {
+            $('query').each(function test() {
+                if ($(this).attr("class") == '.list-group-item query active') {
+                    $(this).removeClass('.active');
+                    $('#glyphicon').remove();
+                }
+            })
+        }
+    }
+    else {
+        //$('.list-group-item query active').remove('active');
+        //$('#glyphicon').remove();
 
-    $this.append('<div id="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>')
+        $this.toggleClass('active');
+        //$this.attr('name', 'selected');
+        $this.append('<div id="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>')
+    }
+
+    //$this.toggleClass('active');    
+    //$this.append('<div id="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>')
+
+    //do {
+    //    $this.toggleClass('active');
+    //    $this.append('<div id="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>')
+    //    i++;
+    //}
+    //while (i != 1);
 
     $('#span2').on('click', function () {
         //alert('ça marche! span 1');
@@ -27,7 +54,7 @@ function myClickQuery() {
                 var liste = $('#QueryList');
                 var value = $('textarea').val();
                 value = value.substring(0, value.length - 1);
-                var a = document.createElement('a'); 
+                var a = document.createElement('a');
                 a.classList.add('list-group-item');
                 a.classList.add('query');
                 a.name = 'query';
@@ -36,12 +63,15 @@ function myClickQuery() {
                 $($this).replaceWith(a);
             }
         });
-    });   
+    });
     showModifySelectedItem($this[0]);
 
     $('#span1').on('click', function () {
-        $('#QueryList').remove(this);
-        //$(this).replaceWith();
+
+        //$(this).remove($(this)[0]);
+        $('#QueryList .active').remove();
+        $('#currentQuery').text = "";
+
     });
 }
 
@@ -60,7 +90,7 @@ $('#addQuery').on('click', function () {
     $(t).keyup(function (e) {
         var code = e.which;
         if (code == 13) e.preventDefault();
-        if (code == 13) {              
+        if (code == 13) {
             var value = $('textarea').val();
             value = value.substring(0, value.length - 1);
             var a = document.createElement('a');
@@ -72,7 +102,7 @@ $('#addQuery').on('click', function () {
             $(t).replaceWith(a);
         }
     });
-            showModifySelectedItem(t);
+    showModifySelectedItem(t);
 });
 
 
