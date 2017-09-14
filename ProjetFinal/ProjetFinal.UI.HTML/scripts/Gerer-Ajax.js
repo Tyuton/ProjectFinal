@@ -9,6 +9,9 @@ function ajaxGetURLs(selectedItem) { //selectedItem is a query
         url: "testfiles/" + q + ".json", // simulation du serveur par des fichiers json
         success: function (result) {
             BuildURLsList(result);
+        },
+        error: function (result) {
+            myClickQuery();
         }
     });
 }
@@ -26,6 +29,7 @@ function BuildURLsList(listURLs) {   //  listURLs est un array d'urls
         }).appendTo("#UrlList");
     });
     //select first
+    
     //if ($('#UrlList > a').length) {
     //    $('#UrlList > a')[0].toggleClass('active');
     //}
@@ -38,7 +42,7 @@ function BuildURLsList(listURLs) {   //  listURLs est un array d'urls
 
 function ajaxGetSelectors() { //selectedItem is an selector    
     var selectedItem = $(this)[0]
-    var url = "http://localhost:49593/testfiles/" + selectedItem.text + ".json";
+    var url = "testfiles/" + selectedItem.text + ".json";
     $.ajax({
         url:  url, // simulation du serveur par des fichiers 
         success: function (result) {
@@ -47,6 +51,7 @@ function ajaxGetSelectors() { //selectedItem is an selector
         error: function (result) {
             alert(result.responseText);
             BuildSelectorsList(result);
+            myClickQuery();
         },
 
     });
@@ -61,7 +66,7 @@ function BuildSelectorsList(listSelectors) {   //  listURLs est un array d'urls
         $("<a/>", {
             "class": "list-group-item selector",
             text: val,
-            click: myClick2
+            click: myClickQuery
         }).appendTo("#SelectorsList");
     });
     //select first
