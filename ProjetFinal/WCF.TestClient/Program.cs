@@ -17,9 +17,6 @@ namespace WCF.TestClient
             //     new ChannelFactory<IService1>("Canal1");
             //IService1 serv = Canal.CreateChannel();
 
-            var repotest = new Repository();
-            var q = repotest.getQueryByName("test");
-            Console.Read();
 
 
             ChannelFactory<IRepository> Canal2 =
@@ -27,7 +24,7 @@ namespace WCF.TestClient
             IRepository serv2 = Canal2.CreateChannel();
 
 
-            var test = serv2.getQueryByName("Ali");
+            List<Query> test = serv2.getQueryByName("Ali");
             Console.WriteLine(test.ToString());
             Console.WriteLine(serv2.CheckExistingQuery(test[0]));
             Console.Read();
