@@ -12,7 +12,7 @@ namespace WCF.TestHost
     {
         static void Main(string[] args)
         {
-            ServiceHost host1 = new ServiceHost(typeof(Service1));
+            ServiceHost host1 = new ServiceHost(typeof(Repository));
 
             host1.Open();
 
