@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace WCF
 {
     [ServiceContract]
-    interface IRepository
+    public interface IRepository
     {
         [OperationContract]
         string TestServer();
