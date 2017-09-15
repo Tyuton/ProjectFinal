@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -12,9 +13,9 @@ namespace WCF.TestClient
     {
         static void Main(string[] args)
         {
-            ChannelFactory<IService1> Canal =
-                 new ChannelFactory<IService1>("Canal1");
-            IService1 serv = Canal.CreateChannel();
+            //ChannelFactory<IService1> Canal =
+            //     new ChannelFactory<IService1>("Canal1");
+            //IService1 serv = Canal.CreateChannel();
 
 
             ChannelFactory<IRepository> Canal2 =
@@ -22,7 +23,9 @@ namespace WCF.TestClient
             IRepository serv2 = Canal2.CreateChannel();
 
 
-            Console.WriteLine(serv2.TestServer() );
+            var test = serv2.getQueryByName("test");
+            Console.WriteLine(test);
+            Console.WriteLine(serv2.CheckExistingQuery(test[0]));
             Console.Read();
         }
     }
