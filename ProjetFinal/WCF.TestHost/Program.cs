@@ -12,6 +12,14 @@ namespace WCF.TestHost
     {
         static void Main(string[] args)
         {
+
+            var repo = new Repository();
+            var q = repo.getQueryByName("Ali");
+
+
+            Console.ReadLine();
+
+
             ServiceHost host1 = new ServiceHost(typeof(Repository));
 
             host1.Open();
