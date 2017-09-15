@@ -51,7 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Page.cs">
       <DependentUpon>WebScraper.tt</DependentUpon>
     </Compile>
@@ -59,7 +58,6 @@
     <Compile Include="Query.cs">
       <DependentUpon>WebScraper.tt</DependentUpon>
     </Compile>
-    <Compile Include="Repository\Repository.cs" />
     <Compile Include="ResultsDetail.cs">
       <DependentUpon>WebScraper.tt</DependentUpon>
     </Compile>
