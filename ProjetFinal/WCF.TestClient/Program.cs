@@ -19,15 +19,25 @@ namespace WCF.TestClient
 
 
 
-            ChannelFactory<IRepository> Canal2 =
-     new ChannelFactory<IRepository>("Canal2");
-            IRepository serv2 = Canal2.CreateChannel();
+            ChannelFactory<IRepositoryService1> Canal2 =
+new ChannelFactory<IRepositoryService1>("Canal2");
+            IRepositoryService1 serv2 = Canal2.CreateChannel();
 
 
-            List<Query> test = serv2.getQueryByName("Ali");
-            Console.WriteLine(test.ToString());
-            Console.WriteLine(serv2.CheckExistingQuery(test[0]));
+            var test = serv2.getQueryDescription("Ali");
+            Console.WriteLine(test);            
             Console.Read();
+
+
+            //       ChannelFactory<IRepository> Canal2 =
+            //new ChannelFactory<IRepository>("Canal2");
+            //       IRepository serv2 = Canal2.CreateChannel();
+
+
+            //       List<Query> test = serv2.getQueryByName("Ali");
+            //       Console.WriteLine(test.ToString());
+            //       Console.WriteLine(serv2.CheckExistingQuery(test[0]));
+            //       Console.Read();
         }
     }
 }

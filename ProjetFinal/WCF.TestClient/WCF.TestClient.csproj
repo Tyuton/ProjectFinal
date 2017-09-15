@@ -55,10 +55,6 @@
       <Project>{aacef432-739e-43bd-a0a4-8d15293a6ba4}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WCF\WCF.csproj">
-      <Project>{8b099b6e-3579-49b0-afeb-78baf92df406}</Project>
-      <Name>WCF</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -12,7 +12,8 @@ namespace DAL
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Runtime.Serialization;
+    [DataContract]
     public partial class WebScraperDBEntities : DbContext
     {
         public WebScraperDBEntities()
@@ -25,10 +26,15 @@ namespace DAL
             throw new UnintentionalCodeFirstException();
         }
     
+        [DataMember]
         public virtual DbSet<Page> Pages { get; set; }
+        [DataMember]
         public virtual DbSet<Query> Queries { get; set; }
+        [DataMember]
         public virtual DbSet<ResultsDetail> ResultsDetails { get; set; }
+        [DataMember]
         public virtual DbSet<ResultsHeader> ResultsHeaders { get; set; }
+        [DataMember]
         public virtual DbSet<Selector> Selectors { get; set; }
     }
 }
