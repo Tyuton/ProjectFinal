@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WCF
 {
-    class Repository : IRepository
+    public class Repository : IRepository
     {
         private WebScraperDBEntities dbContext = new WebScraperDBEntities();
 
