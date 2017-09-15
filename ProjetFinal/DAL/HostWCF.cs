@@ -1,5 +1,4 @@
-﻿using DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
@@ -7,17 +6,12 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WCF.TestHost
+namespace DAL
 {
-    class Program
+    class HostWCF
     {
         static void Main(string[] args)
         {
-
-
-            Console.ReadLine();
-
-
             ServiceHost host1 = new ServiceHost(typeof(Repository));
 
             host1.Open();
@@ -29,16 +23,13 @@ namespace WCF.TestHost
                 Console.WriteLine("Binding: " + dis.BindingName);
                 foreach (EndpointDispatcher point in dis.Endpoints)
                 {
-                    Console.WriteLine("Endpoint: "+point.EndpointAddress);
-                }          
+                    Console.WriteLine("Endpoint: " + point.EndpointAddress);
+                }
             }
 
             Console.WriteLine("Enter to quit.");
             Console.ReadLine();
             host1.Close();
-
-
-
         }
     }
 }

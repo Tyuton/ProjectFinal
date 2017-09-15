@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,15 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    class Repository : IRepository
+    public class Repository : IRepository
     {
         private WebScraperDBEntities dbContext = new WebScraperDBEntities();
+
+
+        public string TestServer()
+        {
+            return "TEstServer coucou";
+        }
 
         /// <summary>
         /// TODO Add a new query...
@@ -136,5 +143,7 @@ namespace DAL
         {
             throw new NotImplementedException();
         }
+
+
     }
 }
