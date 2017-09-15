@@ -18,6 +18,7 @@ namespace WCF
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
         // TODO: Add your service operations here
+
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
