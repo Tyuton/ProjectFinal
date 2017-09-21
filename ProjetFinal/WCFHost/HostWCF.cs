@@ -6,7 +6,7 @@ using System.ServiceModel.Dispatcher;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace WebScraper.WCF
 {
     class HostWCF
     {

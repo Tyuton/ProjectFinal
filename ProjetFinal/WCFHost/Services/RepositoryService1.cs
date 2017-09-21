@@ -1,10 +1,11 @@
-﻿using System;
+﻿using WebScraper.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace WebScraper.WCF
 {
     public class RepositoryService1 : IRepositoryService1
     {

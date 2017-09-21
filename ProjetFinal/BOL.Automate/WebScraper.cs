@@ -2,7 +2,7 @@
 using OpenQA.Selenium.Firefox;
 using System;
 using System.ServiceModel;
-using DAL;
+using WebScraper.WCF;
 
 namespace BOL.Automate
 {

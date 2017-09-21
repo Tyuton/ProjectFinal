@@ -55,9 +55,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repository\IRepositoryService1.cs" />
-    <Compile Include="Repository\RepositoryService1.cs" />
-    <Compile Include="WCF\HostWCF.cs" />
     <Compile Include="Page.cs">
       <DependentUpon>WebScraper.tt</DependentUpon>
     </Compile>
