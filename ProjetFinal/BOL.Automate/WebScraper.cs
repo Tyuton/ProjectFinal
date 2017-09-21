@@ -13,7 +13,7 @@ namespace BOL.Automate
         public int ExecuteQueryAndSaveResults(string QueryName)
         {
             //TODO use lock variables/list of locks 
-            InitWCF();
+            //InitWCF();
 
             using (Navigator driver = new Navigator()) //using force l'appel de Dispose()
             {
@@ -39,15 +39,30 @@ namespace BOL.Automate
             return -1;
         }
 
-        private void InitWCF()
-        {
+        //private void InitWCF()
+        static void Main(string[] args)        
+            {
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 serv2 = Canal2.CreateChannel();
 
 
-            var test = serv2.getQueryDescription("Ali");
-            Console.WriteLine("InitWCF: " + test);
+            //var test = serv2.getQueryDescription("Ali");
+
+            var q = new QueryContract();
+            var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
+                new PageContract() { URL = "www.page1.dz" },
+                new PageContract() { URL = "www.page2.fr" },
+            };
+            var s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
+                new SelectorContract() { Value="alert('choucroute');" },
+                new SelectorContract() { Value="alert('couscous');" }
+            };
+            s[0].Value = "alert('Couscous2');";
+            var x = serv2.getQueryDescription("Ali");
+            var b = serv2.AddNewQuery(q);
+
+            Console.WriteLine("InitWCF: ");
             Console.Read();
         }
     }

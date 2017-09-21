@@ -10,6 +10,12 @@ namespace WebScraper.WCF
     public class RepositoryService1 : IRepositoryService1
     {
         Repository rep = new Repository();
+
+        public bool AddNewQuery(QueryContract query)
+        {
+            return rep.AddNewQuery(query);
+        }
+
         public string getQueryDescription(string name)
         {
             return rep.getQueryByName(name)[0].Description;

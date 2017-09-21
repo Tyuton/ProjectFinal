@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace WebScraper.WCF
 {
     [DataContract]
-    class Query
+    public class QueryContract
     {
         [DataMember]
         public Guid Id { get; set; }
@@ -22,40 +22,40 @@ namespace WebScraper.WCF
         [DataMember]
         public DateTime? DataTimeStamp { get; set; }
         [DataMember]
-        public List<Page> ListePages { get; set; }
+        public List<PageContract> ListePages { get; set; }
 
     }
 
-    class Page
+    public class PageContract
     {
         
         public Guid Id { get; set; }
-        public virtual Query Query { get; set; }
+        public virtual QueryContract Query { get; set; }
         public string URL { get; set; }
-        public List<Selector> ListeSelectors { get; set; }
+        public List<SelectorContract> ListeSelectors { get; set; }
 
     }
 
-    class Selector
+    public class SelectorContract
     {
         public Guid Id { get; set; }
-        public virtual Page Page { get; set; }
+        public virtual PageContract Page { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
 
     }
 
-    class ResultsHeader
+    public class ResultsHeaderContract
     {
         public Guid Id { get; set; }
-        public virtual Selector Selector { get; set; }
+        public virtual SelectorContract Selector { get; set; }
         public DateTime QueryExecutionDate { get; set; }
     }
 
-    class ResultsDetail
+    public class ResultsDetailContract
     {
         public Guid Id { get; set; }
-        public virtual ResultsHeader ResultsHeader { get; set; }
+        public virtual ResultsHeaderContract ResultsHeader { get; set; }
         public string Value { get; set; }
     }
 }

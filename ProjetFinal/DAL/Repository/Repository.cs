@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebScraper.WCF;
 
 namespace WebScraper.DAL
 {
@@ -36,7 +37,7 @@ namespace WebScraper.DAL
             var page = new Page();
             page.Id = Guid.NewGuid();
             page.Query = query;
-            page.URL = url; 
+            page.URL = url;
             dbContext.Pages.Add(page);
 
             var selector = new Selector();
@@ -72,12 +73,12 @@ namespace WebScraper.DAL
                 return null;
             }
             var r = (from q in dbContext.Queries
-                              join p in dbContext.Pages on q.Id equals p.Query.Id
-                              where q.Id == query.Id
-                              join s in dbContext.Selectors on p.Id equals s.Page.Id
-                              join rh in dbContext.ResultsHeaders on s.Id equals rh.Selector.Id
-                              join rd in dbContext.ResultsDetails on rh.Id equals rd.ResultsHeader.Id
-                              select rd
+                     join p in dbContext.Pages on q.Id equals p.Query.Id
+                     where q.Id == query.Id
+                     join s in dbContext.Selectors on p.Id equals s.Page.Id
+                     join rh in dbContext.ResultsHeaders on s.Id equals rh.Selector.Id
+                     join rd in dbContext.ResultsDetails on rh.Id equals rd.ResultsHeader.Id
+                     select rd
           )
          .ToList();
             List<string> sResult = new List<string>();
@@ -108,7 +109,7 @@ namespace WebScraper.DAL
                       join s in dbContext.Selectors on p.Id equals s.Page.Id
                       select s
                       )
-                     .ToList();     
+                     .ToList();
 
             foreach (Selector item in ss)
             {//TODO ajouter une boucle pour resultsheader
@@ -144,6 +145,37 @@ namespace WebScraper.DAL
             throw new NotImplementedException();
         }
 
+        public bool AddNewQuery(QueryContract query)
+        {
+            var queryEF = new Query();
+            query.Id = Guid.NewGuid();
+            query.Name = query.Name;
+            query.Description = query.Description;
+            query.DataExpiryDate = query.DataExpiryDate;
+            query.DataTimeStamp = query.DataTimeStamp;
 
+            dbContext.Queries.Add(queryEF);
+
+            foreach (var p in query.ListePages)
+            {
+                var pageEF = new Page();
+                pageEF.Id = Guid.NewGuid();
+                pageEF.Query = queryEF;
+                pageEF.URL = p.URL;
+                dbContext.Pages.Add(pageEF);
+
+                foreach (var s in p.ListeSelectors)
+                {
+                    var selectorEF = new Selector();
+                    selectorEF.Id = Guid.NewGuid();
+                    selectorEF.Page = pageEF;
+                    selectorEF.Value = s.Value;
+                    dbContext.Selectors.Add(selectorEF);
+                }
+            }
+
+            dbContext.SaveChanges();
+            return true;
+        }
     }
 }

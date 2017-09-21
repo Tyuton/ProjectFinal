@@ -15,6 +15,8 @@ namespace WebScraper.DAL
         string TestServer();
 
 
+
+        bool AddNewQuery(WebScraper.WCF.QueryContract query);
         bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp);
 
 

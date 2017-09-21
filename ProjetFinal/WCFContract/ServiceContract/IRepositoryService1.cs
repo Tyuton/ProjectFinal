@@ -12,6 +12,8 @@ namespace WebScraper.WCF
     {
         [OperationContract]
         string getQueryDescription(string name);
+        [OperationContract]
+        bool AddNewQuery(WebScraper.WCF.QueryContract query);
     }
 }
 
