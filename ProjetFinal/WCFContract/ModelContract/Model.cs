@@ -21,13 +21,18 @@ namespace WebScraper.WCF
         public DateTime? DataExpiryDate { get; set; }
         [DataMember]
         public DateTime? DataTimeStamp { get; set; }
+        [DataMember]
+        public List<Page> ListePages { get; set; }
+
     }
 
     class Page
     {
+        
         public Guid Id { get; set; }
         public virtual Query Query { get; set; }
         public string URL { get; set; }
+        public List<Selector> ListeSelectors { get; set; }
 
     }
 
