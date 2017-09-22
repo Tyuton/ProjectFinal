@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL
+namespace WebScraper.DAL
 {
     using System;
     using System.Collections.Generic;
@@ -16,7 +16,8 @@ namespace DAL
     {
         public System.Guid Id { get; set; }
         public string Value { get; set; }
-        public Nullable<System.Guid> ResultsHeader_Id { get; set; }
+        public System.Guid ResultsHeader_Id { get; set; }
+        public string CLEF { get; set; }
     
         public virtual ResultsHeader ResultsHeader { get; set; }
     }

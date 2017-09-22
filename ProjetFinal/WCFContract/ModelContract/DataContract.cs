@@ -26,36 +26,58 @@ namespace WebScraper.WCF
 
     }
 
+    [DataContract]
     public class PageContract
     {
-        
+        [DataMember]
         public Guid Id { get; set; }
+
+        [DataMember]
         public virtual QueryContract Query { get; set; }
+        [DataMember]
         public string URL { get; set; }
+        [DataMember]
         public List<SelectorContract> ListeSelectors { get; set; }
 
     }
-
+    [DataContract]
     public class SelectorContract
     {
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public virtual PageContract Page { get; set; }
-        public string Name { get; set; }
+        [DataMember]
         public string Value { get; set; }
 
     }
-
+    [DataContract]
     public class ResultsHeaderContract
     {
+
+        public ResultsHeaderContract(SelectorContract SC)
+        {
+            Id = Guid.NewGuid();
+            QueryExecutionDate = new DateTime();
+            Selector = SC;
+        }
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public virtual SelectorContract Selector { get; set; }
+        [DataMember]
         public DateTime QueryExecutionDate { get; set; }
     }
-
+    [DataContract]
     public class ResultsDetailContract
     {
+        [DataMember]
         public Guid Id { get; set; }
+        [DataMember]
         public virtual ResultsHeaderContract ResultsHeader { get; set; }
+        [DataMember]
         public string Value { get; set; }
+        [DataMember]
+        public string CLEF { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using DAL;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ namespace WebScraper.DAL
 {
     public class Repository : IRepository
     {
-        private WebScraperDBEntities dbContext = new WebScraperDBEntities();
+        private DBWebScrapingEntities dbContext = new DBWebScrapingEntities();
 
 
         public string TestServer()
@@ -162,27 +161,82 @@ namespace WebScraper.DAL
             dbContext.Queries.Add(queryEF);
 
             if (query.ListePages != null)
-            foreach (var p in query.ListePages)
-            {
-                var pageEF = new Page();
-                pageEF.Id = Guid.NewGuid();
-                pageEF.Query = queryEF;
-                pageEF.URL = p.URL;
-                dbContext.Pages.Add(pageEF);
-
-                if (p.ListeSelectors != null)
-                foreach (var s in p.ListeSelectors)
+                foreach (var p in query.ListePages)
                 {
-                    var selectorEF = new Selector();
-                    selectorEF.Id = Guid.NewGuid();
-                    selectorEF.Page = pageEF;
-                    selectorEF.Value = s.Value;
-                    dbContext.Selectors.Add(selectorEF);
+                    var pageEF = new Page();
+                    pageEF.Id = Guid.NewGuid();
+                    pageEF.Query = queryEF;
+                    pageEF.URL = p.URL;
+                    dbContext.Pages.Add(pageEF);
+
+                    if (p.ListeSelectors != null)
+                        foreach (var s in p.ListeSelectors)
+                        {
+                            var selectorEF = new Selector();
+                            selectorEF.Id = Guid.NewGuid();
+                            selectorEF.Page = pageEF;
+                            selectorEF.Value = s.Value;
+                            dbContext.Selectors.Add(selectorEF);
+                        }
                 }
-            }
 
             dbContext.SaveChanges();
             return true;
+        }
+
+        public QueryContract GetQueryContractByName(string queryName)
+        {
+            List<Query> qs = getQueryByName(queryName);
+            if (qs != null)
+            {
+                var qs0 = qs[0];
+                QueryContract qc = new QueryContract();
+                qc.Name = qs0.Name;
+                qc.Description = qs0.Description;
+                qc.Id = qs0.Id;
+                qc.DataExpiryDate = qs0.DataExpiryDate;
+                qc.DataTimeStamp = qs0.DataTimeStamp;
+                if (qs0.Pages != null)
+                {
+                    qc.ListePages = qs0.Pages.Select(item => new PageContract()
+                    {
+                        Id = item.Id,
+                        URL = item.URL,
+                        ListeSelectors = item.Selectors.Select(item2 => new SelectorContract()
+                        {
+                            Id = item2.Id,
+                            Value = item2.Value,
+                        }).ToList()
+                    }).ToList();
+                }
+                //qc.ListePages = qs[0].Pages;
+                return qc;
+            }
+            else
+                return null;
+        }
+
+        // return -1 if error
+        public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
+        {
+            ResultsHeader rh = new ResultsHeader();
+            rh.Id = Guid.NewGuid();
+            rh.QueryExecutionDate = rHC.QueryExecutionDate;
+            rh.Selector = null; // selector?
+            rh.Selector_Id = rHC.Selector.Id;
+            rh.ResultsDetails = listRDC.Select(item => dbContext.ResultsDetails.Add(            
+            new ResultsDetail()
+            {
+                Id = item.Id,
+                CLEF = item.CLEF,
+                Value = item.Value
+            }
+            )).ToList();
+
+            dbContext.ResultsHeaders.Add(rh);
+            dbContext.SaveChanges();
+
+            return 1;
         }
     }
 }

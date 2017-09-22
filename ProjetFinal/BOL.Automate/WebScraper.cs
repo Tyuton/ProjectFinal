@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ServiceModel;
 using WebScraper.WCF;
 
@@ -10,55 +12,112 @@ namespace BOL.Automate
     public class WebScraperEngine
     {
         // return -1 if error
-        public int ExecuteQueryAndSaveResults(string QueryName)
+        public static int ExecuteQueryAndSaveResults(string QueryName)
         {
             //TODO use lock variables/list of locks 
-            //InitWCF();
+            // Client WCF
+            ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
+            IRepositoryService1 service2 = Canal2.CreateChannel();
+            QueryContract qc = service2.GetQueryContractByName(QueryName);
+
+            ResultsHeaderContract RHC = null;
+            List<ResultsDetailContract> ListRDC = new List<ResultsDetailContract>();
+            ReadOnlyCollection<Object> seleniumResult = null;
 
             using (Navigator driver = new Navigator()) //using force l'appel de Dispose()
             {
-                // TODO use WCF service to get list of urls/selectors
+                // use WCF service to get list of urls/selectors
 
-                string url = "https://competitions.ffr.fr/";
-                var selector = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
-                                return $(row).find('td').get().map(function(cell) {
-                                    return $(cell).html();
-                                    });
-                                });";
+                //string url = "https://competitions.ffr.fr/";
+                //var selector = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
+                //                return $(row).find('td').get().map(function(cell) {
+                //                    return $(cell).html();
+                //                    });
+                //                });";
+                if (qc.ListePages != null)
+                    foreach (PageContract pc in qc.ListePages)
+                    {
+                        if (pc.ListeSelectors != null)
+                            foreach (SelectorContract sc in pc.ListeSelectors)
+                            {
+                                var url = pc.URL;
+                                var selector = sc.Value;
+                                // execute Selenium scripts
+                                driver.open(url);
+                                seleniumResult = (ReadOnlyCollection<Object>)driver.browser.ExecuteScript(selector);
+                                // init Results Contract objects
+                                RHC = new ResultsHeaderContract(sc);
+                                // TODO save results into repository
+                                string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Club local", "Club visiteur", "Score" };//TODO autofill tempKEYS
+                                int rowIndex = 0;
+                                if (seleniumResult != null)
+                                    foreach (ReadOnlyCollection<Object> item in seleniumResult)
+                                    {
+                                        if (item != null && item.Count > 0)
+                                        {
+                                            for (int i = 0; i < item.Count; i++)
+                                            {
+                                                ListRDC.Add(new ResultsDetailContract()
+                                                {
+                                                    CLEF = tempKEYS[i] + rowIndex,
+                                                    Id = Guid.NewGuid(),
+                                                    Value = item[i].ToString(),//TODO all values are string
+                                                    ResultsHeader = RHC
+                                                });
+                                            }
+                                            rowIndex++;
+                                        }
+                                    }
+                            }
 
-                // execute Selenium scripts
-                driver.open(url);
-                var result = driver.browser.ExecuteScript(selector);
+                    }
 
-                // TODO save results into repository
-                //...
+                int n = service2.SaveResults(RHC, ListRDC);
 
-                return 1;                
+
+                return 1;
             }
 
             return -1;
         }
 
         //private void InitWCF()
-        static void Main(string[] args)        
-            {
+        static int Main(string[] args)
+        {
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 serv2 = Canal2.CreateChannel();
+            var q = new QueryContract();
+            q.Name = "Arbitres";
+            q.Description = "FFR Arbitres";
+            var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
+                new PageContract() { URL = "https://competitions.ffr.fr/" }
+            };
+            var s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
+                new SelectorContract() { Value= @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
+                                return $(row).find('td').get().map(function(cell) {
+                                    return $(cell).html();
+                                    });
+                                });" }
+            };
+            serv2.AddNewQuery(q);
+
+            var i = ExecuteQueryAndSaveResults("Arbitres");
+            Console.WriteLine("ExecuteQueryAndSaveResults...");
+            Console.Read();
+            return -1;
+
 
 
             //var test = serv2.getQueryDescription("Ali");
-
-            var q = new QueryContract() { Name = "SuperTest", Description = "ça marche :')" };
-            q.Name = "SuperTest";
-            q.Description = "ça marche :')";
-            var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
-                new PageContract() { URL = "www.page1.dz" },
-                new PageContract() { URL = "www.page2.fr" },
+            q = new QueryContract() { Name = "SuperTest", Description = "ça marche :')" };
+            q.Name = "Arbitres";
+            q.Description = "FFR Arbitres";
+            p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
+                new PageContract() { URL = "https://competitions.ffr.fr/" }
             };
-            var s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
-                new SelectorContract() { Value="alert('choucroute');" },
-                new SelectorContract() { Value="alert('couscous');" }
+            s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
+                new SelectorContract() { Value="alert('choucroute');" }
             };
 
 

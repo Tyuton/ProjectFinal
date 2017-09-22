@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="WebScraperDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="DBWebScrapingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Pages">
           <Key>
             <PropertyRef Name="Id" />
@@ -96,7 +96,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebScraperDBModelStoreContainer">
+        <EntityContainer Name="DBWebScrapingModelStoreContainer">
           <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Queries" EntityType="Self.Queries" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ResultsDetails" EntityType="Self.ResultsDetails" Schema="dbo" store:Type="Tables" />
@@ -119,10 +119,11 @@
             <End Role="Selectors" EntitySet="Selectors" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="WebScraperDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="DBWebScrapingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Page">
           <Key>
             <PropertyRef Name="Id" />
@@ -151,8 +152,8 @@
           <Property Name="Id" Type="Guid" Nullable="false" />
           <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ResultsHeader_Id" Type="Guid" Nullable="false" />
+          <Property Name="CLEF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="ResultsHeader" Relationship="Self.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" FromRole="ResultsDetails" ToRole="ResultsHeaders" />
-          <Property Name="CLEF" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="ResultsHeader">
           <Key>
@@ -199,7 +200,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
-          <End Role="ResultsHeaders" Type="Self.ResultsHeader" Multiplicity="0..1" />
+          <End Role="ResultsHeaders" Type="Self.ResultsHeader" Multiplicity="1" />
           <End Role="ResultsDetails" Type="Self.ResultsDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ResultsHeaders">
@@ -222,7 +223,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="WebScraperDBEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="DBWebScrapingEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Pages" EntityType="Self.Page" />
           <EntitySet Name="Queries" EntityType="Self.Query" />
           <EntitySet Name="ResultsDetails" EntityType="Self.ResultsDetail" />
@@ -250,9 +251,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="WebScraperDBModelStoreContainer" CdmEntityContainer="WebScraperDBEntities">
+        <EntityContainerMapping StorageEntityContainer="DBWebScrapingModelStoreContainer" CdmEntityContainer="DBWebScrapingEntities">
           <EntitySetMapping Name="Pages">
-            <EntityTypeMapping TypeName="WebScraperDBModel.Page">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.Page">
               <MappingFragment StoreEntitySet="Pages">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="URL" ColumnName="URL" />
@@ -261,7 +262,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Queries">
-            <EntityTypeMapping TypeName="WebScraperDBModel.Query">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.Query">
               <MappingFragment StoreEntitySet="Queries">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -272,17 +273,17 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ResultsDetails">
-            <EntityTypeMapping TypeName="WebScraperDBModel.ResultsDetail">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.ResultsDetail">
               <MappingFragment StoreEntitySet="ResultsDetails">
-                <ScalarProperty Name="CLEF" ColumnName="CLEF" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="ResultsHeader_Id" ColumnName="ResultsHeader_Id" />
+                <ScalarProperty Name="CLEF" ColumnName="CLEF" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ResultsHeaders">
-            <EntityTypeMapping TypeName="WebScraperDBModel.ResultsHeader">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.ResultsHeader">
               <MappingFragment StoreEntitySet="ResultsHeaders">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="QueryExecutionDate" ColumnName="QueryExecutionDate" />
@@ -291,7 +292,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Selectors">
-            <EntityTypeMapping TypeName="WebScraperDBModel.Selector">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.Selector">
               <MappingFragment StoreEntitySet="Selectors">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Value" ColumnName="Value" />

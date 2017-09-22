@@ -1,10 +1,11 @@
-﻿using DAL;
+﻿using WebScraper.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
+using WebScraper.WCF;
 
 namespace WebScraper.DAL
 {
@@ -23,7 +24,7 @@ namespace WebScraper.DAL
         List<Query> getQueryByName(string name);
 
         List<Query> getAllQuery();
-
+        QueryContract GetQueryContractByName(string queryName);
         void ModifyQuery(Query query);
 
         void DeleteQuery(Query query);
@@ -32,7 +33,7 @@ namespace WebScraper.DAL
         //get results details
 
         List<string> GetResults(Query query);
-
+        int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC);
         void SetResults(Query query, string scrapingResults);
 
     }

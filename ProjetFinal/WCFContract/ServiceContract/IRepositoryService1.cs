@@ -14,6 +14,10 @@ namespace WebScraper.WCF
         string getQueryDescription(string name);
         [OperationContract]
         bool AddNewQuery(WebScraper.WCF.QueryContract query);
+        [OperationContract]
+        QueryContract GetQueryContractByName(string queryName);
+        [OperationContract]
+        int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC);
     }
 }
 

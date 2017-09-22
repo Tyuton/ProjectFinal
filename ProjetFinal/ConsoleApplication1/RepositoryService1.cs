@@ -17,9 +17,19 @@ namespace WebScraper.WCF
             return rep.AddNewQuery(query);
         }
 
+        public QueryContract GetQueryContractByName(string queryName)
+        {
+            return rep.GetQueryContractByName(queryName);
+        }
+
         public string getQueryDescription(string name)
         {
             return rep.getQueryByName(name)[0].Description;
+        }
+
+        public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
+        {
+            throw new NotImplementedException();
         }
     }
 }

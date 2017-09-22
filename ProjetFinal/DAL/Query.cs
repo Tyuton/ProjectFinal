@@ -7,34 +7,25 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace DAL
+namespace WebScraper.DAL
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime.Serialization;
-
-    [DataContract]
+    
     public partial class Query
     {
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Query()
         {
             this.Pages = new HashSet<Page>();
         }
     
-        [DataMember]
         public System.Guid Id { get; set; }
-        [DataMember]
         public string Name { get; set; }
-        [DataMember]
         public string Description { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> DataExpiryDate { get; set; }
-        [DataMember]
         public Nullable<System.DateTime> DataTimeStamp { get; set; }
-
-        [DataMember]
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Page> Pages { get; set; }
     }
