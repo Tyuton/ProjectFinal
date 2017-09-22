@@ -51,9 +51,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj">
-      <Project>{aacef432-739e-43bd-a0a4-8d15293a6ba4}</Project>
-      <Name>DAL</Name>
+    <ProjectReference Include="..\WCFContract\WCFContract.csproj">
+      <Project>{2d403005-9351-4688-bbfb-55b0aad70618}</Project>
+      <Name>WCFContract</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
