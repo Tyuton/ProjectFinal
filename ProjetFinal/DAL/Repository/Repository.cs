@@ -62,7 +62,8 @@ namespace WebScraper.DAL
 
         public bool CheckExistingQuery(Query query)
         {
-            return dbContext.Queries.Where(q => q.Id == query.Id) != null ? true : false;
+            //return dbContext.Queries.Where(q => q.Id == query.Id) != null ? true : false;
+            return dbContext.Queries.Where(q => q.Name == query.Name) != null ? true : false;
         }
 
         //get results details
@@ -147,15 +148,20 @@ namespace WebScraper.DAL
 
         public bool AddNewQuery(QueryContract query)
         {
+
+            if (query == null)
+                return false;
+
             var queryEF = new Query();
-            query.Id = Guid.NewGuid();
-            query.Name = query.Name;
-            query.Description = query.Description;
-            query.DataExpiryDate = query.DataExpiryDate;
-            query.DataTimeStamp = query.DataTimeStamp;
+            queryEF.Id = Guid.NewGuid();
+            queryEF.Name = query.Name;
+            queryEF.Description = query.Description;
+            queryEF.DataExpiryDate = query.DataExpiryDate;
+            queryEF.DataTimeStamp = query.DataTimeStamp;
 
             dbContext.Queries.Add(queryEF);
 
+            if (query.ListePages != null)
             foreach (var p in query.ListePages)
             {
                 var pageEF = new Page();
@@ -164,6 +170,7 @@ namespace WebScraper.DAL
                 pageEF.URL = p.URL;
                 dbContext.Pages.Add(pageEF);
 
+                if (p.ListeSelectors != null)
                 foreach (var s in p.ListeSelectors)
                 {
                     var selectorEF = new Selector();

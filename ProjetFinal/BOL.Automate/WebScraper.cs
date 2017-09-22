@@ -50,8 +50,8 @@ namespace BOL.Automate
             //var test = serv2.getQueryDescription("Ali");
 
             var q = new QueryContract() { Name = "SuperTest", Description = "ça marche :')" };
-            //q.Name = "SuperTest";
-            //q.Description = "ça marche :')";
+            q.Name = "SuperTest";
+            q.Description = "ça marche :')";
             var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
                 new PageContract() { URL = "www.page1.dz" },
                 new PageContract() { URL = "www.page2.fr" },
@@ -68,12 +68,12 @@ namespace BOL.Automate
             //var x = serv2.getQueryDescription("SuperTest");
             //var b = serv2.AddNewQuery(q);
             serv2.AddNewQuery(q);
+            var x = serv2.getQueryDescription("SuperTest");
+            Console.WriteLine(x);
 
             Console.WriteLine("InitWCF: ");
             Console.Read();
 
-            var x = serv2.getQueryDescription("SuperTest");
-            Console.WriteLine(x);
             Console.Read();
         }
     }

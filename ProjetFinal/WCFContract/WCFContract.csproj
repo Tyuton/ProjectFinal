@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ModelContract\Model.cs" />
+    <Compile Include="ModelContract\DataContract.cs" />
     <Compile Include="ServiceContract\IRepositoryService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

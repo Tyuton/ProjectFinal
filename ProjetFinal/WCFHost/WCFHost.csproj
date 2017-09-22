@@ -62,7 +62,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Service1.svc" />
-    <Content Include="Web.config" />
+    <None Include="Web.Amin.Config">
+      <DependentUpon>Web.Config</DependentUpon>
+    </None>
+    <Content Include="Web.Config" />
+    <None Include="Web.configOLD" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HostWCF.cs" />
@@ -77,14 +81,21 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web.Amin.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="App.Config" />
+    <None Include="Web.Amin.configOLD">
+      <DependentUpon>Web.configOLD</DependentUpon>
     </None>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web.Debug.Config">
+      <DependentUpon>Web.Config</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="Web.Debug.configOLD">
+      <DependentUpon>Web.configOLD</DependentUpon>
+    </None>
+    <None Include="Web.Release.Config">
+      <DependentUpon>Web.Config</DependentUpon>
+    </None>
+    <None Include="Web.Release.configOLD">
+      <DependentUpon>Web.configOLD</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
