@@ -49,7 +49,9 @@ namespace BOL.Automate
 
             //var test = serv2.getQueryDescription("Ali");
 
-            var q = new QueryContract();
+            var q = new QueryContract() { Name = "SuperTest", Description = "ça marche :')" };
+            //q.Name = "SuperTest";
+            //q.Description = "ça marche :')";
             var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
                 new PageContract() { URL = "www.page1.dz" },
                 new PageContract() { URL = "www.page2.fr" },
@@ -58,11 +60,20 @@ namespace BOL.Automate
                 new SelectorContract() { Value="alert('choucroute');" },
                 new SelectorContract() { Value="alert('couscous');" }
             };
-            s[0].Value = "alert('Couscous2');";
-            var x = serv2.getQueryDescription("Ali");
-            var b = serv2.AddNewQuery(q);
+
+
+            //s[0].Value = "alert('Couscous2');";
+
+
+            //var x = serv2.getQueryDescription("SuperTest");
+            //var b = serv2.AddNewQuery(q);
+            serv2.AddNewQuery(q);
 
             Console.WriteLine("InitWCF: ");
+            Console.Read();
+
+            var x = serv2.getQueryDescription("SuperTest");
+            Console.WriteLine(x);
             Console.Read();
         }
     }
