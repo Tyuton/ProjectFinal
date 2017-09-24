@@ -15,11 +15,8 @@ namespace WebScraper.DAL
 
         string TestServer();
 
-
-
         bool AddNewQuery(WebScraper.WCF.QueryContract query);
         bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp);
-
 
         List<Query> getQueryByName(string name);
 
@@ -27,14 +24,14 @@ namespace WebScraper.DAL
         QueryContract GetQueryContractByName(string queryName);
         void ModifyQuery(Query query);
 
-        void DeleteQuery(Query query);
+        void DeleteQuery(QueryContract query);
 
         bool CheckExistingQuery(Query query);
         //get results details
-
         List<string> GetResults(Query query);
         int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC);
         void SetResults(Query query, string scrapingResults);
-
+        ResultsHeaderContract GetSelectorResults(SelectorContract selector);
+        List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector);
     }
 }

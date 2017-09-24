@@ -11,6 +11,43 @@ namespace BOL.Automate
     // Selenuim version
     public class WebScraperEngine
     {
+        private static QueryContract GetQueryContractByNameFake()
+        {
+            var q = new QueryContract()
+            {
+                Name = "Arbitres",
+                Description = "FFR Arbitres",
+                Id = Guid.NewGuid(),
+                DataExpiryDate = DateTime.Now,
+                DataTimeStamp = DateTime.Now,
+            };
+            PageContract p = null;
+            var pl = q.ListePages = new System.Collections.Generic.List<PageContract>() {
+                (p = new PageContract() {
+                    URL = "https://competitions.ffr.fr/",
+                    Id=Guid.NewGuid(),
+                    //Query=q // pb de cycle
+                })
+            };
+            var s = p.ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
+                new SelectorContract()
+                {
+                    Value=@"window.resizeTo(300,500);",
+                    Id=Guid.NewGuid(),
+                },
+                new SelectorContract()
+                {
+                    Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
+                                return $(row).find('td').get().map(function(cell) {
+                                    return $(cell).html();
+                                    });
+                                });",
+                                Id= Guid.NewGuid(),
+                                //Page=p //pb de cycle
+                },
+            };
+            return q;
+        }
         // return -1 if error
         public static int ExecuteQueryAndSaveResults(string QueryName)
         {
@@ -18,7 +55,7 @@ namespace BOL.Automate
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = Canal2.CreateChannel();
-            QueryContract qc = service2.GetQueryContractByName(QueryName);
+            QueryContract qc = GetQueryContractByNameFake(); // service2.GetQueryContractByName(QueryName);
 
             ResultsHeaderContract RHC = null;
             List<ResultsDetailContract> ListRDC = new List<ResultsDetailContract>();
@@ -45,21 +82,24 @@ namespace BOL.Automate
                                 // execute Selenium scripts
                                 driver.open(url);
                                 seleniumResult = (ReadOnlyCollection<Object>)driver.browser.ExecuteScript(selector);
+                                //Close driver!
+                                driver.browser.Close();
                                 // init Results Contract objects
                                 RHC = new ResultsHeaderContract(sc);
-                                // TODO save results into repository
+                                // TODO save results into repository (update 22/09/2017)
                                 string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Club local", "Club visiteur", "Score" };//TODO autofill tempKEYS
                                 int rowIndex = 0;
                                 if (seleniumResult != null)
                                     foreach (ReadOnlyCollection<Object> item in seleniumResult)
                                     {
-                                        if (item != null && item.Count > 0)
+                                        if (item != null && item.Count > 0
+                                            && rowIndex <= 100 ) // TODELETE
                                         {
                                             for (int i = 0; i < item.Count; i++)
                                             {
                                                 ListRDC.Add(new ResultsDetailContract()
                                                 {
-                                                    CLEF = tempKEYS[i] + rowIndex,
+                                                    CLEF = tempKEYS[i] + "_" + rowIndex,
                                                     Id = Guid.NewGuid(),
                                                     Value = item[i].ToString(),//TODO all values are string
                                                     ResultsHeader = RHC
@@ -73,7 +113,7 @@ namespace BOL.Automate
                     }
 
                 int n = service2.SaveResults(RHC, ListRDC);
-
+                
 
                 return 1;
             }
@@ -87,20 +127,11 @@ namespace BOL.Automate
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 serv2 = Canal2.CreateChannel();
-            var q = new QueryContract();
-            q.Name = "Arbitres";
-            q.Description = "FFR Arbitres";
-            var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
-                new PageContract() { URL = "https://competitions.ffr.fr/" }
-            };
-            var s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
-                new SelectorContract() { Value= @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
-                                return $(row).find('td').get().map(function(cell) {
-                                    return $(cell).html();
-                                    });
-                                });" }
-            };
-            serv2.AddNewQuery(q);
+
+            var q = GetQueryContractByNameFake();
+            //serv2.AddNewQuery(q);
+
+            serv2.DeleteQuery(q);
 
             var i = ExecuteQueryAndSaveResults("Arbitres");
             Console.WriteLine("ExecuteQueryAndSaveResults...");
@@ -113,10 +144,10 @@ namespace BOL.Automate
             q = new QueryContract() { Name = "SuperTest", Description = "ça marche :')" };
             q.Name = "Arbitres";
             q.Description = "FFR Arbitres";
-            p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
+            var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
                 new PageContract() { URL = "https://competitions.ffr.fr/" }
             };
-            s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
+            var s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
                 new SelectorContract() { Value="alert('choucroute');" }
             };
 

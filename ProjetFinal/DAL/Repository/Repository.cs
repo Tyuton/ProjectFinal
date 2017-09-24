@@ -9,6 +9,98 @@ namespace WebScraper.DAL
 {
     public class Repository : IRepository
     {
+        public bool AddNewQuery(QueryContract query)
+        {
+            return false; // throw new NotImplementedException();
+        }
+
+        public bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckExistingQuery(Query query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteQuery(QueryContract query)
+        {
+
+
+        }
+
+        public List<Query> getAllQuery()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Query> getQueryByName(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public QueryContract GetQueryContractByName(string queryName)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResultsHeaderContract GetQueryResults(QueryContract query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<string> GetResults(Query query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModifyQuery(Query query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
+        {
+            Console.WriteLine("Repo");
+            ResultsHeader rh = new ResultsHeader()
+            {
+                Id = rHC.Id, //Guid.NewGuid();
+                QueryExecutionDate = rHC.QueryExecutionDate,
+                Selector = null, // selector?
+                Selector_Id = rHC.Selector.Id
+            };
+            rh.ResultsDetails = listRDC.Select(item => //dbContext.ResultsDetails
+                new ResultsDetail()
+                {
+                    Id = item.Id,
+                    CLEF = item.CLEF,
+                    Value = item.Value,
+                    ResultsHeader_Id = rh.Id,
+                    ResultsHeader = rh
+                }).ToList();
+
+            //dbContext.ResultsHeaders.Add(rh);
+            //dbContext.ResultsDetails.Add(rh.ResultsDetails); done with linq
+            //dbContext.SaveChanges();
+
+            return -1;
+
+        }
+
+        public void SetResults(Query query, string scrapingResults)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string TestServer()
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class RepositoryOLD : IRepository
+    {
         private DBWebScrapingEntities dbContext = new DBWebScrapingEntities();
 
 
@@ -92,41 +184,7 @@ namespace WebScraper.DAL
         //TODO définir les params... (ResultsHeader, ResultsDetails)
         public void SetResults(Query query, string scrapingResults)
         {
-
-            //   var selector = dbQueryContext.Selectors
-            //.Where(s => s.Page ==
-            //   dbQueryContext.Pages
-            //   .Where(q => q.Id.ToString() == query.Id.ToString() )
-            //      ).ToList();
-
-            //   var selector = from selectors in dbQueryContext.Selectors
-            //                  join page in dbQueryContext.Pages on  equals page.QueryId into selectPage
-            //                  into dbQueryContext.Queries;
-
-            var ss = (from q in dbContext.Queries
-                      join p in dbContext.Pages on q.Id equals p.Query.Id
-                      where q.Id == query.Id
-                      join s in dbContext.Selectors on p.Id equals s.Page.Id
-                      select s
-                      )
-                     .ToList();
-
-            foreach (Selector item in ss)
-            {//TODO ajouter une boucle pour resultsheader
-                var resultsheader = new ResultsHeader();
-                resultsheader.Id = Guid.NewGuid();
-                resultsheader.Selector = item;
-                resultsheader.QueryExecutionDate = DateTime.Now;
-                dbContext.ResultsHeaders.Add(resultsheader);
-                //TODO ajouter une boucle pour resultsdetails
-                var resultsdetails = new ResultsDetail();
-                resultsdetails.Id = Guid.NewGuid();
-                resultsdetails.ResultsHeader = resultsheader;
-                resultsdetails.Value = scrapingResults;//"scraping results";
-                dbContext.ResultsDetails.Add(resultsdetails);
-            }
-
-            dbContext.SaveChanges();
+            throw new NotImplementedException();
 
         }
 
@@ -140,9 +198,37 @@ namespace WebScraper.DAL
             throw new NotImplementedException();
         }
 
-        public void DeleteQuery(Query query)
+        public void DeleteQuery(QueryContract query)
         {
-            throw new NotImplementedException();
+            if (query != null)
+            {
+
+                if (query.ListePages != null)
+                    foreach (var p in query.ListePages)
+                    {
+                        if (p.ListeSelectors != null)
+                            foreach (var s in p.ListeSelectors)
+                            {
+                                List<ResultsHeader> rhlEF = dbContext.ResultsHeaders.Where(rh => rh.Selector_Id == s.Id).ToList();
+                                //delete results details
+                                rhlEF.ForEach(rh =>
+                                    dbContext.ResultsDetails.RemoveRange(rh.ResultsDetails)
+                                    );
+                                //delete results headers
+                                dbContext.ResultsHeaders.RemoveRange(rhlEF);
+                                //delete selector/foreachloop
+                                var selectorEF = dbContext.Selectors.Where(slc => slc.Id == s.Id).FirstOrDefault();
+                                dbContext.Selectors.Remove(selectorEF);
+                            }
+                        var pageEF = dbContext.Pages.Where(pg => pg.Id == p.Id).FirstOrDefault();
+                        dbContext.Pages.Add(pageEF);
+                    }
+                var queryEF = dbContext.Queries.Where(qr => qr.Id == query.Id).FirstOrDefault();
+                dbContext.Queries.Remove(queryEF);
+
+                dbContext.SaveChanges();
+            }
+
         }
 
         public bool AddNewQuery(QueryContract query)
@@ -219,24 +305,63 @@ namespace WebScraper.DAL
         // return -1 if error
         public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
         {
-            ResultsHeader rh = new ResultsHeader();
-            rh.Id = Guid.NewGuid();
-            rh.QueryExecutionDate = rHC.QueryExecutionDate;
-            rh.Selector = null; // selector?
-            rh.Selector_Id = rHC.Selector.Id;
-            rh.ResultsDetails = listRDC.Select(item => dbContext.ResultsDetails.Add(            
-            new ResultsDetail()
+            //List<ResultsDetail> rd = new List<ResultsDetail>();
+            ResultsHeader rh = new ResultsHeader()
             {
-                Id = item.Id,
-                CLEF = item.CLEF,
-                Value = item.Value
-            }
+                Id = rHC.Id, //Guid.NewGuid();
+                QueryExecutionDate = rHC.QueryExecutionDate,
+                Selector = null, // selector?
+                Selector_Id = rHC.Selector.Id
+            };
+            rh.ResultsDetails = listRDC.Select(item => dbContext.ResultsDetails
+            .Add(
+                new ResultsDetail()
+                {
+                    Id = item.Id,
+                    CLEF = item.CLEF,
+                    Value = item.Value,
+                    ResultsHeader_Id = rh.Id,
+                    ResultsHeader = rh
+                }
             )).ToList();
 
             dbContext.ResultsHeaders.Add(rh);
+            //dbContext.ResultsDetails.Add(rd); done with linq
             dbContext.SaveChanges();
 
             return 1;
+        }
+
+        public ResultsHeaderContract GetSelectorResults(SelectorContract selector)
+        {
+            if (selector == null)
+                return null;
+
+            ResultsHeader rhEF = dbContext.ResultsHeaders.Where(rh => rh.Selector_Id == selector.Id).ToList().FirstOrDefault();
+            var RHC = new ResultsHeaderContract()
+            {
+                Id = rhEF.Id,
+                QueryExecutionDate = rhEF.QueryExecutionDate,
+                Selector = selector
+            };
+
+            return RHC;
+        }
+
+        public List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector)
+        {
+            ResultsHeaderContract RHC = GetSelectorResults(selector);
+            List<ResultsDetailContract> rdcl = dbContext.ResultsDetails
+                .Where(rd => rd.ResultsHeader_Id == RHC.Id)
+                .Select(rd =>
+                new ResultsDetailContract()
+                {
+                    Id = rd.Id,
+                    CLEF = rd.CLEF,
+                    Value = rd.Value,
+                }
+            ).ToList();
+            return rdcl;
         }
     }
 }

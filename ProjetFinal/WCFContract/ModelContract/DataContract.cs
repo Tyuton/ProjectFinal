@@ -54,11 +54,14 @@ namespace WebScraper.WCF
     [DataContract]
     public class ResultsHeaderContract
     {
+        public ResultsHeaderContract()
+        {
 
+        }
         public ResultsHeaderContract(SelectorContract SC)
         {
             Id = Guid.NewGuid();
-            QueryExecutionDate = new DateTime();
+            QueryExecutionDate = DateTime.Now;
             Selector = SC;
         }
         [DataMember]
