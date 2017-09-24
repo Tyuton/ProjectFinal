@@ -55,6 +55,16 @@ namespace WebScraper.DAL
             throw new NotImplementedException();
         }
 
+        public ResultsHeaderContract GetSelectorResults(SelectorContract selector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ModifyQuery(Query query)
         {
             throw new NotImplementedException();
