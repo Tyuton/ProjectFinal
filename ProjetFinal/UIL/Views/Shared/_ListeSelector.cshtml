@@ -1,0 +1,7 @@
+﻿@model IEnumerable<WebScraper.WCF.SelectorContract>
+
+@foreach (var item in Model)
+{
+    <a class="list-group-item selector" name="selector" id="@item.Id">@item.Value</a>
+}
+<script src="~/Scripts/Gerer.js"></script>

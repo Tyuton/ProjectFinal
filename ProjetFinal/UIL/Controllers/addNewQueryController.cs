@@ -12,7 +12,7 @@ namespace UIL.Controllers
     public class addNewQueryController : Controller
     {
         List<QueryContract> listRequetes = null;
-        List<PageContract> listPages = null;
+        
         // GET: addNewQuery
         [HttpGet]
         public ActionResult manageQueries()
@@ -45,13 +45,9 @@ namespace UIL.Controllers
         {
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
-
-
-            listPages = new List<PageContract>();
-            listPages = service2.GetSelectorContractById(id);
-
-            IEnumerable<SelectorContract> ListSelector = listPages.Where(p => p.Id.ToString() == id).Select(q => q.ListeSelectors).ToList().FirstOrDefault();
-            return PartialView(_ListeSelector);
+            
+            var listSelector = service2.GetSelectorContractById(id);
+            return PartialView(listSelector);
         }
 
 

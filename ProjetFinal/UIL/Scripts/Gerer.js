@@ -11,20 +11,20 @@ function myClickQuery() {
         }
             //remove active et les glyphicon de la sélection précédente avant de l'ajouter à la sélection actuelle
         else {
-            $('.active').removeClass('active');
+            $('#QueryList > a').removeClass('active');
             $('#glyphicon').remove();
             $(this).toggleClass('active');
             $(this).append('<div id="glyphicon" class="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>');
+           // alert($this[0].id);
+            //Appel AJAX
+            $.get(
+                "http://localhost:51006/addNewQuery/_ListeURL?id=" + $this[0].id,
+                function (data) {
+                    //data is result of _ListeURL action
+                    //... //TODO
+                    $('#UrlList').html(data)
 
-                //Appel AJAX
-                $.get(
-                    "http://localhost:51006/addNewQuery/_ListeURL?id=" + $this.id,
-                    function (data) {
-                        //data is result of _ListeURL action
-                        //... //TODO
-                        $('#UrlList').html(data)
-
-                    });
+                });
         }
     }
 };
@@ -66,8 +66,6 @@ $('#span1').on('click', function () {
     $('#QueryList .active').remove();
 });
 
-
-
 //clic bouton : ajouter une nouvelle requête
 $('#addQuery').on('click', function () {
 
@@ -107,10 +105,22 @@ function myClickURL() {
         }
             //remove active et les glyphicon de la sélection précédente avant de l'ajouter à la sélection actuelle
         else {
-            $('.active').removeClass('active');
+            $('#UrlList > a').removeClass('active');
             $('#glyphicon').remove();
             $this.toggleClass('active');
             $this.append('<div id="glyphicon" class="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>');
+            //alert($this[0].id);
+            //Appel AJAX
+            $.get(
+                "http://localhost:51006/addNewQuery/_ListeSelector?id=" + $this[0].id,
+                function (data) {
+                    //data is result of _ListeURL action
+                    //... //TODO
+                    $('#SelectorsList').html(data)
+
+                });
+
+
         }
     }
 
@@ -177,7 +187,7 @@ $('#addURL').on('click', function () {
 
 //Selectors
 
-//Highlight de l'URL selectionnee
+//Highlight du Selector selectionne
 $('.selector').on('click', myClickSelector);
 function myClickSelector() {
     var $this = $(this);
@@ -188,10 +198,11 @@ function myClickSelector() {
         }
             //remove active et les glyphicon de la sélection précédente avant de l'ajouter à la sélection actuelle
         else {
-            $('.active').removeClass('active');
+            $('.SelectorsList > a').removeClass('active');
             $('#glyphicon').remove();
             $this.toggleClass('active');
             $this.append('<div id="glyphicon" class="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>');
+
         }
     }
 
