@@ -77,10 +77,13 @@ function myClick2() {
     alert(2);
 }
 
-function getAllQueries() {
-    $.ajax({
-        type: "GET",
-        url
+//A chaque click sur une Requete, il faut détruire puis reconstruire la liste des Pages associées à cette requêtes.
+//Pareil pour la liste des sélecteurs
 
-    });
-}
+//function getAllPages() {
+//    $.ajax({
+//        type: "GET",
+//        url
+
+//    });
+//}
