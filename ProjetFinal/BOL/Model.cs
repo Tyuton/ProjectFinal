@@ -7,18 +7,12 @@ using System.Threading.Tasks;
 
 namespace BOL
 {
-    [DataContract]
     class Query
     {
-        [DataMember]
         public Guid Id { get; set; }
-        [DataMember]
         public string Name { get; set; }
-        [DataMember]
         public string Description { get; set; }
-        [DataMember]
         public DateTime? DataExpiryDate { get; set; }
-        [DataMember]
         public DateTime? DataTimeStamp { get; set; }
     }
 
@@ -50,6 +44,6 @@ namespace BOL
     {
         public Guid Id { get; set; }
         public virtual ResultsHeader ResultsHeader { get; set; }
-        public string Value { get; set; }
+        public string Value { get; set; }        
     }
 }
