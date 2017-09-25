@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ModelContract\DataContract.cs" />
+    <Compile Include="ServiceContract\IArbitreService.cs" />
     <Compile Include="ServiceContract\IRepositoryService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

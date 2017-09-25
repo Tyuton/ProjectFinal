@@ -26,10 +26,26 @@ namespace ConsoleApplication2
                 }
             }
 
+            ///////////////////////////////////////////////////////////////////
+            ServiceHost host2 = new ServiceHost(typeof(ArbitreService));
+
+            host2.Open();
+
+            foreach (ChannelDispatcher dis in host2.ChannelDispatchers)
+            {
+                Console.WriteLine("Binding: " + dis.BindingName);
+                foreach (EndpointDispatcher point in dis.Endpoints)
+                {
+                    Console.WriteLine("Endpoint: " + point.EndpointAddress);
+                }
+            }
+
+
             Console.WriteLine("Start WCFHost");
             Console.WriteLine("Enter to quit.");
             Console.ReadLine();
             host1.Close();
+            host2.Close();
         }
     }
 }

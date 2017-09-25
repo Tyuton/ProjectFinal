@@ -17,7 +17,7 @@ namespace WebScraper.DAL
 
         bool AddNewQuery(WebScraper.WCF.QueryContract query);
         bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp);
-
+        List<Match> GetAllMatchsByQueryName(string queryName);
         List<Query> getQueryByName(string name);
 
         List<Query> getAllQuery();

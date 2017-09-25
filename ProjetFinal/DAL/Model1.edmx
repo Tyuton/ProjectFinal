@@ -4,179 +4,53 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DBWebScrapingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="DBWebScrapingModelStoreContainer">
-    <EntitySet Name="Pages" EntityType="DBWebScrapingModel.Store.Pages" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Queries" EntityType="DBWebScrapingModel.Store.Queries" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ResultsDetails" EntityType="DBWebScrapingModel.Store.ResultsDetails" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="ResultsHeaders" EntityType="DBWebScrapingModel.Store.ResultsHeaders" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Selectors" EntityType="DBWebScrapingModel.Store.Selectors" store:Type="Tables" Schema="dbo" />
-    <AssociationSet Name="FK_dbo_Pages_dbo_Queries_Query_Id" Association="DBWebScrapingModel.Store.FK_dbo_Pages_dbo_Queries_Query_Id">
-      <End Role="Queries" EntitySet="Queries" />
-      <End Role="Pages" EntitySet="Pages" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_Selectors_dbo_Pages_Page_Id" Association="DBWebScrapingModel.Store.FK_dbo_Selectors_dbo_Pages_Page_Id">
-      <End Role="Pages" EntitySet="Pages" />
-      <End Role="Selectors" EntitySet="Selectors" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" Association="DBWebScrapingModel.Store.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
-      <End Role="ResultsHeaders" EntitySet="ResultsHeaders" />
-      <End Role="ResultsDetails" EntitySet="ResultsDetails" />
-    </AssociationSet>
-    <AssociationSet Name="FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id" Association="DBWebScrapingModel.Store.FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id">
-      <End Role="Selectors" EntitySet="Selectors" />
-      <End Role="ResultsHeaders" EntitySet="ResultsHeaders" />
-    </AssociationSet>
-  </EntityContainer>
-  <EntityType Name="Pages">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="URL" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Query_Id" Type="uniqueidentifier" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Queries">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Description" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="DataExpiryDate" Type="datetime" Nullable="true" />
-    <Property Name="DataTimeStamp" Type="datetime" Nullable="true" />
-  </EntityType>
-  <EntityType Name="ResultsDetails">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="ResultsHeader_Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="CLEF" Type="nvarchar" Nullable="false" MaxLength="50" />
-  </EntityType>
-  <EntityType Name="ResultsHeaders">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="QueryExecutionDate" Type="datetime" Nullable="false" />
-    <Property Name="Selector_Id" Type="uniqueidentifier" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Selectors">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
-    <Property Name="Value" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="Page_Id" Type="uniqueidentifier" Nullable="true" />
-  </EntityType>
-  <Association Name="FK_dbo_Pages_dbo_Queries_Query_Id">
-    <End Role="Queries" Type="DBWebScrapingModel.Store.Queries" Multiplicity="0..1" />
-    <End Role="Pages" Type="DBWebScrapingModel.Store.Pages" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Queries">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Pages">
-        <PropertyRef Name="Query_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_Selectors_dbo_Pages_Page_Id">
-    <End Role="Pages" Type="DBWebScrapingModel.Store.Pages" Multiplicity="0..1" />
-    <End Role="Selectors" Type="DBWebScrapingModel.Store.Selectors" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Pages">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Selectors">
-        <PropertyRef Name="Page_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
-    <End Role="ResultsHeaders" Type="DBWebScrapingModel.Store.ResultsHeaders" Multiplicity="1" />
-    <End Role="ResultsDetails" Type="DBWebScrapingModel.Store.ResultsDetails" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ResultsHeaders">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ResultsDetails">
-        <PropertyRef Name="ResultsHeader_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id">
-    <End Role="Selectors" Type="DBWebScrapingModel.Store.Selectors" Multiplicity="0..1" />
-    <End Role="ResultsHeaders" Type="DBWebScrapingModel.Store.ResultsHeaders" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Selectors">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ResultsHeaders">
-        <PropertyRef Name="Selector_Id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-</Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="DBWebScrapingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Page">
+    <Schema Namespace="DBWebScrapingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Pages">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Query_Id" Type="Guid" />
-          <NavigationProperty Name="Query" Relationship="Self.FK_dbo_Pages_dbo_Queries_Query_Id" FromRole="Pages" ToRole="Queries" />
-          <NavigationProperty Name="Selectors" Relationship="Self.FK_dbo_Selectors_dbo_Pages_Page_Id" FromRole="Pages" ToRole="Selectors" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="URL" Type="nvarchar(max)" />
+          <Property Name="Query_Id" Type="uniqueidentifier" />
         </EntityType>
-        <EntityType Name="Query">
+        <EntityType Name="Queries">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DataExpiryDate" Type="DateTime" Precision="3" />
-          <Property Name="DataTimeStamp" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Pages" Relationship="Self.FK_dbo_Pages_dbo_Queries_Query_Id" FromRole="Queries" ToRole="Pages" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DataExpiryDate" Type="datetime" />
+          <Property Name="DataTimeStamp" Type="datetime" />
         </EntityType>
-        <EntityType Name="ResultsDetail">
+        <EntityType Name="ResultsDetails">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="ResultsHeader_Id" Type="Guid" Nullable="false" />
-          <Property Name="CLEF" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="ResultsHeader" Relationship="Self.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" FromRole="ResultsDetails" ToRole="ResultsHeaders" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="ResultsHeader_Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="CLEF" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="ResultsHeader">
+        <EntityType Name="ResultsHeaders">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="QueryExecutionDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Selector_Id" Type="Guid" />
-          <NavigationProperty Name="ResultsDetails" Relationship="Self.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" FromRole="ResultsHeaders" ToRole="ResultsDetails" />
-          <NavigationProperty Name="Selector" Relationship="Self.FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id" FromRole="ResultsHeaders" ToRole="Selectors" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="QueryExecutionDate" Type="datetime" Nullable="false" />
+          <Property Name="Selector_Id" Type="uniqueidentifier" />
         </EntityType>
-        <EntityType Name="Selector">
+        <EntityType Name="Selectors">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Guid" Nullable="false" />
-          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Page_Id" Type="Guid" />
-          <NavigationProperty Name="Page" Relationship="Self.FK_dbo_Selectors_dbo_Pages_Page_Id" FromRole="Selectors" ToRole="Pages" />
-          <NavigationProperty Name="ResultsHeaders" Relationship="Self.FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id" FromRole="Selectors" ToRole="ResultsHeaders" />
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="Page_Id" Type="uniqueidentifier" />
         </EntityType>
         <Association Name="FK_dbo_Pages_dbo_Queries_Query_Id">
-          <End Role="Queries" Type="Self.Query" Multiplicity="0..1" />
-          <End Role="Pages" Type="Self.Page" Multiplicity="*" />
+          <End Role="Queries" Type="Self.Queries" Multiplicity="0..1" />
+          <End Role="Pages" Type="Self.Pages" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Queries">
               <PropertyRef Name="Id" />
@@ -186,21 +60,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_dbo_Selectors_dbo_Pages_Page_Id">
-          <End Role="Pages" Type="Self.Page" Multiplicity="0..1" />
-          <End Role="Selectors" Type="Self.Selector" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Pages">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Selectors">
-              <PropertyRef Name="Page_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
-          <End Role="ResultsHeaders" Type="Self.ResultsHeader" Multiplicity="1" />
-          <End Role="ResultsDetails" Type="Self.ResultsDetail" Multiplicity="*" />
+          <End Role="ResultsHeaders" Type="Self.ResultsHeaders" Multiplicity="1" />
+          <End Role="ResultsDetails" Type="Self.ResultsDetails" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ResultsHeaders">
               <PropertyRef Name="Id" />
@@ -211,8 +73,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id">
-          <End Role="Selectors" Type="Self.Selector" Multiplicity="0..1" />
-          <End Role="ResultsHeaders" Type="Self.ResultsHeader" Multiplicity="*" />
+          <End Role="Selectors" Type="Self.Selectors" Multiplicity="0..1" />
+          <End Role="ResultsHeaders" Type="Self.ResultsHeaders" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Selectors">
               <PropertyRef Name="Id" />
@@ -222,19 +84,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="DBWebScrapingEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Pages" EntityType="Self.Page" />
-          <EntitySet Name="Queries" EntityType="Self.Query" />
-          <EntitySet Name="ResultsDetails" EntityType="Self.ResultsDetail" />
-          <EntitySet Name="ResultsHeaders" EntityType="Self.ResultsHeader" />
-          <EntitySet Name="Selectors" EntityType="Self.Selector" />
+        <Association Name="FK_dbo_Selectors_dbo_Pages_Page_Id">
+          <End Role="Pages" Type="Self.Pages" Multiplicity="0..1" />
+          <End Role="Selectors" Type="Self.Selectors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pages">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Selectors">
+              <PropertyRef Name="Page_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBWebScrapingModelStoreContainer">
+          <EntitySet Name="Pages" EntityType="Self.Pages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Queries" EntityType="Self.Queries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultsDetails" EntityType="Self.ResultsDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResultsHeaders" EntityType="Self.ResultsHeaders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Selectors" EntityType="Self.Selectors" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_dbo_Pages_dbo_Queries_Query_Id" Association="Self.FK_dbo_Pages_dbo_Queries_Query_Id">
             <End Role="Queries" EntitySet="Queries" />
             <End Role="Pages" EntitySet="Pages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_dbo_Selectors_dbo_Pages_Page_Id" Association="Self.FK_dbo_Selectors_dbo_Pages_Page_Id">
-            <End Role="Pages" EntitySet="Pages" />
-            <End Role="Selectors" EntitySet="Selectors" />
           </AssociationSet>
           <AssociationSet Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" Association="Self.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
             <End Role="ResultsHeaders" EntitySet="ResultsHeaders" />
@@ -244,62 +114,192 @@
             <End Role="Selectors" EntitySet="Selectors" />
             <End Role="ResultsHeaders" EntitySet="ResultsHeaders" />
           </AssociationSet>
+          <AssociationSet Name="FK_dbo_Selectors_dbo_Pages_Page_Id" Association="Self.FK_dbo_Selectors_dbo_Pages_Page_Id">
+            <End Role="Pages" EntitySet="Pages" />
+            <End Role="Selectors" EntitySet="Selectors" />
+          </AssociationSet>
         </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBWebScrapingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBWebScrapingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Pages" EntityType="DBWebScrapingModel.Page" />
+          <EntitySet Name="Queries" EntityType="DBWebScrapingModel.Query" />
+          <EntitySet Name="ResultsDetails" EntityType="DBWebScrapingModel.ResultsDetail" />
+          <EntitySet Name="ResultsHeaders" EntityType="DBWebScrapingModel.ResultsHeader" />
+          <EntitySet Name="Selectors" EntityType="DBWebScrapingModel.Selector" />
+          <AssociationSet Name="FK_dbo_Pages_dbo_Queries_Query_Id" Association="DBWebScrapingModel.FK_dbo_Pages_dbo_Queries_Query_Id">
+            <End Role="Query" EntitySet="Queries" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Selectors_dbo_Pages_Page_Id" Association="DBWebScrapingModel.FK_dbo_Selectors_dbo_Pages_Page_Id">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="Selector" EntitySet="Selectors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" Association="DBWebScrapingModel.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
+            <End Role="ResultsHeader" EntitySet="ResultsHeaders" />
+            <End Role="ResultsDetail" EntitySet="ResultsDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id" Association="DBWebScrapingModel.FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id">
+            <End Role="Selector" EntitySet="Selectors" />
+            <End Role="ResultsHeader" EntitySet="ResultsHeaders" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Query_Id" Type="Guid" />
+          <NavigationProperty Name="Query" Relationship="DBWebScrapingModel.FK_dbo_Pages_dbo_Queries_Query_Id" FromRole="Page" ToRole="Query" />
+          <NavigationProperty Name="Selectors" Relationship="DBWebScrapingModel.FK_dbo_Selectors_dbo_Pages_Page_Id" FromRole="Page" ToRole="Selector" />
+        </EntityType>
+        <EntityType Name="Query">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DataExpiryDate" Type="DateTime" Precision="3" />
+          <Property Name="DataTimeStamp" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Pages" Relationship="DBWebScrapingModel.FK_dbo_Pages_dbo_Queries_Query_Id" FromRole="Query" ToRole="Page" />
+        </EntityType>
+        <EntityType Name="ResultsDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ResultsHeader_Id" Type="Guid" Nullable="false" />
+          <Property Name="CLEF" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ResultsHeader" Relationship="DBWebScrapingModel.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" FromRole="ResultsDetail" ToRole="ResultsHeader" />
+        </EntityType>
+        <EntityType Name="ResultsHeader">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="QueryExecutionDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Selector_Id" Type="Guid" />
+          <NavigationProperty Name="ResultsDetails" Relationship="DBWebScrapingModel.FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id" FromRole="ResultsHeader" ToRole="ResultsDetail" />
+          <NavigationProperty Name="Selector" Relationship="DBWebScrapingModel.FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id" FromRole="ResultsHeader" ToRole="Selector" />
+        </EntityType>
+        <EntityType Name="Selector">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Page_Id" Type="Guid" />
+          <NavigationProperty Name="Page" Relationship="DBWebScrapingModel.FK_dbo_Selectors_dbo_Pages_Page_Id" FromRole="Selector" ToRole="Page" />
+          <NavigationProperty Name="ResultsHeaders" Relationship="DBWebScrapingModel.FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id" FromRole="Selector" ToRole="ResultsHeader" />
+        </EntityType>
+        <Association Name="FK_dbo_Pages_dbo_Queries_Query_Id">
+          <End Type="DBWebScrapingModel.Query" Role="Query" Multiplicity="0..1" />
+          <End Type="DBWebScrapingModel.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Query">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="Query_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Selectors_dbo_Pages_Page_Id">
+          <End Type="DBWebScrapingModel.Page" Role="Page" Multiplicity="0..1" />
+          <End Type="DBWebScrapingModel.Selector" Role="Selector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Selector">
+              <PropertyRef Name="Page_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ResultsDetails_dbo_ResultsHeaders_ResultsHeader_Id">
+          <End Type="DBWebScrapingModel.ResultsHeader" Role="ResultsHeader" Multiplicity="1" />
+          <End Type="DBWebScrapingModel.ResultsDetail" Role="ResultsDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResultsHeader">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultsDetail">
+              <PropertyRef Name="ResultsHeader_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_ResultsHeaders_dbo_Selectors_Selector_Id">
+          <End Type="DBWebScrapingModel.Selector" Role="Selector" Multiplicity="0..1" />
+          <End Type="DBWebScrapingModel.ResultsHeader" Role="ResultsHeader" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Selector">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResultsHeader">
+              <PropertyRef Name="Selector_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DBWebScrapingModelStoreContainer" CdmEntityContainer="DBWebScrapingEntities">
-    <EntitySetMapping Name="Pages">
-      <EntityTypeMapping TypeName="IsTypeOf(DBWebScrapingModel.Page)">
-        <MappingFragment StoreEntitySet="Pages">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="URL" ColumnName="URL" />
-          <ScalarProperty Name="Query_Id" ColumnName="Query_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Queries">
-      <EntityTypeMapping TypeName="IsTypeOf(DBWebScrapingModel.Query)">
-        <MappingFragment StoreEntitySet="Queries">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="DataExpiryDate" ColumnName="DataExpiryDate" />
-          <ScalarProperty Name="DataTimeStamp" ColumnName="DataTimeStamp" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ResultsDetails">
-      <EntityTypeMapping TypeName="IsTypeOf(DBWebScrapingModel.ResultsDetail)">
-        <MappingFragment StoreEntitySet="ResultsDetails">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="ResultsHeader_Id" ColumnName="ResultsHeader_Id" />
-          <ScalarProperty Name="CLEF" ColumnName="CLEF" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="ResultsHeaders">
-      <EntityTypeMapping TypeName="IsTypeOf(DBWebScrapingModel.ResultsHeader)">
-        <MappingFragment StoreEntitySet="ResultsHeaders">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="QueryExecutionDate" ColumnName="QueryExecutionDate" />
-          <ScalarProperty Name="Selector_Id" ColumnName="Selector_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Selectors">
-      <EntityTypeMapping TypeName="IsTypeOf(DBWebScrapingModel.Selector)">
-        <MappingFragment StoreEntitySet="Selectors">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Value" ColumnName="Value" />
-          <ScalarProperty Name="Page_Id" ColumnName="Page_Id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-  </EntityContainerMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.Page">
+              <MappingFragment StoreEntitySet="Pages">
+                <ScalarProperty Name="Query_Id" ColumnName="Query_Id" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Queries">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.Query">
+              <MappingFragment StoreEntitySet="Queries">
+                <ScalarProperty Name="DataTimeStamp" ColumnName="DataTimeStamp" />
+                <ScalarProperty Name="DataExpiryDate" ColumnName="DataExpiryDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultsDetails">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.ResultsDetail">
+              <MappingFragment StoreEntitySet="ResultsDetails">
+                <ScalarProperty Name="CLEF" ColumnName="CLEF" />
+                <ScalarProperty Name="ResultsHeader_Id" ColumnName="ResultsHeader_Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultsHeaders">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.ResultsHeader">
+              <MappingFragment StoreEntitySet="ResultsHeaders">
+                <ScalarProperty Name="Selector_Id" ColumnName="Selector_Id" />
+                <ScalarProperty Name="QueryExecutionDate" ColumnName="QueryExecutionDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Selectors">
+            <EntityTypeMapping TypeName="DBWebScrapingModel.Selector">
+              <MappingFragment StoreEntitySet="Selectors">
+                <ScalarProperty Name="Page_Id" ColumnName="Page_Id" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->

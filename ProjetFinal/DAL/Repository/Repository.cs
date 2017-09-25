@@ -30,6 +30,11 @@ namespace WebScraper.DAL
 
         }
 
+        public List<Match> GetAllMatchsByQueryName(string queryName)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Query> getAllQuery()
         {
             throw new NotImplementedException();
@@ -447,6 +452,47 @@ namespace WebScraper.DAL
                 Id = s.Id,
                 Value = s.Value,
             }).ToList();
+        }
+
+        public List<Match> GetAllMatchsByQueryName(string queryName)
+        {
+            var qEF = dbContext.Queries.Where(q => q.Name == queryName).FirstOrDefault();
+            if (qEF == null)
+                return null;
+
+            List<Match> LM = new List<Match>();
+            //string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Club local", "Club visiteur", "Score" };
+            int rowIndex = 0;
+
+            foreach (var pEF in qEF.Pages)
+            {
+                foreach (var sEF in pEF.Selectors)
+                {
+                    var rhl = dbContext.ResultsHeaders.Where(rh => rh.Selector_Id == sEF.Id).FirstOrDefault();
+                    // order results                     
+                    var rdl = rhl.ResultsDetails
+                                .OrderBy(rd => rd.CLEF.Split('_')[0])
+                                .OrderBy(rd => rd.CLEF.Split('_')[1])
+                                .ToList();
+
+                    for (int i = 0; i < rdl.Count/7; i+=7)
+                    {
+                        var m = new Match();
+
+                        m.Locaux = rdl[i + 0].Value;
+                        m.Visiteurs = rdl[i + 1].Value;
+                        // phase rdl[i + 2].Value;
+                        m.CalendrierMatch = new Calendrier() { CalendrierId=0, DateJournee=Convert.ToDateTime(rdl[i + 3].Value) };
+                        m.HeureMatch= Convert.ToDateTime(rdl[i + 4].Value);                        
+                        m.NiveauMatch = rdl[i + 5].Value;
+                        // score ? rdl[i + 6].Value;
+
+                        LM.Add(m);
+                    }
+                }
+            }
+
+            return LM;
         }
     }
 }
