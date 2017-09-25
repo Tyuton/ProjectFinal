@@ -30,11 +30,11 @@ namespace BOL.Automate
                 })
             };
             var s = p.ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
-                new SelectorContract()
-                {
-                    Value=@"window.resizeTo(300,500);",
-                    Id=Guid.NewGuid(),
-                },
+                //new SelectorContract()
+                //{
+                //    Value=@"window.resizeTo(300,500);",
+                //    Id=Guid.NewGuid(),
+                //},
                 new SelectorContract()
                 {
                     Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
@@ -93,7 +93,7 @@ namespace BOL.Automate
                                     foreach (ReadOnlyCollection<Object> item in seleniumResult)
                                     {
                                         if (item != null && item.Count > 0
-                                            && rowIndex <= 100 ) // TODELETE
+                                            && rowIndex <= 10 ) // TODELETE
                                         {
                                             for (int i = 0; i < item.Count; i++)
                                             {
@@ -131,7 +131,7 @@ namespace BOL.Automate
             var q = GetQueryContractByNameFake();
             //serv2.AddNewQuery(q);
 
-            serv2.DeleteQuery(q);
+            //serv2.DeleteQuery(q);
 
             var i = ExecuteQueryAndSaveResults("Arbitres");
             Console.WriteLine("ExecuteQueryAndSaveResults...");

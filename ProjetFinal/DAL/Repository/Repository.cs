@@ -7,7 +7,7 @@ using WebScraper.WCF;
 
 namespace WebScraper.DAL
 {
-    public class Repository : IRepository
+    public class RepositoryOLD2 : IRepository
     {
         public bool AddNewQuery(QueryContract query)
         {
@@ -109,10 +109,9 @@ namespace WebScraper.DAL
         }
     }
 
-    public class RepositoryOLD : IRepository
+    public class Repository : IRepository
     {
         private DBWebScrapingEntities dbContext = new DBWebScrapingEntities();
-
 
         public string TestServer()
         {
@@ -120,7 +119,7 @@ namespace WebScraper.DAL
         }
 
         /// <summary>
-        /// TODO Add a new query...
+        /// TODO Add a new query / 1 page / 1 selector
         /// </summary>
         /// <returns></returns>
         public bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp)
@@ -139,11 +138,13 @@ namespace WebScraper.DAL
             page.Id = Guid.NewGuid();
             page.Query = query;
             page.URL = url;
+            page.Query_Id = query.Id;
             dbContext.Pages.Add(page);
 
             var selector = new Selector();
             selector.Id = Guid.NewGuid();
             selector.Page = page;
+            selector.Page_Id = page.Id;
             selector.Value = script;
             dbContext.Selectors.Add(selector);
 
@@ -200,7 +201,8 @@ namespace WebScraper.DAL
 
         public List<Query> getAllQuery()
         {
-            throw new NotImplementedException();
+            //TODO change return type to List<QueryContract>
+            return dbContext.Queries.ToList();
         }
 
         public void ModifyQuery(Query query)
@@ -262,6 +264,7 @@ namespace WebScraper.DAL
                     var pageEF = new Page();
                     pageEF.Id = Guid.NewGuid();
                     pageEF.Query = queryEF;
+                    pageEF.Query_Id = queryEF.Id;
                     pageEF.URL = p.URL;
                     dbContext.Pages.Add(pageEF);
 
@@ -271,6 +274,7 @@ namespace WebScraper.DAL
                             var selectorEF = new Selector();
                             selectorEF.Id = Guid.NewGuid();
                             selectorEF.Page = pageEF;
+                            selectorEF.Page_Id = pageEF.Id;
                             selectorEF.Value = s.Value;
                             dbContext.Selectors.Add(selectorEF);
                         }
@@ -315,14 +319,16 @@ namespace WebScraper.DAL
         // return -1 if error
         public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
         {
+            Selector selectorEF = dbContext.Selectors.Where(s => s.Id == rHC.Selector.Id).Select(s => s).FirstOrDefault();
             //List<ResultsDetail> rd = new List<ResultsDetail>();
             ResultsHeader rh = new ResultsHeader()
             {
                 Id = rHC.Id, //Guid.NewGuid();
                 QueryExecutionDate = rHC.QueryExecutionDate,
-                Selector = null, // selector?
+                //Selector = selectorEF, // selector?
                 Selector_Id = rHC.Selector.Id
             };
+            dbContext.ResultsHeaders.Add(rh);
             rh.ResultsDetails = listRDC.Select(item => dbContext.ResultsDetails
             .Add(
                 new ResultsDetail()
@@ -331,11 +337,10 @@ namespace WebScraper.DAL
                     CLEF = item.CLEF,
                     Value = item.Value,
                     ResultsHeader_Id = rh.Id,
-                    ResultsHeader = rh
+                    //ResultsHeader = rh
                 }
             )).ToList();
 
-            dbContext.ResultsHeaders.Add(rh);
             //dbContext.ResultsDetails.Add(rd); done with linq
             dbContext.SaveChanges();
 

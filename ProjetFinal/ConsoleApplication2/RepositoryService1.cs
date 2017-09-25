@@ -14,7 +14,7 @@ namespace WebScraper.WCF
 
         public bool AddNewQuery(QueryContract query)
         {
-            return false; // rep.AddNewQuery(query);
+            return rep.AddNewQuery(query);
         }
 
         public void DeleteQuery(QueryContract q)
