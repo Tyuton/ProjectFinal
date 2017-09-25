@@ -55,6 +55,7 @@ namespace BOL.Automate
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = Canal2.CreateChannel();
+            // Get QueryContract
             QueryContract qc = service2.GetQueryContractByName(QueryName);
 
             ResultsHeaderContract RHC = null;
@@ -87,13 +88,14 @@ namespace BOL.Automate
                                 // init Results Contract objects
                                 RHC = new ResultsHeaderContract(sc);
                                 // TODO save results into repository (update 22/09/2017)
-                                string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Club local", "Club visiteur", "Score" };//TODO autofill tempKEYS
+                                string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Club local", "Club visiteur", "Score" };
+                                //TODO autofill tempKEYS
                                 int rowIndex = 0;
                                 if (seleniumResult != null)
                                     foreach (ReadOnlyCollection<Object> item in seleniumResult)
                                     {
-                                        if (item != null && item.Count > 0
-                                            && rowIndex <= 10 ) // TODELETE
+                                        if (item != null && item.Count > 0)
+                                        //&& rowIndex <= 10) // TODELETE problem MaxSize too long
                                         {
                                             for (int i = 0; i < item.Count; i++)
                                             {
@@ -101,7 +103,7 @@ namespace BOL.Automate
                                                 {
                                                     CLEF = tempKEYS[i] + "_" + rowIndex,
                                                     Id = Guid.NewGuid(),
-                                                    Value = item[i].ToString(),//TODO all values are string
+                                                    Value = item[i].ToString(),// all values are string
                                                     ResultsHeader = RHC
                                                 });
                                             }
@@ -109,15 +111,12 @@ namespace BOL.Automate
                                         }
                                     }
                             }
-
                     }
 
+                // TODO save results into repository (update 22/09/2017)
                 int n = service2.SaveResults(RHC, ListRDC);
-                
-
-                return 1;
+                return n;
             }
-
             return -1;
         }
 
@@ -128,79 +127,56 @@ namespace BOL.Automate
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 serv2 = Canal2.CreateChannel();
 
-            var q = GetQueryContractByNameFake();
-            serv2.AddNewQuery(q);
+            QueryContract q = null;
+            //q = GetQueryContractByNameFake();
+            //serv2.AddNewQuery(q);
 
             //serv2.DeleteQuery(q);
 
-            var i = ExecuteQueryAndSaveResults("Arbitres");
+            //var i = ExecuteQueryAndSaveResults("Arbitres");
+            var ql = serv2.GetAllQueryContract();
+            var v2 = serv2.GetPageContractById(ql[0].Id.ToString());
+            var v3 = serv2.GetSelectorContractById(ql[0].ListePages[0].Id.ToString());
             Console.WriteLine("ExecuteQueryAndSaveResults...");
             Console.Read();
-            return -1;
-
-
-
-            //var test = serv2.getQueryDescription("Ali");
-            q = new QueryContract() { Name = "SuperTest", Description = "ça marche :')" };
-            q.Name = "Arbitres";
-            q.Description = "FFR Arbitres";
-            var p = q.ListePages = new System.Collections.Generic.List<PageContract>() {
-                new PageContract() { URL = "https://competitions.ffr.fr/" }
-            };
-            var s = p[0].ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
-                new SelectorContract() { Value="alert('choucroute');" }
-            };
-
-
-            //s[0].Value = "alert('Couscous2');";
-
-
-            //var x = serv2.getQueryDescription("SuperTest");
-            //var b = serv2.AddNewQuery(q);
-            serv2.AddNewQuery(q);
-            var x = serv2.getQueryDescription("SuperTest");
-            Console.WriteLine(x);
-
-            Console.WriteLine("InitWCF: ");
-            Console.Read();
-
-            Console.Read();
-        }
-    }
-
-    class Navigator : IDisposable
-    {
-        public FirefoxDriver browser = null;
-
-        public void Dispose() // libérer les resourecs
-        {
-            browser.Close();
-        }
-
-        internal void InputTextAndEnter(string css, string valeur)
-        {
-
-            var zone = browser.FindElement(By.Id(css));
-            zone.SendKeys(valeur);
-            zone.SendKeys(Keys.Return);
+            return 1;
 
         }
 
-        internal void InputTextAndEnterJS(string css, string valeur)
+        class Navigator : IDisposable
         {
-            string js = string.Format("document.getElementById('{0}').innerHTML ='{1}';", css, valeur);
-            Console.WriteLine(js);
+            public FirefoxDriver browser = null;
 
-            var v = browser.ExecuteScript(js);
+            public void Dispose() // libérer les resourecs
+            {
+                browser.Close();
+            }
 
-            IJavaScriptExecutor js2 = (IJavaScriptExecutor)browser;
-            string title = (string)js2.ExecuteScript(js);
-        }
+            internal void InputTextAndEnter(string css, string valeur)
+            {
 
-        internal void open(string siteweb)
-        {
-            browser = new FirefoxDriver();
-            browser.Url = siteweb;
+                var zone = browser.FindElement(By.Id(css));
+                zone.SendKeys(valeur);
+                zone.SendKeys(Keys.Return);
+
+            }
+
+            internal void InputTextAndEnterJS(string css, string valeur)
+            {
+                string js = string.Format("document.getElementById('{0}').innerHTML ='{1}';", css, valeur);
+                Console.WriteLine(js);
+
+                var v = browser.ExecuteScript(js);
+
+                IJavaScriptExecutor js2 = (IJavaScriptExecutor)browser;
+                string title = (string)js2.ExecuteScript(js);
+            }
+
+            internal void open(string siteweb)
+            {
+                browser = new FirefoxDriver();
+                browser.Url = siteweb;
+            }
         }
     }
 }

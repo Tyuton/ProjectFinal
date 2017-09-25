@@ -26,7 +26,7 @@ namespace WebScraper.DAL
         void ModifyQuery(Query query);
 
         void DeleteQuery(QueryContract query);
-
+        List<PageContract> GetPageContractById(string queryId);
         bool CheckExistingQuery(Query query);
         //get results details
         List<string> GetResults(Query query);
@@ -34,5 +34,6 @@ namespace WebScraper.DAL
         void SetResults(Query query, string scrapingResults);
         ResultsHeaderContract GetSelectorResults(SelectorContract selector);
         List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector);
+        List<SelectorContract> GetSelectorContractById(string pageId);
     }
 }

@@ -21,6 +21,10 @@ namespace WebScraper.WCF
         [OperationContract]
         int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC);
         [OperationContract]
+        List<PageContract> GetPageContractById(string QueryId);
+        [OperationContract]
+        List<SelectorContract> GetSelectorContractById(string PageId);
+        [OperationContract]
         ResultsHeaderContract GetSelectorResults(SelectorContract selector);
         [OperationContract]
         List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector);

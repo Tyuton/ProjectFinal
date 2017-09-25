@@ -27,6 +27,11 @@ namespace WebScraper.WCF
             return rep.GetAllQueryContract();
         }
 
+        public List<PageContract> GetPageContractById(string QueryId)
+        {
+            return rep.GetPageContractById(QueryId);
+        }
+
         public QueryContract GetQueryContractByName(string queryName)
         {
             return rep.GetQueryContractByName(queryName);
@@ -35,6 +40,11 @@ namespace WebScraper.WCF
         public string getQueryDescription(string name)
         {
             return rep.getQueryByName(name)[0].Description;
+        }
+
+        public List<SelectorContract> GetSelectorContractById(string PageId)
+        {
+            return rep.GetSelectorContractById(PageId);
         }
 
         public ResultsHeaderContract GetSelectorResults(SelectorContract selector)
