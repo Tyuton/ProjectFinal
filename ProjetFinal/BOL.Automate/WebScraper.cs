@@ -55,7 +55,7 @@ namespace BOL.Automate
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = Canal2.CreateChannel();
-            QueryContract qc = GetQueryContractByNameFake(); // service2.GetQueryContractByName(QueryName);
+            QueryContract qc = service2.GetQueryContractByName(QueryName);
 
             ResultsHeaderContract RHC = null;
             List<ResultsDetailContract> ListRDC = new List<ResultsDetailContract>();
@@ -83,7 +83,7 @@ namespace BOL.Automate
                                 driver.open(url);
                                 seleniumResult = (ReadOnlyCollection<Object>)driver.browser.ExecuteScript(selector);
                                 //Close driver!
-                                driver.browser.Close();
+                                //driver.browser.Close();
                                 // init Results Contract objects
                                 RHC = new ResultsHeaderContract(sc);
                                 // TODO save results into repository (update 22/09/2017)
@@ -129,7 +129,7 @@ namespace BOL.Automate
             IRepositoryService1 serv2 = Canal2.CreateChannel();
 
             var q = GetQueryContractByNameFake();
-            //serv2.AddNewQuery(q);
+            serv2.AddNewQuery(q);
 
             //serv2.DeleteQuery(q);
 

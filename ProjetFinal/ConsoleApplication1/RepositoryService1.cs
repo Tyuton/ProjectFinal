@@ -17,6 +17,16 @@ namespace WebScraper.WCF
             return rep.AddNewQuery(query);
         }
 
+        public void DeleteQuery(QueryContract q)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<QueryContract> GetAllQueryContract()
+        {
+            throw new NotImplementedException();
+        }
+
         public QueryContract GetQueryContractByName(string queryName)
         {
             return rep.GetQueryContractByName(queryName);
@@ -25,6 +35,16 @@ namespace WebScraper.WCF
         public string getQueryDescription(string name)
         {
             return rep.getQueryByName(name)[0].Description;
+        }
+
+        public ResultsHeaderContract GetSelectorResults(SelectorContract selector)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector)
+        {
+            throw new NotImplementedException();
         }
 
         public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)

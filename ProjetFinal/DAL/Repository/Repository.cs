@@ -35,6 +35,11 @@ namespace WebScraper.DAL
             throw new NotImplementedException();
         }
 
+        public List<QueryContract> GetAllQueryContract()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Query> getQueryByName(string name)
         {
             throw new NotImplementedException();
@@ -250,7 +255,7 @@ namespace WebScraper.DAL
                 return false;
 
             var queryEF = new Query();
-            queryEF.Id = Guid.NewGuid();
+            queryEF.Id = query.Id; //Guid.NewGuid();
             queryEF.Name = query.Name;
             queryEF.Description = query.Description;
             queryEF.DataExpiryDate = query.DataExpiryDate;
@@ -262,7 +267,7 @@ namespace WebScraper.DAL
                 foreach (var p in query.ListePages)
                 {
                     var pageEF = new Page();
-                    pageEF.Id = Guid.NewGuid();
+                    pageEF.Id = p.Id;//Guid.NewGuid();
                     pageEF.Query = queryEF;
                     pageEF.Query_Id = queryEF.Id;
                     pageEF.URL = p.URL;
@@ -272,7 +277,7 @@ namespace WebScraper.DAL
                         foreach (var s in p.ListeSelectors)
                         {
                             var selectorEF = new Selector();
-                            selectorEF.Id = Guid.NewGuid();
+                            selectorEF.Id = s.Id;// Guid.NewGuid();
                             selectorEF.Page = pageEF;
                             selectorEF.Page_Id = pageEF.Id;
                             selectorEF.Value = s.Value;
@@ -377,6 +382,35 @@ namespace WebScraper.DAL
                 }
             ).ToList();
             return rdcl;
+        }
+
+        public List<QueryContract> GetAllQueryContract()
+        {
+
+            return dbContext.Queries.Select(qEF =>
+            new QueryContract()
+            {
+                Id = qEF.Id,
+                Description = qEF.Description,
+                Name = qEF.Name,
+                DataExpiryDate = qEF.DataExpiryDate,
+                DataTimeStamp = qEF.DataTimeStamp,
+                ListePages = dbContext.Pages.Select(pEF =>
+                    new PageContract()
+                    {
+                        Id = pEF.Id,
+                        URL = pEF.URL,
+                        ListeSelectors = dbContext.Selectors.Select(sEF =>
+                            new SelectorContract()
+                            {
+                                Id = sEF.Id,
+                                Value = sEF.Value,
+                            }
+                        ).ToList()
+                    }
+                    ).ToList()
+            }
+            ).ToList();
         }
     }
 }
