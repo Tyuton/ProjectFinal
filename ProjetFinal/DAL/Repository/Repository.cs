@@ -40,6 +40,11 @@ namespace WebScraper.DAL
             throw new NotImplementedException();
         }
 
+        public List<PageContract> GetPageContractById(string queryId)
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Query> getQueryByName(string name)
         {
             throw new NotImplementedException();
@@ -56,6 +61,11 @@ namespace WebScraper.DAL
         }
 
         public List<string> GetResults(Query query)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<SelectorContract> GetSelectorContractById(string pageId)
         {
             throw new NotImplementedException();
         }
@@ -386,7 +396,7 @@ namespace WebScraper.DAL
 
         public List<QueryContract> GetAllQueryContract()
         {
-
+            //int max = 5;
             return dbContext.Queries.Select(qEF =>
             new QueryContract()
             {
@@ -411,6 +421,32 @@ namespace WebScraper.DAL
                     ).ToList()
             }
             ).ToList();
+            //.Take(max).ToList();
+        }
+
+        public List<PageContract> GetPageContractById(string queryId)
+        {
+            Query qEF = dbContext.Queries.Where(q => q.Id.ToString() == queryId).FirstOrDefault();
+            return qEF.Pages.Select(p=> new PageContract()
+            {
+                Id=p.Id,
+                URL=p.URL,
+                Query=null,
+                ListeSelectors= p.Selectors.Select(s=> new SelectorContract() {
+                    Id=s.Id,
+                    Value=s.Value,                    
+                }).ToList()
+            }).ToList();
+        }
+
+        public List<SelectorContract> GetSelectorContractById(string pageId)
+        {
+            Page pEF = dbContext.Pages.Where(p => p.Id.ToString() == pageId).FirstOrDefault();
+            return pEF.Selectors.Select(s => new SelectorContract()
+            {
+                Id = s.Id,
+                Value = s.Value,
+            }).ToList();
         }
     }
 }
