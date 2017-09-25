@@ -1,8 +1,8 @@
-﻿
-@{
-    ViewBag.Title = "Gérer vos requêtes";
-}
+﻿@model IEnumerable<WebScraper.WCF.QueryContract>
 
+@{
+    ViewBag.Title = "Gestion des requêtes";
+}
 @section css{
     <link href="~/Content/Gerer.css" rel="stylesheet" />
 }
@@ -22,6 +22,10 @@
                 <a href="#" class="list-group-item query" name="query">Requete 2</a>
                 <a href="#" class="list-group-item query" name="query">Requete 3</a>
                 <a href="#" class="list-group-item query" name="query">Requete 4</a>*@
+                @foreach (var item in Model)
+                {
+                    <a class="list-group-item query" name="query" id="@item.Id">@item.Name</a>
+                }
             </div>
             <button class="btn btn-primary" id="addQuery">+</button>
         </fieldset>

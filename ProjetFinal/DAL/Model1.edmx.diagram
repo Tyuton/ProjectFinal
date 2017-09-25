@@ -7,8 +7,8 @@
       <Diagram DiagramId="e102932d23834713a66a0a427293418d" Name="Diagram1">
         <EntityTypeShape EntityType="DBWebScrapingModel.Page" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DBWebScrapingModel.Query" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBWebScrapingModel.ResultsDetail" Width="1.5" PointX="12" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="DBWebScrapingModel.ResultsHeader" Width="1.5" PointX="9.125" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWebScrapingModel.ResultsDetail" Width="1.5" PointX="9.625" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBWebScrapingModel.ResultsHeader" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="DBWebScrapingModel.Selector" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="DBWebScrapingModel.FK_dbo_Pages_dbo_Queries_Query_Id" ManuallyRouted="false" />
         <AssociationConnector Association="DBWebScrapingModel.FK_dbo_Selectors_dbo_Pages_Page_Id" ManuallyRouted="false" />
