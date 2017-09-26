@@ -68,7 +68,7 @@ namespace UIL.Controllers
 
             //Method Static
 
-            int i = WebScraperEngine.ExecuteQueryAndSaveResults("test");
+            int i = WebScraperEngine.ExecuteQueryAndSaveResultsById(query.Id.ToString());
 
             if (i == -1)
             {
