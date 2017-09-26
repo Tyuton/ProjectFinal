@@ -284,8 +284,19 @@ $('#Result').on('click', function () {
 
 });
 
-$('#Save').on('click', function () {
+$('#Execute').on('click', function () {
 
+    var query = $('.query');
+    if (query.hasClass('active')) {
+        $.get(
+          "http://localhost:51006/addNewQuery/ExectuteQuery?id=" + query[0].id,
+          function (data) {
+              //data is result of _ListeURL action
+              //... //TODO
+              //$('#Data').html(data)
+              alert(data);
+          });
 
+    }
 
 });

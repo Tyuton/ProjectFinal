@@ -1,4 +1,5 @@
 ﻿using BOL;
+using BOL.Automate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace UIL.Controllers
     public class addNewQueryController : Controller
     {
         List<QueryContract> listRequetes = null;
-        
+
         // GET: addNewQuery
         [HttpGet]
         public ActionResult manageQueries()
@@ -45,7 +46,7 @@ namespace UIL.Controllers
         {
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
-            
+
             var listSelector = service2.GetSelectorContractById(id);
             return PartialView(listSelector);
         }
@@ -62,9 +63,23 @@ namespace UIL.Controllers
 
         public ActionResult ExectuteQuery(QueryContract query)
         {
-            
-            var listResult = WebScraperEngine
-            return PartialView(listResult);
+
+
+
+            //Method Static
+
+            int i = WebScraperEngine.ExecuteQueryAndSaveResults("test");
+
+            if (i == -1)
+            {
+                return PartialView("Erreur : la commande d'exécution a échouée !");
+            }
+            else
+            {
+                return PartialView("Félicitations : la commande d'exécution a réussi !");
+
+            }
+
         }
 
     }
