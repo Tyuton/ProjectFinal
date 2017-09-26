@@ -18,10 +18,6 @@
         <fieldset id="field1">
             <legend>Liste des requêtes</legend>
             <div id="QueryList" class="list-group">
-                @*<a href="#" class="list-group-item query" name="query">Requete 1</a>
-                <a href="#" class="list-group-item query" name="query">Requete 2</a>
-                <a href="#" class="list-group-item query" name="query">Requete 3</a>
-                <a href="#" class="list-group-item query" name="query">Requete 4</a>*@
                 @foreach (var item in Model)
                 {
                     <a class="list-group-item query" name="query" id="@item.Id">@item.Name</a>
@@ -36,10 +32,6 @@
         <fieldset>
             <legend>Liste des URLs associées</legend>
             <div id="UrlList" class="list-group">
-                @*<a href="#" class="list-group-item url" name="url">URL 1</a>
-                <a href="#" class="list-group-item url" name="url">URL 2</a>
-                <a href="#" class="list-group-item url" name="url">URL 3</a>
-                <a href="#" class="list-group-item url" name="url">URL 4</a>*@
             </div>
             <button class="btn btn-primary" id="addURL">+</button>
         </fieldset>
@@ -49,19 +41,15 @@
         <fieldset>
             <legend>Liste des selecteurs associés</legend>
             <div id="SelectorsList" class="list-group">
-                @*<a href="#" class="list-group-item selector" name="selector">Selectors 1</a>
-                <a href="#" class="list-group-item selector" name="selector">Selectors 2</a>
-                <a href="#" class="list-group-item selector" name="selector">Selectors 3</a>
-                <a href="#" class="list-group-item selector" name="selector">Selectors 4</a>*@
             </div>
             <button class="btn btn-primary" id="addSelector">+</button>
         </fieldset>
     </div>
 
-    <div id="DatePeremption" class="container col-lg-3">
+    <div  class="container col-lg-3">
         <fieldset>
-            <legend>Péremption des données</legend>
-            <div>
+            <legend>Aperçu des données</legend>
+            <div id="Data">
 
             </div>
         </fieldset>
@@ -70,10 +58,10 @@
 
 
 <div id="boutons" class="container col-lg-12">
-    <button class="btn btn-primary" id="Execute">Exécuter</button>
+    <button class="btn btn-primary" id="Execute">Exécuter</button> @*TODO Secondaire*@
     <button class="btn btn-primary" id="Save">Enregistrer les modifications</button>
-    <button class="btn btn-primary" id="Delete">Supprimer</button>
-    <button class="btn btn-primary" id="Cancel">Annuler</button>
+    <button class="btn btn-primary" id="Result">Voir les résultats</button>
+    @*<button class="btn btn-primary" id="Cancel">Annuler</button>*@
 </div>
 
 
@@ -81,7 +69,3 @@
     <script src="/Scripts/Gerer.js"></script>
     <script src="/Scripts/Gerer-Ajax.js"></script>
 }
-
-
-
-

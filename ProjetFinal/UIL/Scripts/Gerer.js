@@ -266,3 +266,25 @@ $('#addSelector').on('click', function () {
         }
     });
 });
+
+$('#Result').on('click', function () {
+    var selector = $('.selector active');
+    //var selectorSelected = selector.hasClass('active');
+    alert(selector);
+
+    alert("Id = " + selector.id);
+    //alert("Name = " + selectorSelected.name);
+    //alert("Class = " + selectorSelected.class);
+
+
+});
+    //Appel AJAX
+//    $.get(
+//        "http://localhost:51006/addNewQuery/_DisplayData?id=" + selectorSelected[0].id,        
+//        function (data) {
+//            //data is result of _ListeURL action
+//            //... //TODO
+//            $('#Data').html(data)
+
+//        });
+//});

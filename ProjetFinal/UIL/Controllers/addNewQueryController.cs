@@ -50,6 +50,16 @@ namespace UIL.Controllers
             return PartialView(listSelector);
         }
 
+        public ActionResult _DisplayData(SelectorContract selector)
+        {
+            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
+            IRepositoryService1 service2 = CanalQuery.CreateChannel();
+
+            var listResult = service2.GetSelectorResultsDetails(selector);
+            return PartialView(listResult);
+
+        }
+
 
     }
 }
