@@ -24,10 +24,10 @@ namespace UIL.Controllers
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
-            listRequetes = new List<QueryContract>();
+            //listRequetes = new List<QueryContract>();
             listRequetes = service2.GetAllQueryContract();
-            
-                return View(listRequetes);
+
+            return View(listRequetes);
         }
 
         public ActionResult _ListeURL(string id)
@@ -35,7 +35,7 @@ namespace UIL.Controllers
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
-            listRequetes = new List<QueryContract>();
+            //listRequetes = new List<QueryContract>();
             listRequetes = service2.GetAllQueryContract();
 
             IEnumerable<PageContract> ListUrl = listRequetes.Where(q => q.Id.ToString() == id).Select(q => q.ListePages).ToList().FirstOrDefault();
@@ -52,14 +52,14 @@ namespace UIL.Controllers
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
-            
+
             var listSelector = service2.GetSelectorContractById(id);
             //if (listRequetes == null)
             //    return Content("Pas de selecteurs");
             //else
-                return PartialView(listSelector);
-            
-            
+            return PartialView(listSelector);
+
+
         }
 
         public ActionResult _DisplayData(SelectorContract selector)
@@ -93,12 +93,41 @@ namespace UIL.Controllers
 
         }
 
-        public ActionResult SaveNewQuery(QueryContract query)
+        public ActionResult SaveNewQuery(List<QueryContract> queryList)
         {
+            //make new Guid ids § default values
+            if (queryList != null)
+            foreach (var qc in queryList)
+            {
+                qc.Id = Guid.NewGuid();
+                qc.Description = "Pas de description";
+                qc.DataExpiryDate = DateTime.Now.AddDays(7);
+                qc.DataTimeStamp = DateTime.Now;
+                if(qc.ListePages != null)
+                foreach (var pc in qc.ListePages)
+                {
+                    pc.Id = Guid.NewGuid();
+                    //pc.Query = qc;
+                    if(pc.ListeSelectors != null)
+                    foreach (var sc in pc.ListeSelectors)
+                    {
+                        sc.Id = Guid.NewGuid();
+                        //sc.Page = pc;
+                    }
+                }
+            }
+
+
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
-            return Content("Pas encore implémenté");
+            //TODO make new function on IService like AddNewQueries(qc);        
+            foreach (var qc in queryList)
+            {
+                service2.AddNewQuery(qc);
+            }
+
+            return Content("TODO A tester - Pas encore implémenté");
 
             //query.Id = 
 

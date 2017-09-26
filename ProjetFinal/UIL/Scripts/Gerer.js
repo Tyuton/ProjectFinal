@@ -24,8 +24,6 @@ function myClickQuery() {
                     //... //TODO
                     $('#UrlList').html(data)
                     $('.url').on('click', myClickURL);
-
-
                 });
         }
     }
@@ -87,7 +85,7 @@ $('#addQuery').on('click', function () {
             a.classList.add('list-group-item');
             a.classList.add('query');
             a.classList.add('newquery');
-            a.id = $.guid;
+            a.id = "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa";//$.guid;
             a.name = 'query';
             a.innerText = value;
             a.onclick = myClickQuery;
@@ -184,7 +182,8 @@ $('#addURL').on('click', function () {
             a.classList.add('url');
             a.classList.add('newurl');
             a.name = 'url';
-            a.id = $.guid;
+            a.id = "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";//$.guid;
+            a.setAttribute("query_id", $('.query.active').attr('id'));
             a.innerText = value;
             a.onclick = myClickURL;
             $(t).replaceWith(a);
@@ -268,7 +267,8 @@ $('#addSelector').on('click', function () {
             a.classList.add('selector');
             a.classList.add('newselector');
             a.name = 'selector';
-            a.id = $.guid;
+            a.id = "cccccccc-cccc-cccc-cccc-cccccccccccc";//$.guid;
+            a.setAttribute("url_id", $('.url.active').attr('id'));
             a.innerText = value;
             a.onclick = myClickSelector;
             $(t).replaceWith(a);
@@ -320,39 +320,75 @@ $('#Execute').on('click', function () {
 
 $('#Save').on('click', function () {
 
-    var qjson = {};
-    var ujson = {};
-    var sjson = {};
+    //Note Id of all new Queries id "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+    //Note Id of all new URLs id "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+    //Note Id of all new Selectors id "cccccccc-cccc-cccc-cccc-cccccccccccc"
 
-
-
+    var ListQueriesJson = [];
     var newQuery = $('.newquery');
+    var ListePagesJson = [];
+
     if (newQuery != null)
-    newQuery.each(
-        $('.newurl')
+        newQuery.each(function (index) {
+            var qid = newQuery[index].id;
+            var newUrls = $('.newurl');
+            newUrls.each(function (index2) {
+                //make urls
+                var uid = $(this).attr('id');
+                var uqid = $(this).attr('query_id');
+                if (uqid === qid) {
+                    var ListeSelectorsJson = [];
+                    var newSelectors = $('.newselector');
+                    newSelectors.each(function (index3) {
+                        //make selectors
+                        var suid = $(this).attr('url_id');
+                        if (suid === uid) {
+                            var sjson = {
+                                'Value': $(this).text(),
+                                'url_id': suid
+                            };
+                            ListeSelectorsJson.push(sjson);
+                        }
+                    });
+
+                    var ujson = {
+                        'Id': uid,
+                        'query_id': $(this).attr('query_id'),
+                        'ListeSelectors': ListeSelectorsJson
+                    };
+
+                    ListePagesJson.push(ujson);
+                }
+            });
+
+            var qjson = {
+                'Id': newQuery[index].id,
+                'Name': newQuery[index].text,
+                'ListePages': ListePagesJson
+            };
 
 
-        );
+            ListQueriesJson.push(qjson);
+        });
 
 
-    var newURL = $('.newurl');
-    var newSelector = $('.newselector');
-    if (newQuery.length > 0) {
-        $.get(
-            "http://localhost:51006/addNewQuery/SaveNewQuery?Qid="
-            + newQuery[0].id + "&QName=" + newQuery[0].text
-            + "Uid=" + newURL[0].id + "&UName=" + newURL[0].text
-            + "Sid=" + newSelector[0].id + "&SName=" + newSelector[0].text,
-            function NewSelectorJS(id, value) {
-                this.id = newSelector.id,
-                this.value = newSelector.text
-            }
-            //function NewPageJS (id, URL, ListeSelectors) {
-            //    this.id = newURL.id,
-            //    this.URL = newURL.text
-            //    this.ListeSelectors = 
-            //}
-            )
+    if (ListQueriesJson.length > 0) {
+        var jsonData = JSON.stringify(ListQueriesJson);
+        $.ajax({
+            url: 'http://localhost:51006/addNewQuery/SaveNewQuery',
+            type: 'POST',
+            data: jsonData,
+            dataType: 'json',
+            contentType: 'application/json; charset=utf-8',
+            success: function (data, status) {
+                alert('ajax return ');
+            },
+            error: function (resulatat, status) {
+                alert('ajax error');
+            },
+            complete: alert('ajax complete')
+        });
+
     }
     alert("En cours d'implémentation");
 
