@@ -469,26 +469,29 @@ namespace WebScraper.DAL
                 foreach (var sEF in pEF.Selectors)
                 {
                     var rhl = dbContext.ResultsHeaders.Where(rh => rh.Selector_Id == sEF.Id).FirstOrDefault();
+                    if (rhl != null)
+                    { 
                     // order results                     
                     var rdl = rhl.ResultsDetails
                                 .OrderBy(rd => rd.CLEF.Split('_')[0])
                                 .OrderBy(rd => rd.CLEF.Split('_')[1])
                                 .ToList();
 
-                    for (int i = 0; i < rdl.Count/7; i+=7)
+                    for (int i = 0; i < rdl.Count; i += 7)
                     {
                         var m = new Match();
 
                         m.Locaux = rdl[i + 0].Value;
                         m.Visiteurs = rdl[i + 1].Value;
                         // phase rdl[i + 2].Value;
-                        m.CalendrierMatch = new Calendrier() { CalendrierId=0, DateJournee=Convert.ToDateTime(rdl[i + 3].Value) };
-                        m.HeureMatch= Convert.ToDateTime(rdl[i + 4].Value);                        
-                        m.NiveauMatch = rdl[i + 5].Value;
-                        // score ? rdl[i + 6].Value;
+                        m.CalendrierMatch = new Calendrier() { CalendrierId = 0, DateJournee = Convert.ToDateTime(rdl[i + 3].Value) };
+                        m.HeureMatch = Convert.ToDateTime(rdl[i + 4].Value.Replace('h',':'));
+                        m.NiveauMatch = rdl[i + 2].Value;
+                        // score ? rdl[i + 6].Value;                        
 
                         LM.Add(m);
                     }
+                }
                 }
             }
 

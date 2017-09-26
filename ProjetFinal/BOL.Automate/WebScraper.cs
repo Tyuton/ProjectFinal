@@ -30,24 +30,25 @@ namespace BOL.Automate
                 })
             };
             var s = p.ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
+                //new SelectorContract()
+                //{
+                //    Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
+                //                return $(row).find('td').get().map(function(cell) {
+                //                    return $(cell).html();
+                //                    });
+                //                });",
+                //                Id= Guid.NewGuid(),
+                //                //Page=p //pb de cycle
+                //},
+                //new SelectorContract() // click buton 2
+                //{
+                //    Value=@"$('#DataTables_Table_1_next').click(); return null;",
+                //    Id=Guid.NewGuid(),
+                //},
                 new SelectorContract()
                 {
-                    Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
-                                return $(row).find('td').get().map(function(cell) {
-                                    return $(cell).html();
-                                    });
-                                });",
-                                Id= Guid.NewGuid(),
-                                //Page=p //pb de cycle
-                },
-                new SelectorContract() // click buton 2
-                {
-                    Value=@"$('#DataTables_Table_1_next').click(); return null;",
-                    Id=Guid.NewGuid(),
-                },
-                new SelectorContract()
-                {
-                    Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
+                    Value = @"$('#DataTables_Table_1_next').click();
+                              return $('table#DataTables_Table_1 tr').get().map(function(row) {
                                 return $(row).find('td').get().map(function(cell) {
                                     return $(cell).html();
                                     });
@@ -98,7 +99,7 @@ namespace BOL.Automate
                                 // init Results Contract objects
                                 RHC = new ResultsHeaderContract(sc);
                                 // TODO save results into repository (update 22/09/2017)
-                                string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Club local", "Club visiteur", "Score" };
+                                string[] tempKEYS = new string[] { "Date", "Heure", "Compétition", "Phase", "Terrain", "Club local", "Club visiteur" };
                                 //TODO autofill tempKEYS
                                 int rowIndex = 0;
                                 if (seleniumResult != null)
@@ -147,27 +148,29 @@ namespace BOL.Automate
         //private void InitWCF()
         static int Main(string[] args)
         {
-            //TestArbitreService();
-            //return -1;
-
             // Client WCF
             ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 serv2 = Canal2.CreateChannel();
 
-            QueryContract q = null;
+            //QueryContract q = null;
             //q = GetQueryContractByNameFake();
             //serv2.AddNewQuery(q);
-            //return -1;
+            ////return -1;
 
-            //serv2.DeleteQuery(q);
 
-            var i = ExecuteQueryAndSaveResults("Arbitres");
-            var ql = serv2.GetAllQueryContract();
-            var v2 = serv2.GetPageContractById(ql[0].Id.ToString());
-            var v3 = serv2.GetSelectorContractById(ql[0].ListePages[0].Id.ToString());
-            Console.WriteLine("ExecuteQueryAndSaveResults...");
-            Console.Read();
-            return 1;
+            ////serv2.DeleteQuery(q);
+
+            //var i = ExecuteQueryAndSaveResults("Arbitres");
+            //var ql = serv2.GetAllQueryContract();
+            //var v2 = serv2.GetPageContractById(ql[0].Id.ToString());
+            //var v3 = serv2.GetSelectorContractById(ql[0].ListePages[0].Id.ToString());
+            //Console.WriteLine("ExecuteQueryAndSaveResults...");
+            //Console.Read();
+            //return 1;
+
+
+            TestArbitreService();
+            return -1;
 
         }
 
