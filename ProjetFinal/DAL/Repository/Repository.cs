@@ -7,127 +7,127 @@ using WebScraper.WCF;
 
 namespace WebScraper.DAL
 {
-    public class RepositoryOLD2 : IRepository
-    {
-        public bool AddNewQuery(QueryContract query)
-        {
-            return false; // throw new NotImplementedException();
-        }
+    //public class RepositoryOLD2 : IRepository
+    //{
+    //    public bool AddNewQuery(QueryContract query)
+    //    {
+    //        return false; // throw new NotImplementedException();
+    //    }
 
-        public bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp)
-        {
-            throw new NotImplementedException();
-        }
+    //    public bool AddNewQuery(string name, string description, string url, string script, DateTime expiry, DateTime timestamp)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public bool CheckExistingQuery(Query query)
-        {
-            throw new NotImplementedException();
-        }
+    //    public bool CheckExistingQuery(Query query)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public void DeleteQuery(QueryContract query)
-        {
+    //    public void DeleteQuery(QueryContract query)
+    //    {
 
 
-        }
+    //    }
 
-        public List<Match> GetAllMatchsByQueryName(string queryName)
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<Match> GetAllMatchsByQueryName(string queryName)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<Query> getAllQuery()
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<Query> getAllQuery()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<QueryContract> GetAllQueryContract()
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<QueryContract> GetAllQueryContract()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<PageContract> GetPageContractById(string queryId)
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<PageContract> GetPageContractById(string queryId)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<Query> getQueryByName(string name)
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<Query> getQueryByName(string name)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public QueryContract GetQueryContractByName(string queryName)
-        {
-            throw new NotImplementedException();
-        }
+    //    public QueryContract GetQueryContractByName(string queryName)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public ResultsHeaderContract GetQueryResults(QueryContract query)
-        {
-            throw new NotImplementedException();
-        }
+    //    public ResultsHeaderContract GetQueryResults(QueryContract query)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<string> GetResults(Query query)
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<string> GetResults(Query query)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<SelectorContract> GetSelectorContractById(string pageId)
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<SelectorContract> GetSelectorContractById(string pageId)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public ResultsHeaderContract GetSelectorResults(SelectorContract selector)
-        {
-            throw new NotImplementedException();
-        }
+    //    public ResultsHeaderContract GetSelectorResults(SelectorContract selector)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector)
-        {
-            throw new NotImplementedException();
-        }
+    //    public List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public void ModifyQuery(Query query)
-        {
-            throw new NotImplementedException();
-        }
+    //    public void ModifyQuery(Query query)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
-        {
-            Console.WriteLine("Repo");
-            ResultsHeader rh = new ResultsHeader()
-            {
-                Id = rHC.Id, //Guid.NewGuid();
-                QueryExecutionDate = rHC.QueryExecutionDate,
-                Selector = null, // selector?
-                Selector_Id = rHC.Selector.Id
-            };
-            rh.ResultsDetails = listRDC.Select(item => //dbContext.ResultsDetails
-                new ResultsDetail()
-                {
-                    Id = item.Id,
-                    CLEF = item.CLEF,
-                    Value = item.Value,
-                    ResultsHeader_Id = rh.Id,
-                    ResultsHeader = rh
-                }).ToList();
+    //    public int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC)
+    //    {
+    //        Console.WriteLine("Repo");
+    //        ResultsHeader rh = new ResultsHeader()
+    //        {
+    //            Id = rHC.Id, //Guid.NewGuid();
+    //            QueryExecutionDate = rHC.QueryExecutionDate,
+    //            Selector = null, // selector?
+    //            Selector_Id = rHC.Selector.Id
+    //        };
+    //        rh.ResultsDetails = listRDC.Select(item => //dbContext.ResultsDetails
+    //            new ResultsDetail()
+    //            {
+    //                Id = item.Id,
+    //                CLEF = item.CLEF,
+    //                Value = item.Value,
+    //                ResultsHeader_Id = rh.Id,
+    //                ResultsHeader = rh
+    //            }).ToList();
 
-            //dbContext.ResultsHeaders.Add(rh);
-            //dbContext.ResultsDetails.Add(rh.ResultsDetails); done with linq
-            //dbContext.SaveChanges();
+    //        //dbContext.ResultsHeaders.Add(rh);
+    //        //dbContext.ResultsDetails.Add(rh.ResultsDetails); done with linq
+    //        //dbContext.SaveChanges();
 
-            return -1;
+    //        return -1;
 
-        }
+    //    }
 
-        public void SetResults(Query query, string scrapingResults)
-        {
-            throw new NotImplementedException();
-        }
+    //    public void SetResults(Query query, string scrapingResults)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
 
-        public string TestServer()
-        {
-            throw new NotImplementedException();
-        }
-    }
+    //    public string TestServer()
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 
     public class Repository : IRepository
     {
@@ -497,5 +497,7 @@ namespace WebScraper.DAL
 
             return LM;
         }
+
+
     }
 }

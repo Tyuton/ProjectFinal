@@ -9,7 +9,7 @@ using WebScraper.WCF;
 namespace BOL.Automate
 {
     // Selenuim version
-    public class WebScraperEngine
+    public static class WebScraperEngine
     {
         private static QueryContract GetQueryContractByNameFake()
         {

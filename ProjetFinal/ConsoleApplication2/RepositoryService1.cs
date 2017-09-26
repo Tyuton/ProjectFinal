@@ -22,6 +22,12 @@ namespace WebScraper.WCF
             rep.DeleteQuery(q);
         }
 
+        public bool ExecuteQueryByName(string queryName)
+        {
+            
+
+        }
+
         public List<QueryContract> GetAllQueryContract()
         {
             return rep.GetAllQueryContract();
