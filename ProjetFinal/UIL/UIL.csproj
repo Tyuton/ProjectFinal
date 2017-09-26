@@ -261,6 +261,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BOL.Automate\BOL.Automate.csproj">
+      <Project>{1c5d8484-81cd-4ec4-9fa1-de13fb4e165e}</Project>
+      <Name>BOL.Automate</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BOL\BOL.csproj">
       <Project>{fc4c6196-0f26-4014-8a9e-37b60aba8e89}</Project>
       <Name>BOL</Name>

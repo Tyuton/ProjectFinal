@@ -15,7 +15,7 @@ function myClickQuery() {
             $('#glyphicon').remove();
             $(this).toggleClass('active');
             $(this).append('<div id="glyphicon" class="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>');
-           // alert($this[0].id);
+            // alert($this[0].id);
             //Appel AJAX
             $.get(
                 "http://localhost:51006/addNewQuery/_ListeURL?id=" + $this[0].id,
@@ -268,23 +268,24 @@ $('#addSelector').on('click', function () {
 });
 
 $('#Result').on('click', function () {
-    var selector = $('.selector active');
-    //var selectorSelected = selector.hasClass('active');
-    alert(selector);
+    var selector = $('.selector');
+    if (selector.hasClass('active')) {
+//Appel AJAX
+    $.get(
+        "http://localhost:51006/addNewQuery/_DisplayData?id=" + selector[0].id,
+        function (data) {
+            //data is result of _ListeURL action
+            //... //TODO
+            $('#Data').html(data)
 
-    alert("Id = " + selector.id);
-    //alert("Name = " + selectorSelected.name);
-    //alert("Class = " + selectorSelected.class);
+        });
+
+    }
+
+});
+
+$('#Save').on('click', function () {
+
 
 
 });
-    //Appel AJAX
-//    $.get(
-//        "http://localhost:51006/addNewQuery/_DisplayData?id=" + selectorSelected[0].id,        
-//        function (data) {
-//            //data is result of _ListeURL action
-//            //... //TODO
-//            $('#Data').html(data)
-
-//        });
-//});

@@ -60,6 +60,12 @@ namespace UIL.Controllers
 
         }
 
+        public ActionResult ExectuteQuery(QueryContract query)
+        {
+            
+            var listResult = WebScraperEngine
+            return PartialView(listResult);
+        }
 
     }
 }

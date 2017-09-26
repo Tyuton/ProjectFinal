@@ -1,8 +1,19 @@
 ﻿@*@model IEnumerable<WebScraper.WCF.SelectorContract>*@
-@model IEnumerable<>
+@model IEnumerable<WebScraper.WCF.ResultsDetailContract>
 
-@foreach (var item in Model)
-{
-    @*<a class="list-group-item selector" name="selector" id="@item.Id">@item.Value</a>*@
-}
+<table style="margin:5px; stroke:black">
+    <tr>
+    <th>Clef</th>
+    <th>Valeur</th>
+    </tr>
+     
+    @for (int i = 0; i < 20; i++)
+    {
+        var item = Model.ToList()[i];
+        <tr>
+            <td>@item.CLEF</td>
+            <td>@item.Value</td>
+        </tr>
+    }
+</table>
 <script src="~/Scripts/Gerer.js"></script>
