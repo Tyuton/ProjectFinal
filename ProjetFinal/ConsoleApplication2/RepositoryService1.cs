@@ -24,8 +24,7 @@ namespace WebScraper.WCF
 
         public bool ExecuteQueryByName(string queryName)
         {
-            
-
+            throw new NotImplementedException();
         }
 
         public List<QueryContract> GetAllQueryContract()
@@ -36,6 +35,11 @@ namespace WebScraper.WCF
         public List<PageContract> GetPageContractById(string QueryId)
         {
             return rep.GetPageContractById(QueryId);
+        }
+
+        public QueryContract GetQueryContractById(string queryId)
+        {
+            return rep.GetQueryContractById(queryId);
         }
 
         public QueryContract GetQueryContractByName(string queryName)

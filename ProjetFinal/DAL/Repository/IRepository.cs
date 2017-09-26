@@ -31,6 +31,8 @@ namespace WebScraper.DAL
         bool CheckExistingQuery(Query query);
         //get results details
         List<string> GetResults(Query query);
+        QueryContract GetQueryContractById(string queryId);
+        
         int SaveResults(ResultsHeaderContract rHC, List<ResultsDetailContract> listRDC);
         void SetResults(Query query, string scrapingResults);
         ResultsHeaderContract GetSelectorResults(SelectorContract selector);

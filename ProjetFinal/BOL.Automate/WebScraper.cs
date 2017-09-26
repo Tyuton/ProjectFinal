@@ -60,7 +60,18 @@ namespace BOL.Automate
             return q;
         }
         // return -1 if error
-        public static int ExecuteQueryAndSaveResults(string QueryName)
+        public static int ExecuteQueryAndSaveResultsById(string QueryId)
+        {            
+            // Client WCF
+            ChannelFactory<IRepositoryService1> Canal2 = new ChannelFactory<IRepositoryService1>("Canal2");
+            IRepositoryService1 service2 = Canal2.CreateChannel();
+            // Get QueryContract
+            QueryContract qc = service2.GetQueryContractById(QueryId);      
+            ExecuteQueryAndSaveResultsByName(qc.Name);
+            return 1;
+        }
+        // return -1 if error
+        public static int ExecuteQueryAndSaveResultsByName(string QueryName)
         {
             //TODO use lock variables/list of locks 
             // Client WCF

@@ -498,6 +498,10 @@ namespace WebScraper.DAL
             return LM;
         }
 
+        public QueryContract GetQueryContractById(string queryId)
+        {
+            return dbContext.Queries.Where(q => q.Id.ToString() == queryId).Select(q => new QueryContract() { Name = q.Name, Id=q.Id }).SingleOrDefault();            
+        }
 
     }
 }
