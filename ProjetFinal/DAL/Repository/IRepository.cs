@@ -21,6 +21,7 @@ namespace WebScraper.DAL
         List<Query> getQueryByName(string name);
 
         List<Query> getAllQuery();
+        
         QueryContract GetQueryContractByName(string queryName);
         List<QueryContract> GetAllQueryContract();
         void ModifyQuery(Query query);

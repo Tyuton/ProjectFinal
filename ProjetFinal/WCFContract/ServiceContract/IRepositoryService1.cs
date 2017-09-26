@@ -30,6 +30,9 @@ namespace WebScraper.WCF
         List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector);
         [OperationContract]
         void DeleteQuery(QueryContract q);
+        [OperationContract]
+        bool ExecuteQueryByName(string queryName);
+
     }
 }
 
