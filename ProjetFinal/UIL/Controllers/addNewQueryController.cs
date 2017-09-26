@@ -20,7 +20,7 @@ namespace UIL.Controllers
         {
             //TODO use lock variables/list of locks 
             // Client WCF
-            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
+            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
             listRequetes = new List<QueryContract>();
@@ -31,7 +31,7 @@ namespace UIL.Controllers
 
         public ActionResult _ListeURL(string id)
         {
-            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
+            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
             listRequetes = new List<QueryContract>();
@@ -44,7 +44,7 @@ namespace UIL.Controllers
 
         public ActionResult _ListeSelector(string id)
         {
-            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
+            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
             var listSelector = service2.GetSelectorContractById(id);
@@ -53,7 +53,7 @@ namespace UIL.Controllers
 
         public ActionResult _DisplayData(SelectorContract selector)
         {
-            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("CanalQuery");
+            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
             var listResult = service2.GetSelectorResultsDetails(selector);
@@ -63,22 +63,24 @@ namespace UIL.Controllers
 
         public ActionResult ExectuteQuery(QueryContract query)
         {
-
-
-
             //Method Static
 
             int i = WebScraperEngine.ExecuteQueryAndSaveResultsById(query.Id.ToString());
 
             if (i == -1)
             {
-                return PartialView("Erreur : la commande d'exécution a échouée !");
+                return Content("Erreur : la commande d'exécution a échouée !");
             }
             else
             {
-                return PartialView("Félicitations : la commande d'exécution a réussi !");
+                return Content("Félicitations : la commande d'exécution a réussi !");
 
             }
+
+        }
+
+        public ActionResult SaveNewQuery()
+        {
 
         }
 

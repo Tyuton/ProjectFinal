@@ -23,6 +23,8 @@ function myClickQuery() {
                     //data is result of _ListeURL action
                     //... //TODO
                     $('#UrlList').html(data)
+                    $('.url').on('click', myClickURL);
+
 
                 });
         }
@@ -117,6 +119,7 @@ function myClickURL() {
                     //data is result of _ListeURL action
                     //... //TODO
                     $('#SelectorsList').html(data)
+                    $('.selector').on('click', myClickSelector);
 
                 });
 
@@ -268,8 +271,9 @@ $('#addSelector').on('click', function () {
 });
 
 $('#Result').on('click', function () {
-    var selector = $('.selector');
-    if (selector.hasClass('active')) {
+    var selector = $('.selector.active');
+    if (selector.length > 0) {
+        alert('étrange');
 //Appel AJAX
     $.get(
         "http://localhost:51006/addNewQuery/_DisplayData?id=" + selector[0].id,
@@ -281,13 +285,15 @@ $('#Result').on('click', function () {
         });
 
     }
-
+    else {
+        alert("Aucun sélecteur n'est sélectionné");
+    }
 });
 
 $('#Execute').on('click', function () {
 
-    var query = $('.query');
-    if (query.hasClass('active')) {
+    var query = $('.query.active');
+    if (query.length > 0) {
         $.get(
           "http://localhost:51006/addNewQuery/ExectuteQuery?id=" + query[0].id,
           function (data) {
@@ -295,8 +301,19 @@ $('#Execute').on('click', function () {
               //... //TODO
               //$('#Data').html(data)
               alert(data);
+          }).fail(function (a, b, c) {
+              alert('Error');
           });
 
     }
+    else {
+        alert("Aucune requête n'est sélectionnée");
+    }
+
+});
+
+$('#Save').on('click', function () {
+
+   
 
 });

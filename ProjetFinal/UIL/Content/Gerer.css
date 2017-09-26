@@ -11,7 +11,7 @@
     justify-content: center;
 }
 
-#Execute, #Save, #Cancel, #Delete {
+#Execute, #Save, #Result, #Delete {
     margin: 10px;
 }
 
