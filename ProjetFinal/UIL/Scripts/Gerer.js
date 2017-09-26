@@ -86,6 +86,7 @@ $('#addQuery').on('click', function () {
             var a = document.createElement('a');
             a.classList.add('list-group-item');
             a.classList.add('query');
+            a.classList.add('newquery');
             a.name = 'query';
             a.innerText = value;
             a.onclick = myClickQuery;
@@ -180,6 +181,7 @@ $('#addURL').on('click', function () {
             var a = document.createElement('a');
             a.classList.add('list-group-item');
             a.classList.add('url');
+            a.classList.add('newurl');
             a.name = 'url';
             a.innerText = value;
             a.onclick = myClickURL;
@@ -209,7 +211,7 @@ function myClickSelector() {
         }
     }
 
-    //Clic sur le glyphicon rouage : modifier le nom de l'URL
+    //Clic sur le glyphicon rouage : modifier le nom du selector
     $('#span2').on('click', function () {
         $this.empty();
 
@@ -238,14 +240,14 @@ function myClickSelector() {
         });
     });
 
-    //Clic sur glyphicon poubelle : supprimmer la URL
+    //Clic sur glyphicon poubelle : supprimmer le selecteur
     $('#span1').on('click', function () {
 
         $('#SelectorsList .active').remove();
     });
 }
 
-//clic bouton : ajouter une nouvelle url
+//clic bouton : ajouter un nouveau selecteur
 $('#addSelector').on('click', function () {
     var liste = $('#SelectorsList');
     var t = document.createElement('textarea');
@@ -262,6 +264,7 @@ $('#addSelector').on('click', function () {
             var a = document.createElement('a');
             a.classList.add('list-group-item');
             a.classList.add('selector');
+            a.classList.add('newselector');
             a.name = 'selector';
             a.innerText = value;
             a.onclick = myClickSelector;
@@ -274,15 +277,15 @@ $('#Result').on('click', function () {
     var selector = $('.selector.active');
     if (selector.length > 0) {
         alert('étrange');
-//Appel AJAX
-    $.get(
-        "http://localhost:51006/addNewQuery/_DisplayData?id=" + selector[0].id,
-        function (data) {
-            //data is result of _ListeURL action
-            //... //TODO
-            $('#Data').html(data)
+        //Appel AJAX
+        $.get(
+            "http://localhost:51006/addNewQuery/_DisplayData?id=" + selector[0].id,
+            function (data) {
+                //data is result of _ListeURL action
+                //... //TODO
+                $('#Data').html(data)
 
-        });
+            });
 
     }
     else {
@@ -313,7 +316,27 @@ $('#Execute').on('click', function () {
 });
 
 $('#Save').on('click', function () {
+    //var newQuery = $('.newquery');
+    //var newURL = $('.newurl');
+    //var newSelector = $('.newselector');
+    //if (newQuery.length > 0) {
+    //    $.get(
+    //        "http://localhost:51006/addNewQuery/SaveNewQuery?Qid="
+    //        + newQuery[0].id + "&QName=" + newQuery[0].text
+    //        + "Uid=" + newURL[0].id + "&UName=" + newURL[0].text
+    //        + "Sid=" + newSelector[0].id + "&SName=" + newSelector[0].text,
+    //        function NewSelectorJS(id, value) {
+    //            this.id = newSelector.id,
+    //            this.value = newSelector.text
+    //        }
+    //        function NewPageJS (id, URL, ListeSelectors) {
+    //            this.id = newURL.id,
+    //            this.URL = newURL.text
+    //            this.ListeSelectors = 
+    //        }
+    //        )
+    //}
 
-   
 
+    
 });

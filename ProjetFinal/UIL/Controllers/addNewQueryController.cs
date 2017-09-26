@@ -3,6 +3,7 @@ using BOL.Automate;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
@@ -47,8 +48,15 @@ namespace UIL.Controllers
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
+            if (id != "")
+            {
             var listSelector = service2.GetSelectorContractById(id);
-            return PartialView(listSelector);
+                return PartialView(listSelector);
+            }
+            else
+            {
+                return null;
+            }
         }
 
         public ActionResult _DisplayData(SelectorContract selector)
@@ -79,9 +87,16 @@ namespace UIL.Controllers
 
         }
 
-        public ActionResult SaveNewQuery()
+        public ActionResult SaveNewQuery(QueryContract query)
         {
+            ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
+            IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
+            return Content("test");
+
+            //query.Id = 
+
+            //service2.AddNewQuery()
         }
 
     }

@@ -18,10 +18,13 @@
         <fieldset id="field1">
             <legend>Liste des requêtes</legend>
             <div id="QueryList" class="list-group">
+
+
                 @foreach (var item in Model)
                 {
                     <a class="list-group-item query" name="query" id="@item.Id">@item.Name</a>
                 }
+
             </div>
             <button class="btn btn-primary" id="addQuery">+</button>
         </fieldset>
