@@ -92,7 +92,7 @@ namespace UIL.Controllers
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
-            return Content("test");
+            return Content("Pas encore implémenté");
 
             //query.Id = 
 
