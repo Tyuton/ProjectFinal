@@ -15,7 +15,7 @@ namespace BOL.Automate
         {
             var q = new QueryContract()
             {
-                Name = "Arbitres",
+                Name = "Arbitres3",
                 Description = "FFR Arbitres",
                 Id = Guid.NewGuid(),
                 DataExpiryDate = DateTime.Now,
@@ -30,16 +30,16 @@ namespace BOL.Automate
                 })
             };
             var s = p.ListeSelectors = new System.Collections.Generic.List<SelectorContract>() {
-                //new SelectorContract()
-                //{
-                //    Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
-                //                return $(row).find('td').get().map(function(cell) {
-                //                    return $(cell).html();
-                //                    });
-                //                });",
-                //                Id= Guid.NewGuid(),
-                //                //Page=p //pb de cycle
-                //},
+                new SelectorContract()
+                {
+                    Value = @"return $('table#DataTables_Table_1 tr').get().map(function(row) {
+                                return $(row).find('td').get().map(function(cell) {
+                                    return $(cell).html();
+                                    });
+                                });",
+                                Id= Guid.NewGuid(),
+                                //Page=p //pb de cycle
+                },
                 //new SelectorContract() // click buton 2
                 //{
                 //    Value=@"$('#DataTables_Table_1_next').click(); return null;",
@@ -166,12 +166,12 @@ namespace BOL.Automate
             //QueryContract q = null;
             //q = GetQueryContractByNameFake();
             //serv2.AddNewQuery(q);
-            ////return -1;
+            //return -1;
 
 
             ////serv2.DeleteQuery(q);
 
-            //var i = ExecuteQueryAndSaveResults("Arbitres");
+            var i = ExecuteQueryAndSaveResultsByName("Arbitres3");
             //var ql = serv2.GetAllQueryContract();
             //var v2 = serv2.GetPageContractById(ql[0].Id.ToString());
             //var v3 = serv2.GetSelectorContractById(ql[0].ListePages[0].Id.ToString());

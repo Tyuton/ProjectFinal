@@ -26,8 +26,8 @@ namespace UIL.Controllers
 
             listRequetes = new List<QueryContract>();
             listRequetes = service2.GetAllQueryContract();
-
-            return View(listRequetes);
+            
+                return View(listRequetes);
         }
 
         public ActionResult _ListeURL(string id)
@@ -39,7 +39,11 @@ namespace UIL.Controllers
             listRequetes = service2.GetAllQueryContract();
 
             IEnumerable<PageContract> ListUrl = listRequetes.Where(q => q.Id.ToString() == id).Select(q => q.ListePages).ToList().FirstOrDefault();
-            return PartialView(ListUrl);
+
+            if (ListUrl == null)
+                return Content("Pas d'url");
+            else
+                return PartialView(ListUrl);
         }
 
 
@@ -48,15 +52,14 @@ namespace UIL.Controllers
             ChannelFactory<IRepositoryService1> CanalQuery = new ChannelFactory<IRepositoryService1>("Canal2");
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
-            if (id != "")
-            {
+            
             var listSelector = service2.GetSelectorContractById(id);
+            //if (listRequetes == null)
+            //    return Content("Pas de selecteurs");
+            //else
                 return PartialView(listSelector);
-            }
-            else
-            {
-                return null;
-            }
+            
+            
         }
 
         public ActionResult _DisplayData(SelectorContract selector)
@@ -65,7 +68,10 @@ namespace UIL.Controllers
             IRepositoryService1 service2 = CanalQuery.CreateChannel();
 
             var listResult = service2.GetSelectorResultsDetails(selector);
-            return PartialView(listResult);
+            if (listResult == null)
+                return Content("Pas de résultats");
+            else
+                return PartialView(listResult);
 
         }
 

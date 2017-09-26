@@ -447,6 +447,8 @@ namespace WebScraper.DAL
         public List<SelectorContract> GetSelectorContractById(string pageId)
         {
             Page pEF = dbContext.Pages.Where(p => p.Id.ToString() == pageId).FirstOrDefault();
+            if (pEF == null) return null;
+
             return pEF.Selectors.Select(s => new SelectorContract()
             {
                 Id = s.Id,

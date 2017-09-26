@@ -87,6 +87,7 @@ $('#addQuery').on('click', function () {
             a.classList.add('list-group-item');
             a.classList.add('query');
             a.classList.add('newquery');
+            a.id = $.guid;
             a.name = 'query';
             a.innerText = value;
             a.onclick = myClickQuery;
@@ -183,6 +184,7 @@ $('#addURL').on('click', function () {
             a.classList.add('url');
             a.classList.add('newurl');
             a.name = 'url';
+            a.id = $.guid;
             a.innerText = value;
             a.onclick = myClickURL;
             $(t).replaceWith(a);
@@ -203,7 +205,7 @@ function myClickSelector() {
         }
             //remove active et les glyphicon de la sélection précédente avant de l'ajouter à la sélection actuelle
         else {
-            $('.SelectorsList > a').removeClass('active');
+            $('#SelectorsList > a').removeClass('active');
             $('#glyphicon').remove();
             $this.toggleClass('active');
             $this.append('<div id="glyphicon" class="glyphicon"><span id="span1" class="glyphicon glyphicon-trash"></span><span id="span2" class="glyphicon glyphicon-cog"></span></div>');
@@ -266,6 +268,7 @@ $('#addSelector').on('click', function () {
             a.classList.add('selector');
             a.classList.add('newselector');
             a.name = 'selector';
+            a.id = $.guid;
             a.innerText = value;
             a.onclick = myClickSelector;
             $(t).replaceWith(a);
@@ -316,27 +319,44 @@ $('#Execute').on('click', function () {
 });
 
 $('#Save').on('click', function () {
-    //var newQuery = $('.newquery');
-    //var newURL = $('.newurl');
-    //var newSelector = $('.newselector');
-    //if (newQuery.length > 0) {
-    //    $.get(
-    //        "http://localhost:51006/addNewQuery/SaveNewQuery?Qid="
-    //        + newQuery[0].id + "&QName=" + newQuery[0].text
-    //        + "Uid=" + newURL[0].id + "&UName=" + newURL[0].text
-    //        + "Sid=" + newSelector[0].id + "&SName=" + newSelector[0].text,
-    //        function NewSelectorJS(id, value) {
-    //            this.id = newSelector.id,
-    //            this.value = newSelector.text
-    //        }
-    //        function NewPageJS (id, URL, ListeSelectors) {
-    //            this.id = newURL.id,
-    //            this.URL = newURL.text
-    //            this.ListeSelectors = 
-    //        }
-    //        )
-    //}
+
+    var qjson = {};
+    var ujson = {};
+    var sjson = {};
+
+
+
+    var newQuery = $('.newquery');
+    if (newQuery != null)
+    newQuery.each(
+        $('.newurl')
+
+
+        );
+
+
+    var newURL = $('.newurl');
+    var newSelector = $('.newselector');
+    if (newQuery.length > 0) {
+        $.get(
+            "http://localhost:51006/addNewQuery/SaveNewQuery?Qid="
+            + newQuery[0].id + "&QName=" + newQuery[0].text
+            + "Uid=" + newURL[0].id + "&UName=" + newURL[0].text
+            + "Sid=" + newSelector[0].id + "&SName=" + newSelector[0].text,
+            function NewSelectorJS(id, value) {
+                this.id = newSelector.id,
+                this.value = newSelector.text
+            }
+            //function NewPageJS (id, URL, ListeSelectors) {
+            //    this.id = newURL.id,
+            //    this.URL = newURL.text
+            //    this.ListeSelectors = 
+            //}
+            )
+    }
     alert("En cours d'implémentation");
 
-    
+
+
+
 });
