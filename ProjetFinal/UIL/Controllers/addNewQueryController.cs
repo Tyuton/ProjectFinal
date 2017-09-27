@@ -54,10 +54,10 @@ namespace UIL.Controllers
 
 
             var listSelector = service2.GetSelectorContractById(id);
-            //if (listRequetes == null)
-            //    return Content("Pas de selecteurs");
-            //else
-            return PartialView(listSelector);
+            if (listSelector == null)
+                return Content("Pas de selecteurs");
+            else
+                return PartialView(listSelector);
 
 
         }
@@ -78,9 +78,7 @@ namespace UIL.Controllers
         public ActionResult ExectuteQuery(QueryContract query)
         {
             //Method Static
-
             int i = WebScraperEngine.ExecuteQueryAndSaveResultsById(query.Id.ToString());
-
             if (i == -1)
             {
                 return Content("Erreur : la commande d'exécution a échouée !");
@@ -88,9 +86,7 @@ namespace UIL.Controllers
             else
             {
                 return Content("Félicitations : la commande d'exécution a réussi !");
-
             }
-
         }
 
         public ActionResult SaveNewQuery(List<QueryContract> queryList)
@@ -127,7 +123,7 @@ namespace UIL.Controllers
                 service2.AddNewQuery(qc);
             }
 
-            return Content("TODO A tester - Pas encore implémenté");
+            return Content("Requêtes enregistrées");
 
             //query.Id = 
 

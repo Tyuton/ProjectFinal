@@ -373,6 +373,7 @@ namespace WebScraper.DAL
                 return null;
 
             ResultsHeader rhEF = dbContext.ResultsHeaders.Where(rh => rh.Selector_Id == selector.Id).ToList().FirstOrDefault();
+            if (rhEF == null) return null;
             var RHC = new ResultsHeaderContract()
             {
                 Id = rhEF.Id,
@@ -386,6 +387,7 @@ namespace WebScraper.DAL
         public List<ResultsDetailContract> GetSelectorResultsDetails(SelectorContract selector)
         {
             ResultsHeaderContract RHC = GetSelectorResults(selector);
+            if (RHC == null) return null;
             List<ResultsDetailContract> rdcl = dbContext.ResultsDetails
                 .Where(rd => rd.ResultsHeader_Id == RHC.Id)
                 .Select(rd =>
