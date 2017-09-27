@@ -27,45 +27,45 @@ function myClickQuery() {
                 });
         }
     }
-};
 
-//Clic sur le glyphicon engrenage : modifier le nom de la requête
-$('#span2').on('click', function () {
-    $this.empty();
-    $this.text = "";
-    document.getElementsByClassName('active')[0].innerHTML = '<textarea id="newQuery"></textarea>';
-    var t = document.getElementById('newQuery');
-    t.style.color = "black";
-    t.text = $this.text;
-    t.focus();
-    //t.style.color = "black";
 
-    var test = document.getElementsByClassName('active')[0];
-    $(t).keyup(function (e) {
-        var code = e.which;
-        if (code == 13) e.preventDefault();
-        if (code == 13) {
-            var liste = $('#QueryList');
-            var value = $('textarea').val();
-            value = value.substring(0, value.length - 1);
-            var a = document.createElement('a');
-            a.classList.add('list-group-item');
-            a.classList.add('query');
-            a.name = 'query';
-            a.innerText = value;
-            a.onclick = myClickQuery;
-            //test.replaceWith(a);
-            $(test).replaceWith(a);
-        }
+    //Clic sur le glyphicon engrenage : modifier le nom de la requête
+    $('#span2').on('click', function () {
+        $this.empty();
+        $this.text = "";
+        document.getElementsByClassName('active')[0].innerHTML = '<textarea id="newQuery"></textarea>';
+        var t = document.getElementById('newQuery');
+        t.style.color = "black";
+        t.text = $this.text;
+        t.focus();
+        //t.style.color = "black";
+
+        var test = document.getElementsByClassName('active')[0];
+        $(t).keyup(function (e) {
+            var code = e.which;
+            if (code == 13) e.preventDefault();
+            if (code == 13) {
+                var liste = $('#QueryList');
+                var value = $('textarea').val();
+                value = value.substring(0, value.length - 1);
+                var a = document.createElement('a');
+                a.classList.add('list-group-item');
+                a.classList.add('query');
+                a.name = 'query';
+                a.innerText = value;
+                a.onclick = myClickQuery;
+                //test.replaceWith(a);
+                $(test).replaceWith(a);
+            }
+        });
     });
-});
 
-//Clic sur glyphicon poubelle : supprimmer la requête
-$('#span1').on('click', function () {
+    //Clic sur glyphicon poubelle : supprimmer la requête
+    $('#span1').on('click', function () {
 
-    $('#QueryList .active').remove();
-});
-
+        $('#QueryList .active').remove();
+    });
+};
 //clic bouton : ajouter une nouvelle requête
 $('#addQuery').on('click', function () {
 
@@ -279,7 +279,7 @@ $('#addSelector').on('click', function () {
 $('#Result').on('click', function () {
     var selector = $('.selector.active');
     if (selector.length > 0) {
-        alert('étrange');
+        
         //Appel AJAX
         $.get(
             "http://localhost:51006/addNewQuery/_DisplayData?id=" + selector[0].id,
@@ -353,6 +353,7 @@ $('#Save').on('click', function () {
 
                     var ujson = {
                         'Id': uid,
+                        'URL': $(this).text(),
                         'query_id': $(this).attr('query_id'),
                         'ListeSelectors': ListeSelectorsJson
                     };
@@ -383,9 +384,9 @@ $('#Save').on('click', function () {
             success: function (data, status) {
                 alert('ajax return ');
             },
-            error: function (resulatat, status) {
-                alert('ajax error');
-            },
+            //error: function (result, status) {
+            //    alert('ajax error');
+            //},
             complete: alert('ajax complete')
         });
 
